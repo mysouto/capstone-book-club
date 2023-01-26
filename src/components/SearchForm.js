@@ -8,8 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+// SEARCH BOOK feature
 function SearchForm() {
-	// SEARCH BOOK
 	const [book, setBook] = useState("");
 	const [searchResults, setResults] = useState([]);
 	const [booksAPI, setBooksApi] = useState(process.env.REACT_APP_BOOKS_API);
