@@ -5,6 +5,13 @@ import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import axios from "axios";
 
+// bootstrap imports
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+
+// import boostrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function App() {
 	// BOOK CLUB COMPONENT
 	// create reference to bookclubs collections
@@ -70,7 +77,7 @@ function App() {
 			.get(URL)
 			.then((response) => {
 				// console.log(response);
-				// console.log(response.data.items);
+				console.log(response.data.items);
 				setResults(response.data.items);
 			})
 			.catch((error) => {
@@ -105,16 +112,26 @@ function App() {
 					type="text"
 					placeholder="Find Book..."
 				/>
-				<button type="submit">Search</button>
+				<Button type="submit">Search</Button>
 			</form>
 
 			{/* book results */}
 			<h3>Results</h3>
 			{searchResults.map((book) => (
-				<img
-					src={book.volumeInfo.imageLinks.thumbnail}
-					alt={book.title}
-				/>
+				<Card style={{ width: "18rem" }}>
+					<Card.Img
+						src={book.volumeInfo.imageLinks.thumbnail}
+						alt={book.volumeInfo.title}
+					/>
+					<Card.Body>
+						<Card.Title>{book.volumeInfo.title}</Card.Title>
+						<Card.Text>
+							Authors: {book.volumeInfo.authors}
+						</Card.Text>
+						<Card.Text>Description</Card.Text>
+						<Button variant="primary">Add Book</Button>
+					</Card.Body>
+				</Card>
 			))}
 		</div>
 	);
