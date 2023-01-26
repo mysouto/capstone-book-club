@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { db } from "./firebase-config";
+import { app, db } from "./firebase-config";
 import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import axios from "axios";
