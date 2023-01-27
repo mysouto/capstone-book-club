@@ -8,6 +8,7 @@ import axios from "axios";
 // Components
 import SearchForm from "./components/SearchForm";
 import NewBookClubForm from "./components/NewBookClubForm";
+import BookClubList from "./components/BookClubList";
 
 function App() {
 	// BOOK CLUB COMPONENT
@@ -22,11 +23,11 @@ function App() {
 	useEffect(() => {
 		const getBookClubs = async () => {
 			// API call to firestore db
-			const bookClubsData = await getDocs(bookclubsCollectionRef);
+			const bookClubsRes = await getDocs(bookclubsCollectionRef);
 			// console.log(bookClubsData.docs);
 
 			setBookClubs(
-				bookClubsData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+				bookClubsRes.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
 			);
 		};
 		getBookClubs();
@@ -54,10 +55,7 @@ function App() {
 
 			<h2>Book Clubs List</h2>
 			{/* READ book club collections */}
-			{/* creating book club list components */}
-			{bookClubs.map((bookclub) => {
-				return <p>Book Club: {bookclub.name} </p>;
-			})}
+			<BookClubList bookClubsData={bookClubs}/>
 
 			{/* SEARCH book */}
 			<h1>Search Book</h1>
