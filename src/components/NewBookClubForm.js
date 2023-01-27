@@ -2,16 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+// CREATE book club
 function NewBookClubForm({ createBookClub }) {
 	// state to track add bookclub input
 	const [newBookClubName, setNewBookClub] = useState("");
 
 	const handleChange = (event) => {
-		// const bookQuery = event.target.value;
-		// setBook(bookQuery);
-
 		const bookClubName = event.target.value;
-		// console.log(event.target.value);
 		setNewBookClub(bookClubName);
 	};
 
@@ -22,7 +19,6 @@ function NewBookClubForm({ createBookClub }) {
 
 	return (
 		<div>
-			{/* CREATE book club */}
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
@@ -36,9 +32,7 @@ function NewBookClubForm({ createBookClub }) {
 					// }}
 				></input>
 
-				<button onClick={() => createBookClub(newBookClubName)}>
-					Create Book Club
-				</button>
+				<button type="submit">Create Book Club</button>
 			</form>
 		</div>
 	);
