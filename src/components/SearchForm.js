@@ -12,7 +12,6 @@ import Card from "react-bootstrap/Card";
 function SearchForm() {
 	const [book, setBook] = useState("");
 	const [searchResults, setResults] = useState([]);
-	const [booksAPI, setBooksApi] = useState(process.env.REACT_APP_BOOKS_API);
 
 	// const URL =
 	// 	"https://www.googleapis.com/books/v1/volumes?q=" +
@@ -22,9 +21,7 @@ function SearchForm() {
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
 		book +
-		"&fields=items(volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=2&Key=" +
-		booksAPI;
-	// console.log(URL);
+		"&fields=items(volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=2";
 
 	const handleChange = (event) => {
 		const bookQuery = event.target.value;
