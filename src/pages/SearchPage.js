@@ -1,7 +1,29 @@
 import React from "react";
+import "../App.css";
+// import { useState, useEffect } from "react";
+// import { app, db } from "../firebase-config";
+// import {
+// 	addDoc,
+// 	collection,
+// 	doc,
+// 	deleteDoc,
+// 	getDocs,
+// } from "firebase/firestore";
+
+// Components
+import SearchForm from "../components/SearchForm";
 
 function SearchPage() {
-    return <div>THIS IS THE SearchPage</div>
+	// create reference to bookclubs collections
+	// const bookclubsCollectionRef = collection(db, "bookclubs");
+
+	return (
+		<div className="App">
+			<h2>THIS IS THE SearchPage</h2>
+			<h1>Search Book</h1>
+			<SearchForm />
+		</div>
+	);
 }
 
 export default SearchPage;
