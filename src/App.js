@@ -8,13 +8,18 @@ import {
 	deleteDoc,
 	getDocs,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
-import axios from "axios";
 
 // Components
 import SearchForm from "./components/SearchForm";
 import NewBookClubForm from "./components/NewBookClubForm";
 import BookClubList from "./components/BookClubList";
+
+// React Router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// Router encompasses all other  components
+import Home from "./pages/Home";
+import BookClubsPage from "./pages/BookClubsPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
 	// BOOK CLUB COMPONENT
@@ -65,27 +70,37 @@ function App() {
 		await deleteDoc(bookClubDoc);
 	};
 
+	// return (
+	// 	<div className="App">
+	// 		{/* CREATE book club */}
+	// 		<h1>Create a Book Club</h1>
+	// 		<NewBookClubForm
+	// 			createBookClub={createBookClub}
+	// 			bookClubsData={bookClubs}
+	// 		/>
+
+	// 		<h2>Book Clubs List</h2>
+	// 		{/* READ book club collections */}
+	// 		<BookClubList
+	// 			bookClubsData={bookClubs}
+	// 			deleteBookClub={deleteBookClub}
+	// 		/>
+
+	// 		{/* SEARCH book */}
+	// 		<h1>Search Book</h1>
+	// 		{/* search book form */}
+	// 		<SearchForm />
+	// 	</div>
+	// );
+
 	return (
-		<div className="App">
-			{/* CREATE book club */}
-			<h1>Create a Book Club</h1>
-			<NewBookClubForm
-				createBookClub={createBookClub}
-				bookClubsData={bookClubs}
-			/>
-
-			<h2>Book Clubs List</h2>
-			{/* READ book club collections */}
-			<BookClubList
-				bookClubsData={bookClubs}
-				deleteBookClub={deleteBookClub}
-			/>
-
-			{/* SEARCH book */}
-			<h1>Search Book</h1>
-			{/* search book form */}
-			<SearchForm />
-		</div>
+		<Router>
+			<Routes>
+				<Route path="/" element={<Home />}></Route>
+				<Route path="/bookclubs" element={<BookClubsPage />}></Route>
+				<Route path="/searchbook" element={<SearchPage />}></Route>
+			</Routes>
+		</Router>
 	);
 }
 
