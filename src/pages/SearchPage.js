@@ -19,7 +19,6 @@ function SearchPage() {
 
 	return (
 		<div className="App">
-			<h2>THIS IS THE SearchPage</h2>
 			<h1>Search Book</h1>
 			<SearchForm />
 		</div>
