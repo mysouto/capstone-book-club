@@ -1,20 +1,26 @@
 import PropTypes from "prop-types";
 
-function BookClub({ id, name }) {
+function BookClub({ bookClubID, name, deleteBookClub }) {
 	return (
 		<div>
 			<p>Book Club: {name} </p>
-            <p>ID {id}</p>
+			<p>ID {bookClubID}</p>
 
-			{/* add delete button here */}
-			{/* pass down prop from App */}
+			<button
+				onClick={() => {
+					deleteBookClub(bookClubID);
+				}}
+			>
+				Delete book club
+			</button>
 		</div>
 	);
 }
 
 BookClub.propTypes = {
-    id: PropTypes.number.isRequired,
+	bookClubID: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
+	deleteBookClub: PropTypes.func.isRequired,
 };
 
 export default BookClub;

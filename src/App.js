@@ -1,7 +1,13 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { app, db } from "./firebase-config";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	doc,
+	deleteDoc,
+	getDocs,
+} from "firebase/firestore";
 import { async } from "@firebase/util";
 import axios from "axios";
 
@@ -27,7 +33,10 @@ function App() {
 			// console.log(bookClubsRes.docs.id);
 
 			setBookClubs(
-				bookClubsRes.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+				bookClubsRes.docs.map((doc) => ({
+					...doc.data(),
+					bookClubID: doc.id,
+				}))
 			);
 		};
 		getBookClubs();
@@ -49,6 +58,13 @@ function App() {
 		);
 	};
 
+	// DELETE
+	const deleteBookClub = async (id) => {
+		console.log("calling deleteBookClub");
+		const bookClubDoc = doc(db, "bookclubs", id);
+		await deleteDoc(bookClubDoc);
+	};
+
 	return (
 		<div className="App">
 			{/* CREATE book club */}
@@ -60,7 +76,10 @@ function App() {
 
 			<h2>Book Clubs List</h2>
 			{/* READ book club collections */}
-			<BookClubList bookClubsData={bookClubs} />
+			<BookClubList
+				bookClubsData={bookClubs}
+				deleteBookClub={deleteBookClub}
+			/>
 
 			{/* SEARCH book */}
 			<h1>Search Book</h1>
