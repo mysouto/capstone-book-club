@@ -24,7 +24,7 @@ function App() {
 		const getBookClubs = async () => {
 			// API call to firestore db
 			const bookClubsRes = await getDocs(bookclubsCollectionRef);
-			// console.log(bookClubsData.docs);
+			// console.log(bookClubsRes.docs.id);
 
 			setBookClubs(
 				bookClubsRes.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -32,6 +32,11 @@ function App() {
 		};
 		getBookClubs();
 	}, []);
+
+	// how to get id from bookClub document in bookClubs collection -> doc.id
+	// for (const bookclub of bookClubs) {
+	// 	console.log(bookclub.id);
+	// }
 
 	// CREATE
 	// add book club to "bookclubs" collection
@@ -55,7 +60,7 @@ function App() {
 
 			<h2>Book Clubs List</h2>
 			{/* READ book club collections */}
-			<BookClubList bookClubsData={bookClubs}/>
+			<BookClubList bookClubsData={bookClubs} />
 
 			{/* SEARCH book */}
 			<h1>Search Book</h1>

@@ -6,10 +6,7 @@ function BookClubList({ bookClubsData }) {
 	// creating book club list components
 	const bookClubComponents = bookClubsData.map((bookclub) => {
 		return (
-			<BookClub
-				// key={bookclub.id}
-				name={bookclub.name}
-			/>
+			<BookClub key={bookclub.id} id={bookclub.id} name={bookclub.name} />
 		);
 	});
 	return <div>{bookClubComponents}</div>;
@@ -18,6 +15,7 @@ function BookClubList({ bookClubsData }) {
 BookClubList.propTypes = {
 	bookClubsData: PropTypes.arrayOf(
 		PropTypes.shape({
+			id: PropTypes.number.isRequired,
 			name: PropTypes.string.isRequired,
 		})
 	),
