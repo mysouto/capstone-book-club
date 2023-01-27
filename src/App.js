@@ -9,66 +9,72 @@ import {
 	getDocs,
 } from "firebase/firestore";
 
+// Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+
 // Components
 import SearchForm from "./components/SearchForm";
 import NewBookClubForm from "./components/NewBookClubForm";
 import BookClubList from "./components/BookClubList";
 
 // React Router
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // Router encompasses all other  components
 import Home from "./pages/Home";
 import BookClubsPage from "./pages/BookClubsPage";
 import SearchPage from "./pages/SearchPage";
 
 function App() {
-	// BOOK CLUB COMPONENT
-	// create reference to bookclubs collections
-	const bookclubsCollectionRef = collection(db, "bookclubs");
+	// // BOOK CLUB COMPONENT
+	// // create reference to bookclubs collections
+	// const bookclubsCollectionRef = collection(db, "bookclubs");
 
-	// state for bookclubs collection
-	const [bookClubs, setBookClubs] = useState([]);
+	// // state for bookclubs collection
+	// const [bookClubs, setBookClubs] = useState([]);
 
-	// READ
-	// query when rendering page with useEffect
-	useEffect(() => {
-		const getBookClubs = async () => {
-			// API call to firestore db
-			const bookClubsRes = await getDocs(bookclubsCollectionRef);
-			// console.log(bookClubsRes.docs.id);
+	// // READ
+	// // query when rendering page with useEffect
+	// useEffect(() => {
+	// 	const getBookClubs = async () => {
+	// 		// API call to firestore db
+	// 		const bookClubsRes = await getDocs(bookclubsCollectionRef);
+	// 		// console.log(bookClubsRes.docs.id);
 
-			setBookClubs(
-				bookClubsRes.docs.map((doc) => ({
-					...doc.data(),
-					bookClubID: doc.id,
-				}))
-			);
-		};
-		getBookClubs();
-	}, []);
+	// 		setBookClubs(
+	// 			bookClubsRes.docs.map((doc) => ({
+	// 				...doc.data(),
+	// 				bookClubID: doc.id,
+	// 			}))
+	// 		);
+	// 	};
+	// 	getBookClubs();
+	// }, []);
 
-	// how to get id from bookClub document in bookClubs collection -> doc.id
-	// for (const bookclub of bookClubs) {
-	// 	console.log(bookclub.id);
-	// }
+	// // how to get id from bookClub document in bookClubs collection -> doc.id
+	// // for (const bookclub of bookClubs) {
+	// // 	console.log(bookclub.id);
+	// // }
 
-	// CREATE
-	// add book club to "bookclubs" collection
-	const createBookClub = async (bookClubName) => {
-		// addDoc function, API call
-		await addDoc(
-			bookclubsCollectionRef,
-			// obj to add
-			{ name: bookClubName }
-		);
-	};
+	// // CREATE
+	// // add book club to "bookclubs" collection
+	// const createBookClub = async (bookClubName) => {
+	// 	// addDoc function, API call
+	// 	await addDoc(
+	// 		bookclubsCollectionRef,
+	// 		// obj to add
+	// 		{ name: bookClubName }
+	// 	);
+	// };
 
-	// DELETE
-	const deleteBookClub = async (id) => {
-		console.log("calling deleteBookClub");
-		const bookClubDoc = doc(db, "bookclubs", id);
-		await deleteDoc(bookClubDoc);
-	};
+	// // DELETE
+	// const deleteBookClub = async (id) => {
+	// 	console.log("calling deleteBookClub");
+	// 	const bookClubDoc = doc(db, "bookclubs", id);
+	// 	await deleteDoc(bookClubDoc);
+	// };
 
 	// return (
 	// 	<div className="App">
@@ -95,6 +101,16 @@ function App() {
 
 	return (
 		<Router>
+			<Navbar bg="dark" variant="dark">
+				<Container>
+					<Navbar.Brand href="#home">Navbar</Navbar.Brand>
+					<Nav>
+						<Nav.Link href="/">Home</Nav.Link>
+						<Nav.Link href="/bookclubs">Book Clubs</Nav.Link>
+						<Nav.Link href="/searchbook">Search Book</Nav.Link>
+					</Nav>
+				</Container>
+			</Navbar>
 			<Routes>
 				<Route path="/" element={<Home />}></Route>
 				<Route path="/bookclubs" element={<BookClubsPage />}></Route>
