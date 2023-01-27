@@ -7,6 +7,7 @@ import axios from "axios";
 
 // Components
 import SearchForm from "./components/SearchForm";
+import NewBookClubForm from "./components/NewBookClubForm";
 
 function App() {
 	// BOOK CLUB COMPONENT
@@ -15,8 +16,6 @@ function App() {
 
 	// state for bookclubs collection
 	const [bookClubs, setBookClubs] = useState([]);
-	// state to track add bookclub input
-	const [newBookClubName, setNewBookClub] = useState("");
 
 	// READ
 	// query when rendering page with useEffect
@@ -35,12 +34,12 @@ function App() {
 
 	// CREATE
 	// add book club to "bookclubs" collection
-	const createBookClub = async () => {
+	const createBookClub = async (bookClubName) => {
 		// addDoc function, API call
 		await addDoc(
 			bookclubsCollectionRef,
 			// obj to add
-			{ name: newBookClubName }
+			{ name: bookClubName }
 		);
 	};
 
@@ -48,14 +47,12 @@ function App() {
 		<div className="App">
 			{/* CREATE book club */}
 			<h1>Create a Book Club</h1>
-			<input
-				placeholder="Book Club Name..."
-				onChange={(event) => {
-					setNewBookClub(event.target.value);
-				}}
+			<NewBookClubForm
+				createBookClub={createBookClub}
+				bookClubsData={bookClubs}
 			/>
-			<button onClick={createBookClub}>Create Book Club</button>
 
+			<h2>Book Clubs List</h2>
 			{/* READ book club collections */}
 			{/* creating book club list components */}
 			{bookClubs.map((bookclub) => {
