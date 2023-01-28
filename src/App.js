@@ -40,7 +40,11 @@ function App() {
 				<Route path="/" element={<Home />}></Route>
 				<Route path="/bookclubs" element={<BookClubsPage />}></Route>
 				<Route path="/searchbook" element={<SearchPage />}></Route>
-				<Route path="/bookclubhome" element={<BookClubHome />}></Route>
+				{/* dynamic variable */}
+				<Route
+					path="/bookclubhome/:bookclubid"
+					element={<BookClubHome />}
+				></Route>
 			</Routes>
 		</Router>
 	);
