@@ -1,9 +1,22 @@
 import PropTypes from "prop-types";
 
-function BookClub({ bookClubID, name, currentBook, deleteBookClub }) {
+function BookClub({
+	bookClubID,
+	name,
+	currentBook,
+	deleteBookClub,
+	updateSelected,
+}) {
 	return (
 		<div>
-			<li>Book Club: {name} </li>
+			<li
+				style={{ cursor: "pointer" }}
+				// onClick={() => console.log("selecting a book club")}
+				onClick={() => updateSelected(bookClubID)}
+			>
+				Book Club: {name}{" "}
+			</li>
+
 			{/* <p>ID {bookClubID}</p> */}
 			{/* <p>Current Book ID: {currentBook}</p> */}
 

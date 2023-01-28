@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import BookClub from "./BookClub";
 
-function BookClubList({ bookClubsData, deleteBookClub }) {
+function BookClubList({ bookClubsData, deleteBookClub, updateSelected }) {
 	// creating book club list components
 	const bookClubComponents = bookClubsData.map((bookclub) => {
 		return (
@@ -12,17 +12,13 @@ function BookClubList({ bookClubsData, deleteBookClub }) {
 				name={bookclub.name}
 				currentBook={bookclub.currentbook}
 				deleteBookClub={deleteBookClub}
+				updateSelected={updateSelected}
 			/>
 		);
 	});
 	return (
 		<div>
-			<ul
-				style={{ cursor: "pointer" }}
-				onClick={() => console.log("selecting a book club")}
-			>
-				{bookClubComponents}
-			</ul>
+			<ul>{bookClubComponents}</ul>
 		</div>
 	);
 }

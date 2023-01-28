@@ -20,12 +20,34 @@ import NewBookClubForm from "../components/NewBookClubForm";
 import BookClubList from "../components/BookClubList";
 
 function BookClubsPage() {
-	// BOOK CLUB COMPONENT
 	// create reference to bookclubs collections
 	const bookclubsCollectionRef = collection(db, "bookclubs");
 
 	// state for bookclubs collection
 	const [bookClubs, setBookClubs] = useState([]);
+
+	// state for selected book club
+	const [selectedBookClub, setSelected] = useState([]);
+	// get book club doc
+	const updateSelected = (bookClubId) => {
+		console.log("calling updateSelected");
+		// fetch data again or grab from response?
+		// const bookClubCopy = "data";
+		// setSelected(bookClubCopy);
+
+		// grabbing book club obj from bookClubs state
+		// for (const bookclub of bookClubs) {
+		// 	console.log(`bookclub: ${bookclub}`);
+		// 	if (bookclub.bookClubId === bookClubId) {
+		// 		setSelected({
+		// 			bookclub,
+		// 			// bookClubID: bookclub.bookClubID,
+		// 			// name: bookclub.name,
+		// 		});
+		// 	}
+		// }
+		// console.log(selectedBookClub);
+	};
 
 	// READ
 	// query when rendering page with useEffect
@@ -129,6 +151,7 @@ function BookClubsPage() {
 			<BookClubList
 				bookClubsData={bookClubs}
 				deleteBookClub={deleteBookClub}
+				updateSelected={updateSelected}
 			/>
 
 			{/* Books Collections */}
