@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 
-function BookClub({ bookClubID, name, deleteBookClub }) {
+function BookClub({ bookClubID, name, currentBook, deleteBookClub }) {
 	return (
 		<div>
 			<p>Book Club: {name} </p>
-			<p>ID {bookClubID}</p>
+			{/* <p>ID {bookClubID}</p> */}
+			<p>Current Book ID: {currentBook}</p>
 
 			<button
 				onClick={() => {

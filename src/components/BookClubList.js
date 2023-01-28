@@ -10,7 +10,8 @@ function BookClubList({ bookClubsData, deleteBookClub }) {
 				key={bookclub.bookClubID}
 				bookClubID={bookclub.bookClubID}
 				name={bookclub.name}
-                deleteBookClub={deleteBookClub}
+				currentBook={bookclub.currentbook}
+				deleteBookClub={deleteBookClub}
 			/>
 		);
 	});
