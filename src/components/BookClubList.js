@@ -15,7 +15,16 @@ function BookClubList({ bookClubsData, deleteBookClub }) {
 			/>
 		);
 	});
-	return <div>{bookClubComponents}</div>;
+	return (
+		<div>
+			<ul
+				style={{ cursor: "pointer" }}
+				onClick={() => console.log("selecting a book club")}
+			>
+				{bookClubComponents}
+			</ul>
+		</div>
+	);
 }
 
 BookClubList.propTypes = {
