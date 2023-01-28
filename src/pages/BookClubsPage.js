@@ -9,12 +9,15 @@ import {
 	doc,
 	deleteDoc,
 	getDocs,
+	getDoc,
+	onSnapshot,
+	query,
+	where,
 } from "firebase/firestore";
 
 // Components
 import NewBookClubForm from "../components/NewBookClubForm";
 import BookClubList from "../components/BookClubList";
-
 
 function BookClubsPage() {
 	// BOOK CLUB COMPONENT
@@ -30,7 +33,8 @@ function BookClubsPage() {
 		const getBookClubs = async () => {
 			// API call to firestore db
 			const bookClubsRes = await getDocs(bookclubsCollectionRef);
-			// console.log(bookClubsRes.docs.id);
+			// console.log(bookClubsRes.docs);
+			// console.log(bookClubsRes.docs.currentbook);
 
 			setBookClubs(
 				bookClubsRes.docs.map((doc) => ({
@@ -65,6 +69,53 @@ function BookClubsPage() {
 		await deleteDoc(bookClubDoc);
 	};
 
+	// BOOKS COLLECTION
+	// create reference to bookclubs collections
+	const booksCollectionRef = collection(db, "books");
+	const [booksCollection, setBooks] = useState([]);
+
+	// READ books collection
+	useEffect(() => {
+		const getCurrentBook = async () => {
+			// API call to firestore db
+			const booksRes = await getDocs(booksCollectionRef);
+			// console.log(booksRes.docs);
+
+			setBooks(
+				booksRes.docs.map((doc) => ({
+					...doc.data(),
+					currentBookID: doc.id,
+				}))
+			);
+			// console.log(books);
+		};
+		getCurrentBook();
+	}, []);
+
+	// USE "ID" in BOOK CLUB OBJ TO QUERY FIREBASE BOOKS COLLECTIONS AND PULL BOOK INFO
+	// -- Filter books collection data with query
+	// const bookQuery = query(
+	// 	booksCollectionRef,
+	// 	where("id", "==", "qN9KG7gOeZq1xbfOARu1")
+	// );
+
+	// -- GET 1 doc
+	const docRef = doc(db, "books", "qjWWWBaoFAapAZP9IfrP");
+
+	const getBookData = () => {
+		console.log("calling getBookData");
+		// method 1 - getDoc
+		// getDoc(docRef).then((doc) => {
+		// 	// console.log(data.docs);
+		// 	console.log(doc.data(), doc.id);
+		// });
+
+		// another method - get realtime updated data, changes in doc
+		onSnapshot(docRef, (doc) => {
+			console.log(doc.data(), doc.id);
+		});
+	};
+
 	return (
 		<div className="App">
 			<h1>Create a Book Club</h1>
@@ -79,9 +130,22 @@ function BookClubsPage() {
 				bookClubsData={bookClubs}
 				deleteBookClub={deleteBookClub}
 			/>
+
+			{/* Books Collections */}
+			<h3>Books Collection</h3>
+			<div>
+				{booksCollection.map((book) => {
+					return (
+						<div>
+							<p>Title: {book.title}</p>
+						</div>
+					);
+				})}
+			</div>
+			<h3>Book Query</h3>
+			<button onClick={getBookData}>Get 1 Book by ID</button>
 		</div>
 	);
-	
 }
 
 export default BookClubsPage;
