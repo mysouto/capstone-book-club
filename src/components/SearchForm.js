@@ -21,7 +21,7 @@ function SearchForm() {
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
 		book +
-		"&fields=items(volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=20";
+		"&fields=items(volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=10";
 
 	const handleChange = (event) => {
 		const bookQuery = event.target.value;

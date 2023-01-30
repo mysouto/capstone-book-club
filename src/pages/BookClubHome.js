@@ -1,14 +1,30 @@
 import React from "react";
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
+// use bookclubid to make request to db
+//  request info
 function BookClubHome() {
 	let { bookclubid } = useParams();
-	// use bookclubid to make request to db
-	//  request info
+	// console.log({ bookclubid });
+	let navigate = useNavigate();
+
 	return (
 		<div>
-			<h1>THIS IS A BOOK CLUB HOME PAGE</h1>
-			<h2>Book Club ID: {bookclubid}</h2>
+			<h1>BOOK CLUB HOME PAGE</h1>
+			<h2>Welcome to your Book Club!</h2>
+			<p>Book Club ID: {bookclubid}</p>
+
+			<div>
+				<p>No books yet :(</p>
+				<p>Get started here!</p>
+				<button
+					onClick={() => {
+						navigate("/searchbook");
+					}}
+				>
+					Search Book
+				</button>
+			</div>
 		</div>
 	);
 }
