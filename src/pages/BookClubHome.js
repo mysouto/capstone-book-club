@@ -1,46 +1,45 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase-config";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+
+// bootstrap imports
+import "bootstrap/dist/css/bootstrap.min.css";
+import Card from "react-bootstrap/Card";
 
 // use bookclubid to make request to db
 // request info
 function BookClubHome() {
-	// book club data state
-	const [currentBookClub, setBookClub] = useState([]);
-
-	// current book state
-	const [currentBook, setBook] = useState([]);
-
 	let { bookclubid } = useParams();
-	// console.log({ bookclubid });
 	let navigate = useNavigate();
 
 	// GET book club doc data
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
 
-	// remove console.log => return/display book data
-	// useEffect(() => {
-	// const getBookclubData = async () => {
-	// 	console.log("calling getBookclubData");
-	// 	// 1. using getDoc
-	// 	const response = await getDoc(bookclubRef);
-	// 	console.log("Document data:", response.data());
-	// 	// setBookClub(response.data());
-	// };
-	// 	getBookclubData();
-	// }, []);
+	// book club data state
+	const [currentBookClub, setBookClub] = useState([]);
+	const [currentBook, setBook] = useState([]);
+
+	// 1. using getDoc
+	useEffect(() => {
+		const getBookclubData = async () => {
+			const response = await getDoc(bookclubRef);
+			const data = response.data();
+			setBookClub(data);
+
+			const bookData = data.currentbook;
+			setBook(bookData);
+		};
+		getBookclubData();
+	}, []);
 
 	// 2. onSnapshot
-	useEffect(() => {
-		const getData = async () => {
-			onSnapshot(bookclubRef, (doc) => {
-				setBookClub(doc.data());
-			});
-			console.log("current bookClub", currentBookClub);
-		};
-		getData();
-	}, []);
+	// 	const getData = async () => {
+	// onSnapshot(bookclubRef, (doc) => {
+	// 	console.log(doc.data(), doc.id);
+	// 	// setBookClub(doc.data());
+	// });
+	// };
 
 	return (
 		<div>
@@ -50,12 +49,19 @@ function BookClubHome() {
 			<p>Book Club ID: {bookclubid}</p>
 
 			<h3>Current Book</h3>
-			<p>Book ID: {currentBookClub.currentbook}</p>
+			<Card style={{ width: "16rem" }}>
+				<Card.Img src={currentBook.cover} alt={currentBook.title} />
+				<Card.Body>
+					<Card.Title>{currentBook.title}</Card.Title>
+					<Card.Text>Author: {currentBook.author}</Card.Text>
+					<Card.Text>Description</Card.Text>
+				</Card.Body>
+			</Card>
 
 			<h1>NEW BOOK CLUB</h1>
 			<div>
-				{/* <p>No books yet :(</p> */}
-				{/* <p>Get started here!</p> */}
+				<p>No books yet :(</p>
+				<p>Get started here!</p>
 				<button
 					onClick={() => {
 						navigate("/searchbook");
