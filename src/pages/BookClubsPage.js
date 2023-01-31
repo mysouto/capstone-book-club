@@ -9,10 +9,6 @@ import {
 	doc,
 	deleteDoc,
 	getDocs,
-	getDoc,
-	onSnapshot,
-	query,
-	where,
 } from "firebase/firestore";
 
 // Components
@@ -23,31 +19,8 @@ function BookClubsPage() {
 	// create reference to bookclubs collections
 	const bookclubsCollectionRef = collection(db, "bookclubs");
 
-	// state for bookclubs collection
+	// state for bookclubs db collection
 	const [bookClubs, setBookClubs] = useState([]);
-
-	// state for selected book club
-	const [selectedBookClub, setSelected] = useState([]);
-	// get book club doc
-	const updateSelected = (bookClubId) => {
-		console.log("calling updateSelected");
-		// fetch data again or grab from response?
-		// const bookClubCopy = "data";
-		// setSelected(bookClubCopy);
-
-		// grabbing book club obj from bookClubs state
-		// for (const bookclub of bookClubs) {
-		// 	console.log(`bookclub: ${bookclub}`);
-		// 	if (bookclub.bookClubId === bookClubId) {
-		// 		setSelected({
-		// 			bookclub,
-		// 			// bookClubID: bookclub.bookClubID,
-		// 			// name: bookclub.name,
-		// 		});
-		// 	}
-		// }
-		// console.log(selectedBookClub);
-	};
 
 	// READ
 	// query when rendering page with useEffect
@@ -55,8 +28,6 @@ function BookClubsPage() {
 		const getBookClubs = async () => {
 			// API call to firestore db
 			const bookClubsRes = await getDocs(bookclubsCollectionRef);
-			// console.log(bookClubsRes.docs);
-			// console.log(bookClubsRes.docs.currentbook);
 
 			setBookClubs(
 				bookClubsRes.docs.map((doc) => ({
@@ -67,11 +38,6 @@ function BookClubsPage() {
 		};
 		getBookClubs();
 	}, []);
-
-	// how to get id from bookClub document in bookClubs collection -> doc.id
-	// for (const bookclub of bookClubs) {
-	// 	console.log(bookclub.id);
-	// }
 
 	// CREATE
 	// add book club to "bookclubs" collection
@@ -91,53 +57,6 @@ function BookClubsPage() {
 		await deleteDoc(bookClubDoc);
 	};
 
-	// BOOKS COLLECTION
-	// create reference to bookclubs collections
-	const booksCollectionRef = collection(db, "books");
-	const [booksCollection, setBooks] = useState([]);
-
-	// READ books collection
-	useEffect(() => {
-		const getCurrentBook = async () => {
-			// API call to firestore db
-			const booksRes = await getDocs(booksCollectionRef);
-			// console.log(booksRes.docs);
-
-			setBooks(
-				booksRes.docs.map((doc) => ({
-					...doc.data(),
-					currentBookID: doc.id,
-				}))
-			);
-			// console.log(books);
-		};
-		getCurrentBook();
-	}, []);
-
-	// USE "ID" in BOOK CLUB OBJ TO QUERY FIREBASE BOOKS COLLECTIONS AND PULL BOOK INFO
-	// -- Filter books collection data with query
-	// const bookQuery = query(
-	// 	booksCollectionRef,
-	// 	where("id", "==", "qN9KG7gOeZq1xbfOARu1")
-	// );
-
-	// -- GET 1 doc
-	const docRef = doc(db, "books", "qjWWWBaoFAapAZP9IfrP");
-
-	const getBookData = () => {
-		console.log("calling getBookData");
-		// method 1 - getDoc
-		// getDoc(docRef).then((doc) => {
-		// 	// console.log(data.docs);
-		// 	console.log(doc.data(), doc.id);
-		// });
-
-		// another method - get realtime updated data, changes in doc
-		onSnapshot(docRef, (doc) => {
-			console.log(doc.data(), doc.id);
-		});
-	};
-
 	return (
 		<div className="App">
 			<h1>Create a Book Club</h1>
@@ -151,22 +70,7 @@ function BookClubsPage() {
 			<BookClubList
 				bookClubsData={bookClubs}
 				deleteBookClub={deleteBookClub}
-				updateSelected={updateSelected}
 			/>
-
-			{/* Books Collections */}
-			<h3>Books Collection</h3>
-			<div>
-				{booksCollection.map((book) => {
-					return (
-						<div>
-							<p>Title: {book.title}</p>
-						</div>
-					);
-				})}
-			</div>
-			<h3>Book Query</h3>
-			<button onClick={getBookData}>Get 1 Book by ID</button>
 		</div>
 	);
 }

@@ -10,17 +10,11 @@ function BookClubList({ bookClubsData, deleteBookClub, updateSelected }) {
 				key={bookclub.bookClubID}
 				bookClubID={bookclub.bookClubID}
 				name={bookclub.name}
-				currentBook={bookclub.currentbook}
 				deleteBookClub={deleteBookClub}
-				updateSelected={updateSelected}
 			/>
 		);
 	});
-	return (
-		<div>
-			<ul>{bookClubComponents}</ul>
-		</div>
-	);
+	return <div>{bookClubComponents}</div>;
 }
 
 BookClubList.propTypes = {
