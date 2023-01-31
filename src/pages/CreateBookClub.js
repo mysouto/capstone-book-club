@@ -8,7 +8,7 @@ import { addDoc, collection } from "firebase/firestore";
 // Components
 import NewBookClubForm from "../components/NewBookClubForm";
 
-function BookClubsPage() {
+function CreateBookClub() {
 	// create reference to bookclubs collections
 	const bookclubsCollectionRef = collection(db, "bookclubs");
 
@@ -31,4 +31,4 @@ function BookClubsPage() {
 	);
 }
 
-export default BookClubsPage;
+export default CreateBookClub;
