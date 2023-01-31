@@ -7,6 +7,7 @@ const BookList = ({ searchResults, addBook }) => {
 	const resultsComponents = searchResults.map((result) => {
 		return (
 			<Book
+				key={result.id}
 				bookApiID={result.id}
 				cover={result.volumeInfo.imageLinks.thumbnail}
 				title={result.volumeInfo.title}

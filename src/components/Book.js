@@ -12,7 +12,7 @@ const Book = ({ bookApiID, title, cover, authors, addBook }) => {
 				<Card.Title>{title}</Card.Title>
 				<Card.Text>Authors: {authors}</Card.Text>
 				<Card.Text>Description</Card.Text>
-				<Button variant="primary" onClick={addBook}>
+				<Button variant="primary" onClick={() => addBook(bookApiID)}>
 					Add Book
 				</Button>
 			</Card.Body>
