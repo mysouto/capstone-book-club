@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 // import BookClubsPage from "./pages/BookClubsPage";
 import CreateBookClub from "./pages/CreateBookClub";
-import SearchPage from "./pages/SearchPage";
+// import SearchPage from "./pages/SearchPage";
 import BookClubHome from "./pages/BookClubHome";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
 						<Nav.Link href="/createbookclub">
 							Create a Book Club
 						</Nav.Link>
-						<Nav.Link href="/searchbook">Search Book</Nav.Link>
+						{/* <Nav.Link href="/searchbook">Search Book</Nav.Link> */}
 					</Nav>
 				</Container>
 			</Navbar>
@@ -40,7 +40,7 @@ function App() {
 					path="/createbookclub"
 					element={<CreateBookClub />}
 				></Route>
-				<Route path="/searchbook" element={<SearchPage />}></Route>
+				{/* <Route path="/searchbook" element={<SearchPage />}></Route> */}
 				{/* dynamic variable */}
 				<Route
 					path="/bookclubhome/:bookclubid"

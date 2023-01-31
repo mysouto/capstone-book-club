@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
 // Components
-import BookList from "../components/BookList";
+import BookList from "./BookList";
 
 // SEARCH BOOK feature
 function SearchForm() {
