@@ -3,25 +3,21 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
 
-// bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+
+// Components
+import BookList from "./BookList";
 
 // SEARCH BOOK feature
 function SearchForm() {
 	const [book, setBook] = useState("");
 	const [searchResults, setResults] = useState([]);
 
-	// const URL =
-	// 	"https://www.googleapis.com/books/v1/volumes?q=" +
-	// 	book +
-	// 	"&fields=items(volumeInfo/imageLinks/thumbnail)&maxResults=2&Key=" +
-	// 	booksAPI;
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
 		book +
-		"&fields=items(volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=10";
+		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=5";
 
 	const handleChange = (event) => {
 		const bookQuery = event.target.value;
@@ -43,6 +39,17 @@ function SearchForm() {
 			});
 	};
 
+	// TO DO
+	// grab id of selected book, similar to book club list/id param
+	// create book + book results list component
+	// book li item selected => grab item id
+	// => use id to get book info
+	const addBook = (bookId) => {
+		console.log("calling add Book");
+	};
+
+	// console.log("searchResults", searchResults);
+
 	return (
 		<div className="search-area">
 			<form onSubmit={handleSubmit}>
@@ -54,24 +61,12 @@ function SearchForm() {
 				<Button type="submit">Search</Button>
 			</form>
 
-			{/* book results */}
+			{/* book search results */}
 			<h3>Results</h3>
-			{searchResults.map((book) => (
-				<Card style={{ width: "18rem" }}>
-					<Card.Img
-						src={book.volumeInfo.imageLinks.thumbnail}
-						alt={book.volumeInfo.title}
-					/>
-					<Card.Body>
-						<Card.Title>{book.volumeInfo.title}</Card.Title>
-						<Card.Text>
-							Authors: {book.volumeInfo.authors}
-						</Card.Text>
-						<Card.Text>Description</Card.Text>
-						<Button variant="primary">Add Book</Button>
-					</Card.Body>
-				</Card>
-			))}
+			<BookList
+				searchResults={searchResults}
+				addBook={addBook}
+			></BookList>
 		</div>
 	);
 }
