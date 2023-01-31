@@ -27,9 +27,8 @@ function BookClubHome() {
 			const data = response.data();
 			setBookClub(data);
 
-			console.log(typeof data);
-
-			console.log(data.hasOwnProperty("currentbook"));
+			// console.log(typeof data);
+			// console.log(data.hasOwnProperty("currentbook"));
 			if (data.hasOwnProperty("currentbook")) {
 				const bookData = data.currentbook;
 				setBook(bookData);

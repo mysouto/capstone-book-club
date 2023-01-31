@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import BookClub from "./BookClub";
 
-function BookClubList({ bookClubsData, deleteBookClub, updateSelected }) {
+function BookClubList({ bookClubsData, deleteBookClub }) {
 	// creating book club list components
 	const bookClubComponents = bookClubsData.map((bookclub) => {
 		return (
