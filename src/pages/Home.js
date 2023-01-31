@@ -3,12 +3,7 @@ import React from "react";
 import "../App.css";
 import { useState, useEffect } from "react";
 import { app, db } from "../firebase-config";
-import {
-	collection,
-	doc,
-	deleteDoc,
-	getDocs,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 // Components
 import BookClubList from "../components/BookClubList";
@@ -37,23 +32,13 @@ function Home() {
 		getBookClubs();
 	}, []);
 
-	// DELETE
-	const deleteBookClub = async (id) => {
-		console.log("calling deleteBookClub");
-		const bookClubDoc = doc(db, "bookclubs", id);
-		await deleteDoc(bookClubDoc);
-	};
-
 	return (
 		<div className="App">
 			<h1>HOME PAGE</h1>
 
 			<h2>Book Clubs List</h2>
 			{/* READ book club collections */}
-			<BookClubList
-				bookClubsData={bookClubs}
-				deleteBookClub={deleteBookClub}
-			/>
+			<BookClubList bookClubsData={bookClubs} />
 		</div>
 	);
 }

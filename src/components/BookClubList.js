@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import BookClub from "./BookClub";
 
-function BookClubList({ bookClubsData, deleteBookClub }) {
+function BookClubList({ bookClubsData }) {
 	// creating book club list components
 	const bookClubComponents = bookClubsData.map((bookclub) => {
 		return (
@@ -10,7 +10,6 @@ function BookClubList({ bookClubsData, deleteBookClub }) {
 				key={bookclub.bookClubID}
 				bookClubID={bookclub.bookClubID}
 				name={bookclub.name}
-				deleteBookClub={deleteBookClub}
 			/>
 		);
 	});
@@ -24,7 +23,6 @@ BookClubList.propTypes = {
 			name: PropTypes.string.isRequired,
 		})
 	),
-	deleteBookClub: PropTypes.func.isRequired,
 };
 
 export default BookClubList;

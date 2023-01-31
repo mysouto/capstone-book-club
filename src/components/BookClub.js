@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-function BookClub({ bookClubID, name, deleteBookClub }) {
+function BookClub({ bookClubID, name }) {
 	let navigate = useNavigate();
 
 	return (
@@ -23,14 +23,6 @@ function BookClub({ bookClubID, name, deleteBookClub }) {
 			>
 				Go to Club Page
 			</button>
-
-			{/* <button
-				onClick={() => {
-					deleteBookClub(bookClubID);
-				}}
-			>
-				Delete book club
-			</button> */}
 		</div>
 	);
 }
@@ -38,7 +30,6 @@ function BookClub({ bookClubID, name, deleteBookClub }) {
 BookClub.propTypes = {
 	bookClubID: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	deleteBookClub: PropTypes.func.isRequired,
 };
 
 export default BookClub;

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase-config";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
 
 // bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -45,6 +45,14 @@ function BookClubHome() {
 	// });
 	// };
 
+	// DELETE
+	const deleteBookClub = async (id) => {
+		console.log("calling deleteBookClub");
+		const bookClubDoc = doc(db, "bookclubs", id);
+		await deleteDoc(bookClubDoc);
+		navigate("/");
+	};
+
 	// if (currentBook === []) {
 	if (currentBookClub.hasOwnProperty("currentbook")) {
 		return (
@@ -63,6 +71,14 @@ function BookClubHome() {
 						<Card.Text>Description</Card.Text>
 					</Card.Body>
 				</Card>
+
+				<button
+					onClick={() => {
+						deleteBookClub(bookclubid);
+					}}
+				>
+					Delete book club
+				</button>
 			</div>
 		);
 	} else {
@@ -80,6 +96,14 @@ function BookClubHome() {
 						Add Book
 					</button>
 				</div>
+
+				<button
+					onClick={() => {
+						deleteBookClub(bookclubid);
+					}}
+				>
+					Delete book club
+				</button>
 			</div>
 		);
 	}
