@@ -27,8 +27,13 @@ function BookClubHome() {
 			const data = response.data();
 			setBookClub(data);
 
-			const bookData = data.currentbook;
-			setBook(bookData);
+			console.log(typeof data);
+
+			console.log(data.hasOwnProperty("currentbook"));
+			if (data.hasOwnProperty("currentbook")) {
+				const bookData = data.currentbook;
+				setBook(bookData);
+			}
 		};
 		getBookclubData();
 	}, []);
@@ -41,37 +46,44 @@ function BookClubHome() {
 	// });
 	// };
 
-	return (
-		<div>
-			<h1>BOOK CLUB HOME PAGE</h1>
-			<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
-			<p>Book Club Name: {currentBookClub.name}</p>
-			<p>Book Club ID: {bookclubid}</p>
-
-			<h3>Current Book</h3>
-			<Card style={{ width: "16rem" }}>
-				<Card.Img src={currentBook.cover} alt={currentBook.title} />
-				<Card.Body>
-					<Card.Title>{currentBook.title}</Card.Title>
-					<Card.Text>Author: {currentBook.author}</Card.Text>
-					<Card.Text>Description</Card.Text>
-				</Card.Body>
-			</Card>
-
-			<h1>NEW BOOK CLUB</h1>
+	// if (currentBook === []) {
+	if (currentBookClub.hasOwnProperty("currentbook")) {
+		return (
 			<div>
-				<p>No books yet :(</p>
-				<p>Get started here!</p>
-				<button
-					onClick={() => {
-						navigate("/searchbook");
-					}}
-				>
-					Search Book
-				</button>
+				<h1>BOOK CLUB HOME PAGE</h1>
+				<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
+				<p>Book Club Name: {currentBookClub.name}</p>
+				<p>Book Club ID: {bookclubid}</p>
+
+				<h3>Current Book</h3>
+				<Card style={{ width: "16rem" }}>
+					<Card.Img src={currentBook.cover} alt={currentBook.title} />
+					<Card.Body>
+						<Card.Title>{currentBook.title}</Card.Title>
+						<Card.Text>Author: {currentBook.author}</Card.Text>
+						<Card.Text>Description</Card.Text>
+					</Card.Body>
+				</Card>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		return (
+			<div>
+				<h1>NEW BOOK CLUB</h1>
+				<div>
+					<p>No books yet :(</p>
+					<p>Get started here!</p>
+					<button
+						onClick={() => {
+							navigate("/searchbook");
+						}}
+					>
+						Add Book
+					</button>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default BookClubHome;
