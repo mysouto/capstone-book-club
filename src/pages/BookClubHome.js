@@ -57,7 +57,7 @@ function BookClubHome() {
 	if (currentBookClub.hasOwnProperty("currentbook")) {
 		return (
 			<div>
-				<h1>BOOK CLUB HOME PAGE</h1>
+				<h1>BOOK CLUB: {currentBookClub.name} HOME PAGE</h1>
 				<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
 				<p>Book Club Name: {currentBookClub.name}</p>
 				<p>Book Club ID: {bookclubid}</p>
