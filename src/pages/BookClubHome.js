@@ -8,10 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-
 import SearchForm from "../components/SearchForm";
+import NewPostForm from "../components/NewPostForm";
 
 // use bookclubid to make request to db
 // request info
@@ -69,6 +67,12 @@ function BookClubHome() {
 		navigate("/");
 	};
 
+	// FEATURE: ADD POST TO DB
+	const addPost = async (postText) => {
+		console.log("calling addPost");
+		console.log(postText);
+	};
+
 	// TODO - conditionals: Home vs <SearchPage/>
 	// CALLBACK FOR FIND BOOK BUTTON
 	const findBook = () => {
@@ -115,20 +119,8 @@ function BookClubHome() {
 						Delete book club
 					</Button>
 
-					<div>
-						<h2>Comments</h2>
-						<FloatingLabel
-							controlId="floatingTextarea2"
-							label="Comments"
-						>
-							<Form.Control
-								as="textarea"
-								placeholder="Leave a comment here"
-								style={{ height: "100px" }}
-							/>
-						</FloatingLabel>
-						<Button>Post Comment</Button>{" "}
-					</div>
+					<h2>Comments</h2>
+					<NewPostForm addPost={addPost} />
 				</div>
 			);
 		} else {
