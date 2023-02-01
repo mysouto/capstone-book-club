@@ -10,7 +10,7 @@ const Book = ({ bookApiID, title, cover, authors, addBook }) => {
 			<Card.Img src={cover} alt={title} />
 			<Card.Body>
 				<Card.Title>{title}</Card.Title>
-				<Card.Text>Authors: {authors}</Card.Text>
+				<Card.Text>Authors: {authors.join(", ")}</Card.Text>
 				<Card.Text>Description</Card.Text>
 				<Button variant="primary" onClick={() => addBook(bookApiID)}>
 					Add Book

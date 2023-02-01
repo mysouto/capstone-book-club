@@ -67,7 +67,12 @@ function BookClubHome() {
 	};
 
 	if (searchState) {
-		return <SearchForm />;
+		return (
+			<SearchForm
+				bookclubid={bookclubid}
+				bookclubName={currentBookClub.name}
+			/>
+		);
 	}
 
 	// if (currentBook === []) {
@@ -84,7 +89,7 @@ function BookClubHome() {
 					<Card.Img src={currentBook.cover} alt={currentBook.title} />
 					<Card.Body>
 						<Card.Title>{currentBook.title}</Card.Title>
-						<Card.Text>Author: {currentBook.author}</Card.Text>
+						<Card.Text>Author: {currentBook.authors}</Card.Text>
 						<Card.Text>Description</Card.Text>
 					</Card.Body>
 				</Card>
