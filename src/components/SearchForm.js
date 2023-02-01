@@ -7,11 +7,14 @@ import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
+import { app, db } from "../firebase-config";
+import { collection, doc, setDoc } from "firebase/firestore";
+
 // Components
 import BookList from "./BookList";
 
 // SEARCH BOOK feature
-function SearchForm() {
+function SearchForm({ bookclubid, bookclubName }) {
 	const [book, setBook] = useState("");
 	const [searchResults, setResults] = useState([]);
 
@@ -45,9 +48,41 @@ function SearchForm() {
 	// create book + book results list component
 	// book li item selected => grab item id
 	// => use id to get book info
-	const addBook = (bookId) => {
-		console.log("calling add Book");
+	// firestore ref
+	const getBook = (bookApiID) => {
+		console.log("bookID:", bookApiID);
+		// loop searchResults
+		// save to bookToAdd
+		let book = {};
+		for (let result of searchResults) {
+			// console.log(result.id);
+			if (result.id === bookApiID) {
+				book = {
+					bookApiID: result.id,
+					cover: result.volumeInfo.imageLinks.thumbnail,
+					title: result.volumeInfo.title,
+					// refactor, map authors lst and convert to str
+					authors: result.volumeInfo.authors.join(", "),
+				};
+				console.log(book);
+			}
+		}
+		console.log("book to add: ", book);
+		return book;
+	};
 
+	const bookclubRef = doc(db, "bookclubs", bookclubid);
+
+	const addBook = async (bookApiID) => {
+		const bookToAdd = getBook(bookApiID);
+
+		console.log("calling add Book");
+		// console.log("bookclub ID: ", bookclubid);
+		// add bookToAdd to db => update / add currentbook field?
+		await setDoc(bookclubRef, {
+			name: bookclubName,
+			currentbook: bookToAdd,
+		});
 		// navigate back to book club home page
 	};
 
