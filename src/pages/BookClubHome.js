@@ -1,7 +1,14 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase-config";
-import { doc, getDoc, deleteDoc, onSnapshot } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	getDoc,
+	onSnapshot,
+} from "firebase/firestore";
 
 // bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,8 +24,10 @@ function BookClubHome() {
 	let { bookclubid } = useParams();
 	let navigate = useNavigate();
 
-	// GET book club doc data
+	// Bookclubs collection
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
+	// Posts collection
+	const postsRef = collection(db, "posts");
 
 	// book club data state
 	const [currentBookClub, setBookClub] = useState([]);
@@ -55,7 +64,6 @@ function BookClubHome() {
 				setBook(bookData);
 			}
 		});
-
 		return unsubscribe;
 	}, [setBookClub, bookclubRef]);
 
@@ -70,7 +78,13 @@ function BookClubHome() {
 	// FEATURE: ADD POST TO DB
 	const addPost = async (postText) => {
 		console.log("calling addPost");
-		console.log(postText);
+
+		await addDoc(postsRef, {
+			text: postText,
+			bookclubID: bookclubid,
+			// bookclubID: currentBookClub.id,
+			bookID: currentBook.bookApiID,
+		});
 	};
 
 	// TODO - conditionals: Home vs <SearchPage/>
@@ -119,6 +133,7 @@ function BookClubHome() {
 						Delete book club
 					</Button>
 
+					{/* POSTS FEATURE */}
 					<h2>Comments</h2>
 					<NewPostForm addPost={addPost} />
 				</div>

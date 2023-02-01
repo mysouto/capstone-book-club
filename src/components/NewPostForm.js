@@ -10,18 +10,17 @@ import Form from "react-bootstrap/Form";
 // FEATURE: CREATE A POST
 // todo: need other fields or data from post?
 const NewPostForm = ({ addPost }) => {
-	const [postText, setText] = useState({ text: "" });
+	const [postText, setText] = useState("");
 
 	const onTextChange = (event) => {
 		const postData = event.target.value;
 		setText(postData);
-		console.log(postText);
 	};
 
 	const onPostSubmit = (event) => {
 		event.preventDefault();
 		addPost(postText);
-		setText({ text: "" });
+		setText("");
 	};
 
 	// additional feature
