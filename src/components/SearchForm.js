@@ -47,6 +47,8 @@ function SearchForm() {
 	// => use id to get book info
 	const addBook = (bookId) => {
 		console.log("calling add Book");
+
+		// navigate back to book club home page
 	};
 
 	// console.log("searchResults", searchResults);
