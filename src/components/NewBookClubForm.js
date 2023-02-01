@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
+
 // CREATE book club
 function NewBookClubForm({ createBookClub }) {
 	// state to track add bookclub input
@@ -32,7 +36,7 @@ function NewBookClubForm({ createBookClub }) {
 					// }}
 				></input>
 
-				<button type="submit">Create Book Club</button>
+				<Button type="submit">Create Book Club</Button>
 			</form>
 		</div>
 	);

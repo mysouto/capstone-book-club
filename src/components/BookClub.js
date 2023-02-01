@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
+
 function BookClub({ bookClubID, name }) {
 	let navigate = useNavigate();
 
@@ -16,13 +20,13 @@ function BookClub({ bookClubID, name }) {
 			{/* <p>ID {bookClubID}</p> */}
 
 			{/* NAVIGATE TO BOOK CLUB HOME PAGE */}
-			<button
+			<Button
 				onClick={() => {
 					navigate(`/bookclubhome/${bookClubID}`);
 				}}
 			>
 				Go to Club Page
-			</button>
+			</Button>
 		</div>
 	);
 }
