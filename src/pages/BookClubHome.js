@@ -63,7 +63,7 @@ function BookClubHome() {
 	// CALLBACK FOR FIND BOOK BUTTON
 	const findBook = () => {
 		console.log("caklling findBook");
-		setSearchState(true);
+		setSearchState(!searchState);
 	};
 
 	if (searchState) {
@@ -71,64 +71,68 @@ function BookClubHome() {
 			<SearchForm
 				bookclubid={bookclubid}
 				bookclubName={currentBookClub.name}
+				findBook={findBook}
 			/>
 		);
-	}
-
-	// if (currentBook === []) {
-	if (currentBookClub.hasOwnProperty("currentbook")) {
-		return (
-			<div>
-				<h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1>
-				<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
-				<p>Book Club Name: {currentBookClub.name}</p>
-				<p>Book Club ID: {bookclubid}</p>
-
-				<h3>Current Book</h3>
-				<Card style={{ width: "16rem" }}>
-					<Card.Img src={currentBook.cover} alt={currentBook.title} />
-					<Card.Body>
-						<Card.Title>{currentBook.title}</Card.Title>
-						<Card.Text>Author: {currentBook.authors}</Card.Text>
-						<Card.Text>Description</Card.Text>
-					</Card.Body>
-				</Card>
-
-				<Button
-					onClick={() => {
-						deleteBookClub(bookclubid);
-					}}
-				>
-					Delete book club
-				</Button>
-			</div>
-		);
 	} else {
-		return (
-			<div>
-				<h1>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h1>
+		// if (currentBook === []) {
+		if (currentBookClub.hasOwnProperty("currentbook")) {
+			return (
 				<div>
-					<p>No books yet :(</p>
-					<p>Get started here!</p>
-					{/* <button
+					<h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1>
+					<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
+					<p>Book Club Name: {currentBookClub.name}</p>
+					<p>Book Club ID: {bookclubid}</p>
+
+					<h3>Current Book</h3>
+					<Card style={{ width: "16rem" }}>
+						<Card.Img
+							src={currentBook.cover}
+							alt={currentBook.title}
+						/>
+						<Card.Body>
+							<Card.Title>{currentBook.title}</Card.Title>
+							<Card.Text>Author: {currentBook.authors}</Card.Text>
+							<Card.Text>Description</Card.Text>
+						</Card.Body>
+					</Card>
+
+					<Button
 						onClick={() => {
-							navigate("/searchbook");
+							deleteBookClub(bookclubid);
 						}}
 					>
-						Add Book
-					</button> */}
-					<Button onClick={findBook}>Find Book</Button>
+						Delete book club
+					</Button>
 				</div>
+			);
+		} else {
+			return (
+				<div>
+					<h1>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h1>
+					<div>
+						<p>No books yet :(</p>
+						<p>Get started here!</p>
+						{/* <button
+							onClick={() => {
+								navigate("/searchbook");
+							}}
+						>
+							Add Book
+						</button> */}
+						<Button onClick={findBook}>Find Book</Button>
+					</div>
 
-				<Button
-					onClick={() => {
-						deleteBookClub(bookclubid);
-					}}
-				>
-					Delete book club
-				</Button>
-			</div>
-		);
+					<Button
+						onClick={() => {
+							deleteBookClub(bookclubid);
+						}}
+					>
+						Delete book club
+					</Button>
+				</div>
+			);
+		}
 	}
 }
 
