@@ -6,6 +6,9 @@ import { doc, getDoc, deleteDoc } from "firebase/firestore";
 // bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+
+import SearchForm from "../components/SearchForm";
 
 // use bookclubid to make request to db
 // request info
@@ -19,6 +22,9 @@ function BookClubHome() {
 	// book club data state
 	const [currentBookClub, setBookClub] = useState([]);
 	const [currentBook, setBook] = useState([]);
+
+	// state for what type of page: Home or Search Page
+	const [searchState, setSearchState] = useState(false);
 
 	// 1. using getDoc
 	useEffect(() => {
@@ -53,11 +59,22 @@ function BookClubHome() {
 		navigate("/");
 	};
 
+	// TODO - conditionals: Home vs <SearchPage/>
+	// CALLBACK FOR FIND BOOK BUTTON
+	const findBook = () => {
+		console.log("caklling findBook");
+		setSearchState(true);
+	};
+
+	if (searchState) {
+		return <SearchForm />;
+	}
+
 	// if (currentBook === []) {
 	if (currentBookClub.hasOwnProperty("currentbook")) {
 		return (
 			<div>
-				<h1>BOOK CLUB: {currentBookClub.name} HOME PAGE</h1>
+				<h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1>
 				<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
 				<p>Book Club Name: {currentBookClub.name}</p>
 				<p>Book Club ID: {bookclubid}</p>
@@ -72,38 +89,39 @@ function BookClubHome() {
 					</Card.Body>
 				</Card>
 
-				<button
+				<Button
 					onClick={() => {
 						deleteBookClub(bookclubid);
 					}}
 				>
 					Delete book club
-				</button>
+				</Button>
 			</div>
 		);
 	} else {
 		return (
 			<div>
-				<h1>NEW BOOK CLUB</h1>
+				<h1>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h1>
 				<div>
 					<p>No books yet :(</p>
 					<p>Get started here!</p>
-					<button
+					{/* <button
 						onClick={() => {
 							navigate("/searchbook");
 						}}
 					>
 						Add Book
-					</button>
+					</button> */}
+					<Button onClick={findBook}>Find Book</Button>
 				</div>
 
-				<button
+				<Button
 					onClick={() => {
 						deleteBookClub(bookclubid);
 					}}
 				>
 					Delete book club
-				</button>
+				</Button>
 			</div>
 		);
 	}
