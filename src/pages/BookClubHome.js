@@ -8,6 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
 import SearchForm from "../components/SearchForm";
 
 // use bookclubid to make request to db
@@ -48,7 +51,8 @@ function BookClubHome() {
 		const unsubscribe = onSnapshot(bookclubRef, (response) => {
 			const data = response.data();
 			setBookClub(data);
-			if (data.hasOwnProperty("currentbook")) {
+			// if (data.hasOwnProperty("currentbook")) {
+			if (data.currentbook) {
 				const bookData = data.currentbook;
 				setBook(bookData);
 			}
@@ -110,6 +114,21 @@ function BookClubHome() {
 					>
 						Delete book club
 					</Button>
+
+					<div>
+						<h2>Comments</h2>
+						<FloatingLabel
+							controlId="floatingTextarea2"
+							label="Comments"
+						>
+							<Form.Control
+								as="textarea"
+								placeholder="Leave a comment here"
+								style={{ height: "100px" }}
+							/>
+						</FloatingLabel>
+						<Button>Post Comment</Button>{" "}
+					</div>
 				</div>
 			);
 		} else {
