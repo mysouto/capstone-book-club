@@ -65,7 +65,7 @@ function BookClubHome() {
 			}
 		});
 		return unsubscribe;
-	}, [setBookClub, bookclubRef]);
+	}, []);
 
 	// DELETE
 	const deleteBookClub = async (id) => {
@@ -86,6 +86,10 @@ function BookClubHome() {
 			bookID: currentBook.bookApiID,
 		});
 	};
+	// cache dummy data
+	// forward reques to firestore
+	// comment out code that's causin the loop
+	// set up emulator
 
 	// TODO - conditionals: Home vs <SearchPage/>
 	// CALLBACK FOR FIND BOOK BUTTON
