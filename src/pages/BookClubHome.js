@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../firebase-config";
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 
 // bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,29 +27,35 @@ function BookClubHome() {
 	const [searchState, setSearchState] = useState(false);
 
 	// 1. using getDoc
+	// useEffect(() => {
+	// 	const getBookclubData = async () => {
+	// 		const response = await getDoc(bookclubRef);
+	// 		const data = response.data();
+	// 		setBookClub(data);
+
+	// 		// console.log(typeof data);
+	// 		// console.log(data.hasOwnProperty("currentbook"));
+	// 		if (data.hasOwnProperty("currentbook")) {
+	// 			const bookData = data.currentbook;
+	// 			setBook(bookData);
+	// 		}
+	// 	};
+	// 	getBookclubData();
+	// }, []);
+
+	// 2. onSnapshot
 	useEffect(() => {
-		const getBookclubData = async () => {
-			const response = await getDoc(bookclubRef);
+		const unsubscribe = onSnapshot(bookclubRef, (response) => {
 			const data = response.data();
 			setBookClub(data);
-
-			// console.log(typeof data);
-			// console.log(data.hasOwnProperty("currentbook"));
 			if (data.hasOwnProperty("currentbook")) {
 				const bookData = data.currentbook;
 				setBook(bookData);
 			}
-		};
-		getBookclubData();
-	}, []);
+		});
 
-	// 2. onSnapshot
-	// 	const getData = async () => {
-	// onSnapshot(bookclubRef, (doc) => {
-	// 	console.log(doc.data(), doc.id);
-	// 	// setBookClub(doc.data());
-	// });
-	// };
+		return unsubscribe;
+	}, [setBookClub, bookclubRef]);
 
 	// DELETE
 	const deleteBookClub = async (id) => {
