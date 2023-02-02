@@ -102,7 +102,7 @@ function BookClubHome() {
 		if (currentBookClub.hasOwnProperty("currentbook")) {
 			return (
 				<div>
-					<h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1>
+					{/* <h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1> */}
 					<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
 					<p>Book Club Name: {currentBookClub.name}</p>
 					<p>Book Club ID: {bookclubid}</p>
@@ -133,7 +133,7 @@ function BookClubHome() {
 					<NewPostForm addPost={addPost} />
 
 					{/* READ POSTS */}
-					<h2>Showing xx Comments</h2>
+					<h2>Showing {postsData.length} Comments</h2>
 					{/* <postsData> */}
 					<PostsList postsData={postsData} />
 				</div>
