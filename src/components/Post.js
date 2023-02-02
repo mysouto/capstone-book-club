@@ -15,7 +15,7 @@ function Post({ id, text, bookclubID, bookID }) {
 		<div className="media">
 			{/* <Image src="..." class="mr-3" alt="..." /> */}
 			<div className="media-body">
-				<h5 class="mt-0">Post Title</h5>
+				<h5 className="mt-0">Post Title</h5>
 				<p> Comment Content: {text}</p>
 				<p>Book Club ID: {bookclubID}</p>
 				<p>Book ID: {bookID}</p>
