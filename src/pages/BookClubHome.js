@@ -6,8 +6,10 @@ import {
 	collection,
 	deleteDoc,
 	doc,
-	getDoc,
+	getDocs,
 	onSnapshot,
+	query,
+	where,
 } from "firebase/firestore";
 
 // bootstrap imports
@@ -17,6 +19,7 @@ import Button from "react-bootstrap/Button";
 
 import SearchForm from "../components/SearchForm";
 import NewPostForm from "../components/NewPostForm";
+import PostsList from "../components/PostsList";
 
 // use bookclubid to make request to db
 // request info
@@ -91,13 +94,48 @@ function BookClubHome() {
 	// comment out code that's causin the loop
 	// set up emulator
 
-	// TODO - conditionals: Home vs <SearchPage/>
+	const [postsData, setPostsData] = useState([]);
+
+	// FEATURE: READ POSTS COLLECTION DB
+	const postsQuery = query(
+		collection(db, "posts"),
+		where("bookclubID", "==", "3UmM9kpOYKlMSXjMAao6")
+	);
+
+	// useEffect(() => {
+	// 	const getPosts = async () => {
+	// 		const querySnapshot = await getDocs(postsQuery);
+	// 		setPostsData(
+	// 			querySnapshot.docs.map((doc) => ({
+	// 				// doc.data() is never undefined for query doc snapshots
+	// 				...doc.data(),
+	// 				id: doc.id,
+	// 			}))
+	// 		);
+	// 	};
+	// 	getPosts();
+	// }, []);
+
+	useEffect(() => {
+		const unsubscribe = onSnapshot(postsQuery, (querySnapshot) => {
+			setPostsData(
+				querySnapshot.docs.map((doc) => ({
+					// doc.data() is never undefined for query doc snapshots
+					...doc.data(),
+					id: doc.id,
+				}))
+			);
+		});
+		return unsubscribe;
+	}, []);
+
 	// CALLBACK FOR FIND BOOK BUTTON
 	const findBook = () => {
 		console.log("caklling findBook");
 		setSearchState(!searchState);
 	};
 
+	// conditionals: Home vs <SearchPage/>
 	if (searchState) {
 		return (
 			<SearchForm
@@ -140,6 +178,11 @@ function BookClubHome() {
 					{/* POSTS FEATURE */}
 					<h2>Comments</h2>
 					<NewPostForm addPost={addPost} />
+
+					{/* READ POSTS */}
+					<h2>Showing xx Comments</h2>
+					{/* <postsData> */}
+					<PostsList postsData={postsData} />
 				</div>
 			);
 		} else {
