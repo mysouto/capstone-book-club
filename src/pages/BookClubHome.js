@@ -5,10 +5,12 @@ import {
 	addDoc,
 	collection,
 	deleteDoc,
+	deleteField,
 	doc,
 	getDocs,
 	onSnapshot,
 	query,
+	updateDoc,
 	where,
 } from "firebase/firestore";
 
@@ -50,6 +52,11 @@ function BookClubHome() {
 		const bookClubDoc = doc(db, "bookclubs", id);
 		await deleteDoc(bookClubDoc);
 		navigate("/");
+	};
+
+	const deleteCurrentBook = async (id) => {
+		console.log("calling deleteBook");
+		await updateDoc(bookclubRef, { currentbook: deleteField() });
 	};
 
 	// FEATURE: ADD POST TO DB
@@ -107,7 +114,7 @@ function BookClubHome() {
 					<p>Book Club Name: {currentBookClub.name}</p>
 					<p>Book Club ID: {bookclubid}</p>
 
-					<h3>Current Book</h3>
+					<h3>Reading Now</h3>
 					<Card style={{ width: "16rem" }}>
 						<Card.Img
 							src={currentBook.cover}
@@ -120,28 +127,37 @@ function BookClubHome() {
 						</Card.Body>
 					</Card>
 
+					<Button onClick={() => deleteCurrentBook()}>
+						Delete book
+					</Button>
+
+					<div>
+						{/* POSTS FEATURE */}
+						<h2>Comments</h2>
+						<NewPostForm addPost={addPost} />
+
+						{/* READ POSTS */}
+						<h2>Showing {postsData.length} Comments</h2>
+						{/* <postsData> */}
+						<PostsList postsData={postsData} />
+					</div>
+
 					<Button
 						onClick={() => {
 							deleteBookClub(bookclubid);
 						}}
+						variant="danger"
 					>
 						Delete book club
 					</Button>
-
-					{/* POSTS FEATURE */}
-					<h2>Comments</h2>
-					<NewPostForm addPost={addPost} />
-
-					{/* READ POSTS */}
-					<h2>Showing {postsData.length} Comments</h2>
-					{/* <postsData> */}
-					<PostsList postsData={postsData} />
 				</div>
 			);
 		} else {
 			return (
 				<div>
-					<h1>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h1>
+					<h2>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h2>
+					<p>Book Club Name: {currentBookClub.name}</p>
+					<p>Book Club ID: {bookclubid}</p>
 					<div>
 						<p>No books yet :(</p>
 						<p>Get started here!</p>
