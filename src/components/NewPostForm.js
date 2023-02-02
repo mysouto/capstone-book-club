@@ -24,7 +24,7 @@ const NewPostForm = ({ addPost }) => {
 	};
 
 	// additional feature
-	// const isSubmitDisabled = postText.text === "" || postText.text.length > 30;
+	let isSubmitDisabled = postText === "" || postText.length > 30;
 
 	return (
 		<div>
@@ -38,7 +38,9 @@ const NewPostForm = ({ addPost }) => {
 					></Form.Control>
 				</FloatingLabel>
 				{/* <Button type="submit" disabled={isSubmitDisabled}> */}
-				<Button type="submit">Post Comment</Button>{" "}
+				<Button type="submit" disabled={isSubmitDisabled}>
+					Post Comment
+				</Button>{" "}
 			</Form>
 
 			{/* <form onSubmit={onPostSubmit}>

@@ -17,6 +17,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 import SearchForm from "../components/SearchForm";
 import NewPostForm from "../components/NewPostForm";
@@ -33,6 +34,11 @@ function BookClubHome() {
 	const [currentBook, setBook] = useState([]);
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
+	const [showDeleteModal, setDeleteModal] = useState(false);
+
+	// delete modal
+	const handleClose = () => setDeleteModal(false);
+	const handleShow = () => setDeleteModal(true);
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(bookclubRef, (response) => {
@@ -106,7 +112,7 @@ function BookClubHome() {
 			/>
 		);
 	} else {
-		if (currentBookClub.hasOwnProperty("currentbook")) {
+		if (currentBookClub.currentbook) {
 			return (
 				<div>
 					{/* <h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1> */}
@@ -127,7 +133,10 @@ function BookClubHome() {
 						</Card.Body>
 					</Card>
 
-					<Button onClick={() => deleteCurrentBook()}>
+					<Button
+						onClick={() => deleteCurrentBook()}
+						variant="warning"
+					>
 						Delete book
 					</Button>
 
@@ -142,14 +151,40 @@ function BookClubHome() {
 						<PostsList postsData={postsData} />
 					</div>
 
-					<Button
+					<h3>Danger Zone</h3>
+					<Button variant="danger" onClick={handleShow}>
+						Delete Book Club modal
+					</Button>
+					<Modal show={showDeleteModal} onHide={handleClose}>
+						<Modal.Header closeButton>
+							<Modal.Title>
+								Delete {currentBookClub.name} Book Club
+							</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							Are you sure you wanna delete this Book Club?
+						</Modal.Body>
+						<Modal.Footer>
+							<Button variant="secondary" onClick={handleClose}>
+								Close
+							</Button>
+							<Button
+								variant="danger"
+								onClick={() => {
+									deleteBookClub(bookclubid);
+								}}
+							>
+								Delete Book Club
+							</Button>
+						</Modal.Footer>
+					</Modal>
+					{/* <Button
 						onClick={() => {
 							deleteBookClub(bookclubid);
 						}}
-						variant="danger"
 					>
 						Delete book club
-					</Button>
+					</Button> */}
 				</div>
 			);
 		} else {
@@ -164,13 +199,41 @@ function BookClubHome() {
 						<Button onClick={findBook}>Find Book</Button>
 					</div>
 
-					<Button
+					<h3>Danger Zone</h3>
+					<Button variant="danger" onClick={handleShow}>
+						Delete Book Club modal
+					</Button>
+					<Modal show={showDeleteModal} onHide={handleClose}>
+						<Modal.Header closeButton>
+							<Modal.Title>
+								Delete {currentBookClub.name} Book Club
+							</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							Are you sure you wanna delete this Book Club?
+						</Modal.Body>
+						<Modal.Footer>
+							<Button variant="secondary" onClick={handleClose}>
+								Close
+							</Button>
+							<Button
+								variant="danger"
+								onClick={() => {
+									deleteBookClub(bookclubid);
+								}}
+							>
+								Delete Book Club
+							</Button>
+						</Modal.Footer>
+					</Modal>
+					{/* <Button
 						onClick={() => {
 							deleteBookClub(bookclubid);
 						}}
+						variant="danger"
 					>
 						Delete book club
-					</Button>
+					</Button> */}
 				</div>
 			);
 		}
