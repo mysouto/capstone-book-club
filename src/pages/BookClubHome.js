@@ -12,7 +12,6 @@ import {
 	where,
 } from "firebase/firestore";
 
-// bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -21,47 +20,22 @@ import SearchForm from "../components/SearchForm";
 import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
 
-// use bookclubid to make request to db
-// request info
 function BookClubHome() {
 	let { bookclubid } = useParams();
 	let navigate = useNavigate();
 
-	// Bookclubs collection
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
-	// Posts collection
 	const postsRef = collection(db, "posts");
 
-	// book club data state
 	const [currentBookClub, setBookClub] = useState([]);
 	const [currentBook, setBook] = useState([]);
-
-	// state for what type of page: Home or Search Page
+	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 
-	// 1. using getDoc
-	// useEffect(() => {
-	// 	const getBookclubData = async () => {
-	// 		const response = await getDoc(bookclubRef);
-	// 		const data = response.data();
-	// 		setBookClub(data);
-
-	// 		// console.log(typeof data);
-	// 		// console.log(data.hasOwnProperty("currentbook"));
-	// 		if (data.hasOwnProperty("currentbook")) {
-	// 			const bookData = data.currentbook;
-	// 			setBook(bookData);
-	// 		}
-	// 	};
-	// 	getBookclubData();
-	// }, []);
-
-	// 2. onSnapshot
 	useEffect(() => {
 		const unsubscribe = onSnapshot(bookclubRef, (response) => {
 			const data = response.data();
 			setBookClub(data);
-			// if (data.hasOwnProperty("currentbook")) {
 			if (data.currentbook) {
 				const bookData = data.currentbook;
 				setBook(bookData);
@@ -89,32 +63,12 @@ function BookClubHome() {
 			bookID: currentBook.bookApiID,
 		});
 	};
-	// cache dummy data
-	// forward reques to firestore
-	// comment out code that's causin the loop
-	// set up emulator
-
-	const [postsData, setPostsData] = useState([]);
 
 	// FEATURE: READ POSTS COLLECTION DB
 	const postsQuery = query(
 		collection(db, "posts"),
-		where("bookclubID", "==", "3UmM9kpOYKlMSXjMAao6")
+		where("bookclubID", "==", bookclubid)
 	);
-
-	// useEffect(() => {
-	// 	const getPosts = async () => {
-	// 		const querySnapshot = await getDocs(postsQuery);
-	// 		setPostsData(
-	// 			querySnapshot.docs.map((doc) => ({
-	// 				// doc.data() is never undefined for query doc snapshots
-	// 				...doc.data(),
-	// 				id: doc.id,
-	// 			}))
-	// 		);
-	// 	};
-	// 	getPosts();
-	// }, []);
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(postsQuery, (querySnapshot) => {
@@ -145,7 +99,6 @@ function BookClubHome() {
 			/>
 		);
 	} else {
-		// if (currentBook === []) {
 		if (currentBookClub.hasOwnProperty("currentbook")) {
 			return (
 				<div>
@@ -192,13 +145,6 @@ function BookClubHome() {
 					<div>
 						<p>No books yet :(</p>
 						<p>Get started here!</p>
-						{/* <button
-							onClick={() => {
-								navigate("/searchbook");
-							}}
-						>
-							Add Book
-						</button> */}
 						<Button onClick={findBook}>Find Book</Button>
 					</div>
 
