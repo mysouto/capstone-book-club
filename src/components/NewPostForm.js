@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 // bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
@@ -11,10 +12,12 @@ import Form from "react-bootstrap/Form";
 // todo: need other fields or data from post?
 const NewPostForm = ({ addPost }) => {
 	const [postText, setText] = useState("");
+	const [charCount, setCount] = useState("");
 
 	const onTextChange = (event) => {
 		const postData = event.target.value;
 		setText(postData);
+		setCount(postData.length);
 	};
 
 	const onPostSubmit = (event) => {
@@ -25,6 +28,7 @@ const NewPostForm = ({ addPost }) => {
 
 	// additional feature
 	let isSubmitDisabled = postText === "" || postText.length > 300;
+	let showAlert = postText.length > 300;
 
 	return (
 		<div>
@@ -41,6 +45,10 @@ const NewPostForm = ({ addPost }) => {
 				<Button type="submit" disabled={isSubmitDisabled}>
 					Post Comment
 				</Button>{" "}
+				<p> Characters: {charCount}</p>
+				<Alert show={showAlert} key="warning" variant="warning">
+					Too many characters, be more concise lol
+				</Alert>
 			</Form>
 
 			{/* <form onSubmit={onPostSubmit}>
