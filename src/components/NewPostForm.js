@@ -24,7 +24,7 @@ const NewPostForm = ({ addPost }) => {
 	};
 
 	// additional feature
-	let isSubmitDisabled = postText === "" || postText.length > 30;
+	let isSubmitDisabled = postText === "" || postText.length > 300;
 
 	return (
 		<div>

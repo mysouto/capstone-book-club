@@ -25,7 +25,7 @@ function BookClub({ bookClubID, name }) {
 					navigate(`/bookclubhome/${bookClubID}`);
 				}}
 			>
-				Go to Club Page
+				Go to Book Club Page
 			</Button>
 		</div>
 	);

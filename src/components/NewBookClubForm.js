@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 
 // CREATE book club
@@ -21,6 +22,9 @@ function NewBookClubForm({ createBookClub }) {
 		createBookClub(newBookClubName);
 	};
 
+	let isSubmitDisabled =
+		newBookClubName === "" || newBookClubName.length > 32;
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -36,7 +40,13 @@ function NewBookClubForm({ createBookClub }) {
 					// }}
 				></input>
 
-				<Button type="submit">Create Book Club</Button>
+				<Alert show={isSubmitDisabled} key="warning" variant="warning">
+					Book Club name cannot be empty
+				</Alert>
+
+				<Button type="submit" disabled={isSubmitDisabled}>
+					Create Book Club
+				</Button>
 			</form>
 		</div>
 	);

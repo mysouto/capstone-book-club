@@ -18,6 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Alert from "react-bootstrap/Alert";
 
 import SearchForm from "../components/SearchForm";
 import NewPostForm from "../components/NewPostForm";
@@ -158,38 +159,51 @@ function BookClubHome() {
 						<PostsList postsData={postsData} />
 					</div>
 
-					<div>
-						<h3>Danger Zone</h3>
-						<Button variant="danger" onClick={handleShow}>
-							Delete Book Club modal
-						</Button>
-						<Modal show={showDeleteModal} onHide={handleClose}>
-							<Modal.Header closeButton>
-								<Modal.Title>
-									Delete {currentBookClub.name} Book Club
-								</Modal.Title>
-							</Modal.Header>
-							<Modal.Body>
-								Are you sure you wanna delete this Book Club?
-							</Modal.Body>
-							<Modal.Footer>
+					<>
+						<Alert variant="danger">
+							<p>Danger Zone</p>
+							<hr />
+							<div className="d-flex justify-content-end">
 								<Button
-									variant="secondary"
-									onClick={handleClose}
+									variant="outline-danger"
+									onClick={handleShow}
 								>
-									Close
+									Delete Book Club modal
 								</Button>
-								<Button
-									variant="danger"
-									onClick={() => {
-										deleteBookClub(bookclubid);
-									}}
+								<Modal
+									show={showDeleteModal}
+									onHide={handleClose}
 								>
-									Delete Book Club
-								</Button>
-							</Modal.Footer>
-						</Modal>
-					</div>
+									<Modal.Header closeButton>
+										<Modal.Title>
+											Delete {currentBookClub.name} Book
+											Club
+										</Modal.Title>
+									</Modal.Header>
+									<Modal.Body>
+										Are you sure you wanna delete this Book
+										Club?
+									</Modal.Body>
+									<Modal.Footer>
+										<Button
+											variant="secondary"
+											onClick={handleClose}
+										>
+											Close
+										</Button>
+										<Button
+											variant="danger"
+											onClick={() => {
+												deleteBookClub(bookclubid);
+											}}
+										>
+											Delete Book Club
+										</Button>
+									</Modal.Footer>
+								</Modal>
+							</div>
+						</Alert>
+					</>
 				</div>
 			);
 		} else {
@@ -198,47 +212,71 @@ function BookClubHome() {
 					<h2>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h2>
 					<p>Book Club Name: {currentBookClub.name}</p>
 					<p>Book Club ID: {bookclubid}</p>
-					<div>
-						<p>No books yet :(</p>
-						<p>Get started here!</p>
-						<Button onClick={findBook}>Find Book</Button>
-					</div>
 
-					<h3>Danger Zone</h3>
-					<Button variant="danger" onClick={handleShow}>
-						Delete Book Club modal
-					</Button>
-					<Modal show={showDeleteModal} onHide={handleClose}>
-						<Modal.Header closeButton>
-							<Modal.Title>
-								Delete {currentBookClub.name} Book Club
-							</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>
-							Are you sure you wanna delete this Book Club?
-						</Modal.Body>
-						<Modal.Footer>
-							<Button variant="secondary" onClick={handleClose}>
-								Close
-							</Button>
-							<Button
-								variant="danger"
-								onClick={() => {
-									deleteBookClub(bookclubid);
-								}}
-							>
-								Delete Book Club
-							</Button>
-						</Modal.Footer>
-					</Modal>
-					{/* <Button
-						onClick={() => {
-							deleteBookClub(bookclubid);
-						}}
-						variant="danger"
-					>
-						Delete book club
-					</Button> */}
+					{/* <p>No books yet :(</p>
+						<p>Get started here!</p>
+						<Button onClick={findBook}>Find Book</Button> */}
+					<>
+						<Alert variant="info">
+							<Alert.Heading>No books here yet :(</Alert.Heading>
+							<p>Get started here!</p>
+							<hr />
+							<div className="d-flex justify-content-end">
+								<Button
+									onClick={findBook}
+									variant="outline-info"
+								>
+									Find Book
+								</Button>
+							</div>
+						</Alert>
+					</>
+
+					<>
+						<Alert variant="danger">
+							<p>Danger Zone</p>
+							<hr />
+							<div className="d-flex justify-content-end">
+								<Button
+									variant="outline-danger"
+									onClick={handleShow}
+								>
+									Delete Book Club modal
+								</Button>
+								<Modal
+									show={showDeleteModal}
+									onHide={handleClose}
+								>
+									<Modal.Header closeButton>
+										<Modal.Title>
+											Delete {currentBookClub.name} Book
+											Club
+										</Modal.Title>
+									</Modal.Header>
+									<Modal.Body>
+										Are you sure you wanna delete this Book
+										Club?
+									</Modal.Body>
+									<Modal.Footer>
+										<Button
+											variant="secondary"
+											onClick={handleClose}
+										>
+											Close
+										</Button>
+										<Button
+											variant="danger"
+											onClick={() => {
+												deleteBookClub(bookclubid);
+											}}
+										>
+											Delete Book Club
+										</Button>
+									</Modal.Footer>
+								</Modal>
+							</div>
+						</Alert>
+					</>
 				</div>
 			);
 		}
