@@ -43,12 +43,20 @@ function BookClubHome() {
 	useEffect(() => {
 		const unsubscribe = onSnapshot(bookclubRef, (response) => {
 			const data = response.data();
+			// if no bookclub doc data found in db, navigate home and return to stop onSnapshot listener
+			if (!data) {
+				navigate("/");
+				return;
+			}
+			// Respond to data
 			setBookClub(data);
+
 			if (data.currentbook) {
 				const bookData = data.currentbook;
 				setBook(bookData);
 			}
 		});
+		// Stop listening to changes
 		return unsubscribe;
 	}, []);
 
@@ -57,7 +65,6 @@ function BookClubHome() {
 		console.log("calling deleteBookClub");
 		const bookClubDoc = doc(db, "bookclubs", id);
 		await deleteDoc(bookClubDoc);
-		navigate("/");
 	};
 
 	const deleteCurrentBook = async (id) => {
@@ -151,40 +158,38 @@ function BookClubHome() {
 						<PostsList postsData={postsData} />
 					</div>
 
-					<h3>Danger Zone</h3>
-					<Button variant="danger" onClick={handleShow}>
-						Delete Book Club modal
-					</Button>
-					<Modal show={showDeleteModal} onHide={handleClose}>
-						<Modal.Header closeButton>
-							<Modal.Title>
-								Delete {currentBookClub.name} Book Club
-							</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>
-							Are you sure you wanna delete this Book Club?
-						</Modal.Body>
-						<Modal.Footer>
-							<Button variant="secondary" onClick={handleClose}>
-								Close
-							</Button>
-							<Button
-								variant="danger"
-								onClick={() => {
-									deleteBookClub(bookclubid);
-								}}
-							>
-								Delete Book Club
-							</Button>
-						</Modal.Footer>
-					</Modal>
-					{/* <Button
-						onClick={() => {
-							deleteBookClub(bookclubid);
-						}}
-					>
-						Delete book club
-					</Button> */}
+					<div>
+						<h3>Danger Zone</h3>
+						<Button variant="danger" onClick={handleShow}>
+							Delete Book Club modal
+						</Button>
+						<Modal show={showDeleteModal} onHide={handleClose}>
+							<Modal.Header closeButton>
+								<Modal.Title>
+									Delete {currentBookClub.name} Book Club
+								</Modal.Title>
+							</Modal.Header>
+							<Modal.Body>
+								Are you sure you wanna delete this Book Club?
+							</Modal.Body>
+							<Modal.Footer>
+								<Button
+									variant="secondary"
+									onClick={handleClose}
+								>
+									Close
+								</Button>
+								<Button
+									variant="danger"
+									onClick={() => {
+										deleteBookClub(bookclubid);
+									}}
+								>
+									Delete Book Club
+								</Button>
+							</Modal.Footer>
+						</Modal>
+					</div>
 				</div>
 			);
 		} else {
