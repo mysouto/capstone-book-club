@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 

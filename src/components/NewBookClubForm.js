@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
