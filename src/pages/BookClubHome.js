@@ -14,15 +14,15 @@ import {
 	where,
 } from "firebase/firestore";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-
 import SearchForm from "../components/SearchForm";
 import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
-import DeleteModal from "./modals/DeleteBookCubModal";
-import NoBookAlert from "./modals/NoBookAlert";
+import DeleteModal from "./css-components/DeleteBookCubModal";
+import NoBookAlert from "./css-components/NoBookAlert";
+import CardBook from "./css-components/CardBook";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
 
 function BookClubHome() {
 	let { bookclubid } = useParams();
@@ -130,17 +130,9 @@ function BookClubHome() {
 					<p>Book Club ID: {bookclubid}</p>
 
 					<h3>Reading Now</h3>
-					<Card style={{ width: "16rem" }}>
-						<Card.Img
-							src={currentBook.cover}
-							alt={currentBook.title}
-						/>
-						<Card.Body>
-							<Card.Title>{currentBook.title}</Card.Title>
-							<Card.Text>Author: {currentBook.authors}</Card.Text>
-							<Card.Text>Description</Card.Text>
-						</Card.Body>
-					</Card>
+					<>
+						<CardBook currentBook={currentBook} />
+					</>
 
 					<Button
 						onClick={() => deleteCurrentBook()}
@@ -156,7 +148,6 @@ function BookClubHome() {
 
 						{/* READ POSTS */}
 						<h2>Showing {postsData.length} Comments</h2>
-						{/* <postsData> */}
 						<PostsList postsData={postsData} />
 					</>
 
@@ -179,9 +170,6 @@ function BookClubHome() {
 					<p>Book Club Name: {currentBookClub.name}</p>
 					<p>Book Club ID: {bookclubid}</p>
 
-					{/* <p>No books yet :(</p>
-						<p>Get started here!</p>
-						<Button onClick={findBook}>Find Book</Button> */}
 					<>
 						<NoBookAlert findBook={findBook} />
 					</>
