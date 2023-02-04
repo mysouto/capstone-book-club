@@ -9,7 +9,11 @@ const BookList = ({ searchResults, addBook }) => {
 			<Book
 				key={result.id}
 				bookApiID={result.id}
-				cover={result.volumeInfo.imageLinks.thumbnail}
+				cover={
+					result.volumeInfo.imageLinks === undefined
+						? ""
+						: result.volumeInfo.imageLinks.thumbnail
+				}
 				title={result.volumeInfo.title}
 				authors={result.volumeInfo.authors}
 				description={result.volumeInfo.description}

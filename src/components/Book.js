@@ -7,7 +7,10 @@ import Card from "react-bootstrap/Card";
 const Book = ({ bookApiID, title, cover, authors, description, addBook }) => {
 	return (
 		<Card style={{ width: "18rem" }}>
-			<Card.Img src={cover} alt={title} />
+			<Card.Img
+				src={cover}
+				alt={title}
+			/>
 			<Card.Body>
 				<Card.Title>{title}</Card.Title>
 				<Card.Text>Authors: {authors.join(", ")}</Card.Text>
@@ -23,7 +26,7 @@ const Book = ({ bookApiID, title, cover, authors, description, addBook }) => {
 Book.propTypes = {
 	bookApiID: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
-	cover: PropTypes.string.isRequired,
+	cover: PropTypes.string,
 	authors: PropTypes.array.isRequired,
 	addBook: PropTypes.func,
 };
