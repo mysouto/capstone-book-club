@@ -4,14 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const Book = ({ bookApiID, title, cover, authors, addBook }) => {
+const Book = ({ bookApiID, title, cover, authors, description, addBook }) => {
 	return (
 		<Card style={{ width: "18rem" }}>
 			<Card.Img src={cover} alt={title} />
 			<Card.Body>
 				<Card.Title>{title}</Card.Title>
 				<Card.Text>Authors: {authors.join(", ")}</Card.Text>
-				<Card.Text>Description</Card.Text>
+				<Card.Text>Description: {description}</Card.Text>
 				<Button variant="primary" onClick={() => addBook(bookApiID)}>
 					Add Book
 				</Button>

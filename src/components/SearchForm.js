@@ -23,7 +23,7 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
 		book +
-		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/imageLinks/thumbnail)&maxResults=5";
+		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/imageLinks/thumbnail)&maxResults=5";
 
 	const handleChange = (event) => {
 		const bookQuery = event.target.value;
@@ -52,9 +52,45 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 					cover: result.volumeInfo.imageLinks.thumbnail,
 					title: result.volumeInfo.title,
 					authors: result.volumeInfo.authors.join(", "),
+					description: result.volumeInfo.description,
 				};
+				// if (result.id === undefined) {
+				// 	book.bookApiID = "Undefined data from books API";
+				// 	console.log(book.bookApiID);
+				// } else {
+				// 	book.bookApiID = result.id;
+				// }
+				// if (result.volumeInfo.imageLinks.thumbnail === undefined) {
+				// 	book.cover = "Undefined image from books API";
+				// 	console.log(book.cover);
+				// } else {
+				// 	book.cover = result.volumeInfo.imageLinks.thumbnail;
+				// }
+				// book.title = result.volumeInfo.title;
+				// book.authors = result.volumeInfo.authors.join(", ");
+				// if (result.id === undefined) {
+				// 	book.title = "Undefined title from books API";
+				// 	console.log(book.title);
+				// } else {
+				// 	book.title = result.volumeInfo.title;
+				// }
+				// if (result.authors === undefined) {
+				// 	book.authors = "Undefined authors from books API";
+				// 	console.log(book.authors);
+				// } else {
+				// 	book.authors = result.volumeInfo.authors.join(", ");
+				// }
 			}
 		}
+
+		// console.log(typeof book);
+		// for (let bookField in book) {
+		// 	if (bookField === undefined) {
+		// 		book.bookField = "Undefined data from books API";
+		// 		console.log(book.bookField);
+		// 	}
+		// }
+
 		return book;
 	};
 

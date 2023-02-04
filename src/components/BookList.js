@@ -12,6 +12,7 @@ const BookList = ({ searchResults, addBook }) => {
 				cover={result.volumeInfo.imageLinks.thumbnail}
 				title={result.volumeInfo.title}
 				authors={result.volumeInfo.authors}
+				description={result.volumeInfo.description}
 				addBook={addBook}
 			/>
 		);
@@ -23,9 +24,10 @@ BookList.propTypes = {
 	searchResults: PropTypes.arrayOf(
 		PropTypes.shape({
 			bookApiID: PropTypes.string.isRequired,
-			cover: PropTypes.string.isRequired,
+			cover: PropTypes.string,
 			title: PropTypes.string.isRequired,
 			authors: PropTypes.array.isRequired,
+			description: PropTypes.string,
 		})
 	),
 	addBook: PropTypes.func,

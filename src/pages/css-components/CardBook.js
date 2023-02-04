@@ -10,14 +10,14 @@ const CardBook = ({ currentBook }) => {
 			<Card.Body>
 				<Card.Title>{currentBook.title}</Card.Title>
 				<Card.Text>Author: {currentBook.authors}</Card.Text>
-				<Card.Text>Description</Card.Text>
+				<Card.Text>Description {currentBook.description}</Card.Text>
 			</Card.Body>
 		</Card>
 	);
 };
 
 CardBook.propTypes = {
-    currentBook: PropTypes.object.isRequired,
-}
+	currentBook: PropTypes.object.isRequired,
+};
 
 export default CardBook;
