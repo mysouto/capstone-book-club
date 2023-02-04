@@ -17,12 +17,12 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Alert from "react-bootstrap/Alert";
 
 import SearchForm from "../components/SearchForm";
 import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
+import DeleteModal from "./modals/DeleteBookCubModal";
+import NoBookAlert from "./modals/NoBookAlert";
 
 function BookClubHome() {
 	let { bookclubid } = useParams();
@@ -51,6 +51,7 @@ function BookClubHome() {
 			}
 			// Respond to data
 			setBookClub(data);
+			// console.log(typeof currentBookClub);
 
 			if (data.currentbook) {
 				const bookData = data.currentbook;
@@ -148,7 +149,7 @@ function BookClubHome() {
 						Delete book
 					</Button>
 
-					<div>
+					<>
 						{/* POSTS FEATURE */}
 						<h2>Comments</h2>
 						<NewPostForm addPost={addPost} />
@@ -157,52 +158,17 @@ function BookClubHome() {
 						<h2>Showing {postsData.length} Comments</h2>
 						{/* <postsData> */}
 						<PostsList postsData={postsData} />
-					</div>
+					</>
 
 					<>
-						<Alert variant="danger">
-							<p>Danger Zone</p>
-							<hr />
-							<div className="d-flex justify-content-end">
-								<Button
-									variant="outline-danger"
-									onClick={handleShow}
-								>
-									Delete Book Club modal
-								</Button>
-								<Modal
-									show={showDeleteModal}
-									onHide={handleClose}
-								>
-									<Modal.Header closeButton>
-										<Modal.Title>
-											Delete {currentBookClub.name} Book
-											Club
-										</Modal.Title>
-									</Modal.Header>
-									<Modal.Body>
-										Are you sure you wanna delete this Book
-										Club?
-									</Modal.Body>
-									<Modal.Footer>
-										<Button
-											variant="secondary"
-											onClick={handleClose}
-										>
-											Close
-										</Button>
-										<Button
-											variant="danger"
-											onClick={() => {
-												deleteBookClub(bookclubid);
-											}}
-										>
-											Delete Book Club
-										</Button>
-									</Modal.Footer>
-								</Modal>
-							</div>
-						</Alert>
+						<DeleteModal
+							bookclubid={bookclubid}
+							currentBookClub={currentBookClub}
+							deleteBookClub={deleteBookClub}
+							showDeleteModal={showDeleteModal}
+							handleClose={handleClose}
+							handleShow={handleShow}
+						/>
 					</>
 				</div>
 			);
@@ -217,65 +183,18 @@ function BookClubHome() {
 						<p>Get started here!</p>
 						<Button onClick={findBook}>Find Book</Button> */}
 					<>
-						<Alert variant="info">
-							<Alert.Heading>No books here yet :(</Alert.Heading>
-							<p>Get started here!</p>
-							<hr />
-							<div className="d-flex justify-content-end">
-								<Button
-									onClick={findBook}
-									variant="outline-info"
-								>
-									Find Book
-								</Button>
-							</div>
-						</Alert>
+						<NoBookAlert findBook={findBook} />
 					</>
 
 					<>
-						<Alert variant="danger">
-							<p>Danger Zone</p>
-							<hr />
-							<div className="d-flex justify-content-end">
-								<Button
-									variant="outline-danger"
-									onClick={handleShow}
-								>
-									Delete Book Club modal
-								</Button>
-								<Modal
-									show={showDeleteModal}
-									onHide={handleClose}
-								>
-									<Modal.Header closeButton>
-										<Modal.Title>
-											Delete {currentBookClub.name} Book
-											Club
-										</Modal.Title>
-									</Modal.Header>
-									<Modal.Body>
-										Are you sure you wanna delete this Book
-										Club?
-									</Modal.Body>
-									<Modal.Footer>
-										<Button
-											variant="secondary"
-											onClick={handleClose}
-										>
-											Close
-										</Button>
-										<Button
-											variant="danger"
-											onClick={() => {
-												deleteBookClub(bookclubid);
-											}}
-										>
-											Delete Book Club
-										</Button>
-									</Modal.Footer>
-								</Modal>
-							</div>
-						</Alert>
+						<DeleteModal
+							bookclubid={bookclubid}
+							currentBookClub={currentBookClub}
+							deleteBookClub={deleteBookClub}
+							showDeleteModal={showDeleteModal}
+							handleClose={handleClose}
+							handleShow={handleShow}
+						/>
 					</>
 				</div>
 			);
