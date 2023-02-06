@@ -17,87 +17,70 @@ import BookList from "./BookList";
 function SearchForm({ bookclubid, bookclubName, findBook }) {
 	let navigate = useNavigate();
 
-	const [book, setBook] = useState("");
+	const bookclubRef = doc(db, "bookclubs", bookclubid);
+
+	const [bookQuery, setBookQuery] = useState("");
 	const [searchResults, setResults] = useState([]);
 
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
-		book +
+		bookQuery +
 		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/imageLinks/thumbnail)&maxResults=5";
 
 	const handleChange = (event) => {
-		const bookQuery = event.target.value;
-		setBook(bookQuery);
+		const query = event.target.value;
+		setBookQuery(query);
 	};
 
-	const handleSubmit = (event) => {
+	const searchBook = (event) => {
 		event.preventDefault();
-		// console.log(book);
 		axios
 			.get(URL)
 			.then((response) => {
-				setResults(response.data.items);
+				console.log("API response:", response.data.items);
+
+				// unpack API response and check of undefined data
+				const booksAPIResCopy = response.data.items.map((book) => {
+					return {
+						bookApiID:
+							book.id === undefined
+								? "No bookApiID from response"
+								: book.id,
+						cover:
+							book.volumeInfo.imageLinks === undefined
+								? ""
+								: book.volumeInfo.imageLinks.thumbnail,
+						title: book.volumeInfo.title,
+						authors: book.volumeInfo.authors.join(", "),
+						description:
+							book.volumeInfo.description === undefined
+								? "No book description available."
+								: book.volumeInfo.description,
+					};
+				});
+
+				console.log("booksAPIResCopy", booksAPIResCopy);
+				setResults(booksAPIResCopy);
+				// setResults(response.data.items);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	};
 
-	const getBook = (bookApiID) => {
+	const getSelectedBook = (bookApiID) => {
 		let book = {};
 		for (let result of searchResults) {
-			if (result.id === bookApiID) {
-				book = {
-					bookApiID: result.id,
-					cover: result.volumeInfo.imageLinks.thumbnail,
-					title: result.volumeInfo.title,
-					authors: result.volumeInfo.authors.join(", "),
-					description: result.volumeInfo.description,
-				};
-				// if (result.id === undefined) {
-				// 	book.bookApiID = "Undefined data from books API";
-				// 	console.log(book.bookApiID);
-				// } else {
-				// 	book.bookApiID = result.id;
-				// }
-				// if (result.volumeInfo.imageLinks.thumbnail === undefined) {
-				// 	book.cover = "Undefined image from books API";
-				// 	console.log(book.cover);
-				// } else {
-				// 	book.cover = result.volumeInfo.imageLinks.thumbnail;
-				// }
-				// book.title = result.volumeInfo.title;
-				// book.authors = result.volumeInfo.authors.join(", ");
-				// if (result.id === undefined) {
-				// 	book.title = "Undefined title from books API";
-				// 	console.log(book.title);
-				// } else {
-				// 	book.title = result.volumeInfo.title;
-				// }
-				// if (result.authors === undefined) {
-				// 	book.authors = "Undefined authors from books API";
-				// 	console.log(book.authors);
-				// } else {
-				// 	book.authors = result.volumeInfo.authors.join(", ");
-				// }
+			if (result.bookApiID === bookApiID) {
+				book = result;
 			}
 		}
-
-		// console.log(typeof book);
-		// for (let bookField in book) {
-		// 	if (bookField === undefined) {
-		// 		book.bookField = "Undefined data from books API";
-		// 		console.log(book.bookField);
-		// 	}
-		// }
-
 		return book;
 	};
 
-	const bookclubRef = doc(db, "bookclubs", bookclubid);
-
 	const addBook = async (bookApiID) => {
-		const bookToAdd = getBook(bookApiID);
+		const bookToAdd = getSelectedBook(bookApiID);
+		console.log("bookToAdd", bookToAdd);
 		await setDoc(bookclubRef, {
 			name: bookclubName,
 			currentbook: bookToAdd,
@@ -110,7 +93,7 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 	return (
 		<div className="App">
 			<h1>Search Book</h1>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={searchBook}>
 				<input
 					onChange={handleChange}
 					type="text"
