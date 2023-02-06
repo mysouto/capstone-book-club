@@ -111,7 +111,10 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 	);
 }
 
-// Search.propTypes = {
-// }
+SearchForm.propTypes = {
+	bookclubid: PropTypes.string.isRequired,
+	bookclubName: PropTypes.string.isRequired,
+	findBook: PropTypes.func.isRequired,
+};
 
 export default SearchForm;
