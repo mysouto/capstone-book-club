@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 
-const CardBook = ({ currentBook }) => {
+const BookCard = ({ currentBook }) => {
 	return (
 		<Card style={{ width: "16rem" }}>
 			<Card.Img src={currentBook.cover} alt={currentBook.title} />
@@ -16,8 +16,8 @@ const CardBook = ({ currentBook }) => {
 	);
 };
 
-CardBook.propTypes = {
+BookCard.propTypes = {
 	currentBook: PropTypes.object.isRequired,
 };
 
-export default CardBook;
+export default BookCard;

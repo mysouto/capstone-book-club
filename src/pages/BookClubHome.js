@@ -19,7 +19,7 @@ import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
 import DeleteModal from "./css-components/DeleteBookCubModal";
 import NoBookAlert from "./css-components/NoBookAlert";
-import CardBook from "./css-components/CardBook";
+import BookCard from "./css-components/BookCard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -49,7 +49,6 @@ function BookClubHome() {
 				navigate("/");
 				return;
 			}
-			// Respond to data
 			setBookClub(data);
 			// console.log(typeof currentBookClub);
 
@@ -107,7 +106,7 @@ function BookClubHome() {
 
 	// CALLBACK FOR FIND BOOK BUTTON
 	const findBook = () => {
-		console.log("caklling findBook");
+		console.log("calling findBook");
 		setSearchState(!searchState);
 	};
 
@@ -131,7 +130,7 @@ function BookClubHome() {
 
 					<h3>Reading Now</h3>
 					<>
-						<CardBook currentBook={currentBook} />
+						<BookCard currentBook={currentBook} />
 					</>
 
 					<Button
