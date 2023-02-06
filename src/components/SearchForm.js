@@ -11,7 +11,7 @@ import { app, db } from "../firebase-config";
 import { doc, setDoc } from "firebase/firestore";
 
 // Components
-import BookList from "./BookList";
+import BookResList from "./BookResList";
 
 // SEARCH BOOK feature
 function SearchForm({ bookclubid, bookclubName, findBook }) {
@@ -103,10 +103,10 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 			</form>
 
 			<h3>Results</h3>
-			<BookList
+			<BookResList
 				searchResults={searchResults}
 				addBook={addBook}
-			></BookList>
+			></BookResList>
 		</div>
 	);
 }

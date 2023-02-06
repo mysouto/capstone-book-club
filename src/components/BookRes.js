@@ -4,7 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const Book = ({ bookApiID, title, cover, authors, description, addBook }) => {
+const BookRes = ({
+	bookApiID,
+	title,
+	cover,
+	authors,
+	description,
+	addBook,
+}) => {
 	return (
 		<Card style={{ width: "18rem" }}>
 			<Card.Img src={cover} alt={title} />
@@ -20,7 +27,7 @@ const Book = ({ bookApiID, title, cover, authors, description, addBook }) => {
 	);
 };
 
-Book.propTypes = {
+BookRes.propTypes = {
 	bookApiID: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	cover: PropTypes.string.isRequired,
@@ -28,4 +35,4 @@ Book.propTypes = {
 	addBook: PropTypes.func.isRequired,
 };
 
-export default Book;
+export default BookRes;
