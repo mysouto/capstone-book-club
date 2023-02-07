@@ -14,7 +14,7 @@ import {
 	where,
 } from "firebase/firestore";
 
-import SearchForm from "../components/SearchForm";
+import SearchPage from "./SearchPage";
 import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
 import DeleteModal from "./css-components/DeleteBookCubModal";
@@ -113,7 +113,7 @@ function BookClubHome() {
 	// conditionals: Home vs <SearchPage/>
 	if (searchState) {
 		return (
-			<SearchForm
+			<SearchPage
 				bookclubid={bookclubid}
 				bookclubName={currentBookClub.name}
 				findBook={findBook}

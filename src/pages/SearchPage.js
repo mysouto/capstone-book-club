@@ -11,10 +11,10 @@ import { app, db } from "../firebase-config";
 import { doc, setDoc } from "firebase/firestore";
 
 // Components
-import BookResList from "./BookResList";
+import BookResList from "../components/BookResList";
 
 // SEARCH BOOK feature
-function SearchForm({ bookclubid, bookclubName, findBook }) {
+function SearchPage({ bookclubid, bookclubName, findBook }) {
 	let navigate = useNavigate();
 
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
@@ -91,7 +91,7 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 	};
 
 	return (
-		<div className="App">
+		<div>
 			<h1>Search Book</h1>
 			<form onSubmit={searchBook}>
 				<input
@@ -111,10 +111,10 @@ function SearchForm({ bookclubid, bookclubName, findBook }) {
 	);
 }
 
-SearchForm.propTypes = {
+SearchPage.propTypes = {
 	bookclubid: PropTypes.string.isRequired,
 	bookclubName: PropTypes.string.isRequired,
 	findBook: PropTypes.func.isRequired,
 };
 
-export default SearchForm;
+export default SearchPage;
