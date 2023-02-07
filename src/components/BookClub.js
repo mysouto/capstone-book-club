@@ -8,23 +8,29 @@ function BookClub({ bookClubID, name }) {
 	let navigate = useNavigate();
 
 	return (
-		<div>
-			<div
-			// style={{ cursor: "pointer" }}
-			// // onClick={() => console.log("selecting a book club")}
-			// onClick={() => updateSelected(bookClubID)}
+		<div
+			className="col-sm-5 col-lg-2 m-3 p-5 bg-info text-white text-center text-capitalize rounded shadow"
+			// style={{width: "230px"}}
+			// style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}
+		>
+			{/* <div
+			style={{ cursor: "pointer" }}
 			>
 				Book Club: {name}
-			</div>
-			{/* <p>ID {bookClubID}</p> */}
+			</div> */}
 
+			<p className="lead"> {name}</p>
 			{/* NAVIGATE TO BOOK CLUB HOME PAGE */}
 			<Button
 				onClick={() => {
 					navigate(`/bookclubhome/${bookClubID}`);
 				}}
+				// variant="secondary" size="sm"
+				variant="outline-secondary"
+				size="sm"
+				// className="fw-light"
 			>
-				Go to Book Club Page
+				Go to Book Club
 			</Button>
 		</div>
 	);

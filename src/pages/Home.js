@@ -32,12 +32,12 @@ function Home() {
 	}, []);
 
 	return (
-		<div className="App">
-			<h1>HOME PAGE</h1>
-
-			<h2>Book Clubs List</h2>
+		// <div style={{ display: "flex", flexDirection: "column" }}>
+		<div className="container">
+			<h2 className="display-2 text-center" >Book Clubs</h2>
 			{/* READ book club collections */}
-			<BookClubList bookClubsData={bookClubs} />
+			{/* <div style={{ display: "flex"}}> */}
+			<BookClubList bookClubsData={bookClubs} /> {/* </div> */}
 		</div>
 	);
 }

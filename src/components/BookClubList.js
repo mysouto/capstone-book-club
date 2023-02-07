@@ -13,7 +13,19 @@ function BookClubList({ bookClubsData }) {
 			/>
 		);
 	});
-	return <div>{bookClubComponents}</div>;
+	return (
+		<div
+			// style={{
+			// 	display: "flex",
+			// 	justifyContent: "space-evenly",
+			// 	// alignItems: "center",
+			// 	flexWrap: "wrap",
+			// }}
+			className= "row justify-content-center"
+		>
+			{bookClubComponents}
+		</div>
+	);
 }
 
 BookClubList.propTypes = {
