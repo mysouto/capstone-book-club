@@ -25,7 +25,7 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
 		bookQuery +
-		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/imageLinks/thumbnail)&maxResults=40";
+		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/publishedDate, volumeInfo/imageLinks/thumbnail)&maxResults=40";
 
 	const handleChange = (event) => {
 		const query = event.target.value;
@@ -37,7 +37,7 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 		axios
 			.get(URL)
 			.then((response) => {
-				console.log("API response:", response.data.items);
+				// console.log("API response:", response.data.items);
 
 				// unpack API response and check of undefined data
 				const booksAPIResCopy = response.data.items.map((book) => {
@@ -59,10 +59,14 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 							book.volumeInfo.description === undefined
 								? "No book description available."
 								: book.volumeInfo.description,
+						publishedDate:
+							book.volumeInfo.publishedDate === undefined
+								? "No published data available"
+								: book.volumeInfo.publishedDate,
 					};
 				});
 
-				console.log("booksAPIResCopy", booksAPIResCopy);
+				// console.log("booksAPIResCopy", booksAPIResCopy);
 				setResults(booksAPIResCopy);
 				// setResults(response.data.items);
 			})

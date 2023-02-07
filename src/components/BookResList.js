@@ -12,11 +12,14 @@ const BookResList = ({ searchResults, addBook }) => {
 				title={result.title}
 				authors={result.authors}
 				description={result.description}
+				publishedDate={result.publishedDate}
 				addBook={addBook}
 			/>
 		);
 	});
-	return <div className="row justify-content-between">{resultsComponents}</div>;
+	return (
+		<div className="row justify-content-between">{resultsComponents}</div>
+	);
 };
 
 BookResList.propTypes = {
@@ -26,7 +29,8 @@ BookResList.propTypes = {
 			cover: PropTypes.string.isRequired,
 			title: PropTypes.string.isRequired,
 			authors: PropTypes.string.isRequired,
-			description: PropTypes.string,
+			publishedDate: PropTypes.string.isRequired,
+			description: PropTypes.string.isRequired,
 		})
 	),
 	addBook: PropTypes.func,
