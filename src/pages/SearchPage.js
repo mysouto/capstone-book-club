@@ -25,7 +25,7 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 	const URL =
 		"https://www.googleapis.com/books/v1/volumes?q=" +
 		bookQuery +
-		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/imageLinks/thumbnail)&maxResults=5";
+		"&fields=items(id, volumeInfo/title, volumeInfo/authors, volumeInfo/description, volumeInfo/imageLinks/thumbnail)&maxResults=40";
 
 	const handleChange = (event) => {
 		const query = event.target.value;
@@ -51,7 +51,10 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 								? ""
 								: book.volumeInfo.imageLinks.thumbnail,
 						title: book.volumeInfo.title,
-						authors: book.volumeInfo.authors.join(", "),
+						authors:
+							book.volumeInfo.authors === undefined
+								? "No authors data availabl"
+								: book.volumeInfo.authors.join(", "),
 						description:
 							book.volumeInfo.description === undefined
 								? "No book description available."
@@ -101,7 +104,7 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 					onChange={handleChange}
 					type="text"
 					placeholder="Find Book..."
-					className="rounded-pill border border-2 m-4 p-2"
+					className="col-10 rounded-pill border border-2 m-4 p-2"
 				/>
 				<Button type="submit" className="col-2">
 					Search

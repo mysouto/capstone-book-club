@@ -13,12 +13,17 @@ const BookRes = ({
 	addBook,
 }) => {
 	return (
-		<Card style={{ width: "18rem" }}>
-			<Card.Img src={cover} alt={title} />
+		<Card style={{ width: "18rem" }} className="col-sm-true m-4">
+			<Card.Img
+				src={cover}
+				alt={title}
+				variant="top"
+				style={{ "max-height": "16rem" }}
+			/>
 			<Card.Body>
 				<Card.Title>{title}</Card.Title>
-				<Card.Text>Authors: {authors}</Card.Text>
-				<Card.Text>Description: {description}</Card.Text>
+				<Card.Text>Author(s): {authors}</Card.Text>
+				{/* <Card.Text>Description: {description}</Card.Text> */}
 				<Button variant="primary" onClick={() => addBook(bookApiID)}>
 					Add Book
 				</Button>

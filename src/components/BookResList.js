@@ -16,7 +16,7 @@ const BookResList = ({ searchResults, addBook }) => {
 			/>
 		);
 	});
-	return <div>{resultsComponents}</div>;
+	return <div className="row justify-content-between">{resultsComponents}</div>;
 };
 
 BookResList.propTypes = {
