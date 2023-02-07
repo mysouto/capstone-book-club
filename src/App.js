@@ -1,7 +1,3 @@
-// import "./css/App.css";
-import { useState, useEffect } from "react";
-import { app, db } from "./firebase-config";
-
 // Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";

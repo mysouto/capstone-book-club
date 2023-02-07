@@ -10,8 +10,11 @@ function BookClub({ bookClubID, name }) {
 	return (
 		<div
 			className="col-sm-5 col-lg-2 m-3 p-5 bg-info text-white text-center text-capitalize rounded shadow"
-			// style={{width: "230px"}}
-			// style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}
+			// style={{
+			// 	display: "flex",
+			// 	flexDirection: "column",
+			// 	flexWrap: "wrap",
+			// }}
 		>
 			{/* <div
 			style={{ cursor: "pointer" }}
