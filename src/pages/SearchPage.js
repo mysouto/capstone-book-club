@@ -91,18 +91,24 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 	};
 
 	return (
-		<div>
-			<h1>Search Book</h1>
-			<form onSubmit={searchBook}>
+		<div className="container">
+			<h4 className="display-4 text-center m-3">Search Book</h4>
+			<form
+				onSubmit={searchBook}
+				className="row justify-content-center m-4 p-3"
+			>
 				<input
 					onChange={handleChange}
 					type="text"
 					placeholder="Find Book..."
+					className="rounded-pill border border-2 m-4 p-2"
 				/>
-				<Button type="submit">Search</Button>
+				<Button type="submit" className="col-2">
+					Search
+				</Button>
 			</form>
 
-			<h3>Results</h3>
+			<h6 className="display-6 text-center">Results</h6>
 			<BookResList
 				searchResults={searchResults}
 				addBook={addBook}
