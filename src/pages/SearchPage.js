@@ -98,7 +98,7 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 	};
 
 	return (
-		<div className="container">
+		<div>
 			<h4 className="display-4 text-center m-3">Search Book</h4>
 			<form
 				onSubmit={searchBook}
@@ -116,10 +116,12 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 			</form>
 
 			<h6 className="display-6 text-center">Results</h6>
-			<BookResList
-				searchResults={searchResults}
-				addBook={addBook}
-			></BookResList>
+			<div className="container">
+				<BookResList
+					searchResults={searchResults}
+					addBook={addBook}
+				></BookResList>
+			</div>
 		</div>
 	);
 }

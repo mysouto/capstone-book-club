@@ -21,13 +21,14 @@ const BookRes = ({
 	const handleShow = () => setShow(true);
 
 	return (
-		<div style={{ width: "18rem" }}>
-			<Card>
+		<div className="col">
+			<Card style={{ width: "18rem" }}>
+				{/* / height: "100" */}
 				<Card.Img
 					src={cover}
 					alt={title}
 					variant="top"
-					style={{ maxHeight: "18rem", cursor: "pointer" }}
+					// style={{ height: "70", width: "100" }}
 				/>
 				<Card.Body>
 					<Card.Title>{title}</Card.Title>
