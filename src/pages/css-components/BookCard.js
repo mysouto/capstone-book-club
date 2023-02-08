@@ -12,8 +12,12 @@ const BookCard = ({ currentBook }) => {
 
 	return (
 		<div>
-			<Card style={{ width: "12rem" }}>
-				<Card.Img src={currentBook.cover} alt={currentBook.title} />
+			<Card style={{ width: "16rem", height: "40rem" }}>
+				<Card.Img
+					src={currentBook.cover}
+					alt={currentBook.title}
+					style={{ height: "20rem" }}
+				/>
 				<Card.Body>
 					<Card.Title>{currentBook.title}</Card.Title>
 					<Card.Text>
@@ -24,11 +28,11 @@ const BookCard = ({ currentBook }) => {
 						{" "}
 						<strong>Description </strong>
 						<p className="text-muted">
-							{currentBook.description.slice(0, 100)}{" "}
+							{currentBook.description.slice(0, 100)} ...{" "}
 							{/* <a href="#" data-toggle="modal" data-target={BookDetailsModal}> */}
-							<a href="#" onClick={handleShow}>
-								... see more
-							</a>
+							<Card.Link href="#" onClick={handleShow}>
+								see more
+							</Card.Link>
 						</p>
 					</Card.Text>
 				</Card.Body>
@@ -38,6 +42,11 @@ const BookCard = ({ currentBook }) => {
 					<Modal.Title>{currentBook.title}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
+					<Card.Img
+						src={currentBook.cover}
+						alt={currentBook.title}
+						style={{ height: "220px", width: "180px" }}
+					/>
 					<p>
 						<strong>Author(s):</strong> {currentBook.authors}
 					</p>

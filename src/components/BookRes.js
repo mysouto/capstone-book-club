@@ -55,6 +55,11 @@ const BookRes = ({
 							<Modal.Title>{title}</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
+							<Card.Img
+								src={cover}
+								alt={title}
+								style={{ height: "220px", width: "180px" }}
+							/>
 							<p>
 								<strong>Author(s):</strong> {authors}
 							</p>
