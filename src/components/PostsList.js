@@ -16,11 +16,15 @@ function PostsList({ postsData }) {
 		);
 	});
 	return (
-		<div
-			style={{ height: "500px", overflow: "hidden", overflowY: "visible" }}
+		<ul
+			style={{
+				height: "500px",
+				overflow: "hidden",
+				overflowY: "visible",
+			}}
 		>
 			{postsComponents}
-		</div>
+		</ul>
 	);
 }
 

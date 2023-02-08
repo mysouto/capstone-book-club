@@ -56,7 +56,7 @@ function BookClubHome() {
 				const bookData = data.currentbook;
 				setBook(bookData);
 				// console.log(data.currentbook.bookApiID);
-				setBookID(data.currentbook.bookApiID);
+				setBookID(data.currentbook.bookApiID || "no ID");
 			}
 		});
 		// Stop listening to changes
@@ -89,8 +89,8 @@ function BookClubHome() {
 	// FEATURE: READ POSTS COLLECTION DB
 	const postsQuery = query(
 		collection(db, "posts"),
-		// where("bookclubID", "==", bookclubid),
-		where("bookID", "==", currentBookID)
+		where("bookclubID", "==", bookclubid),
+		// where("bookID", "==", currentBookID)
 		// where("bookID", "==", currentBook.bookApiID)
 	);
 
@@ -131,8 +131,8 @@ function BookClubHome() {
 						<h2>
 							Welcome to your {currentBookClub.name} Book Club!
 						</h2>
-						<p>Book Club Name: {currentBookClub.name}</p>
-						<p>Book Club ID: {bookclubid}</p>
+						{/* <p>Book Club Name: {currentBookClub.name}</p> */}
+						{/* <p>Book Club ID: {bookclubid}</p> */}
 					</header>
 
 					<div
