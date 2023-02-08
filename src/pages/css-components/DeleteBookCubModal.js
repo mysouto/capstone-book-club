@@ -20,7 +20,7 @@ const DeleteModal = ({
 				<hr />
 				<div className="d-flex justify-content-end">
 					<Button variant="outline-danger" onClick={handleShow}>
-						Delete Book Club modal
+						Delete Book Club
 					</Button>
 					<Modal show={showDeleteModal} onHide={handleClose}>
 						<Modal.Header closeButton>
