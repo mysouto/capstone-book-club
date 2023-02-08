@@ -30,9 +30,8 @@ function BookClubHome() {
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
 	const postsRef = collection(db, "posts");
 
-	const [currentBookClub, setBookClub] = useState([]);
-	const [currentBook, setBook] = useState([]);
-	const [currentBookID, setBookID] = useState("");
+	const [currentBookClub, setBookClub] = useState({});
+	const [currentBook, setBook] = useState();
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
@@ -55,13 +54,11 @@ function BookClubHome() {
 			if (data.currentbook) {
 				const bookData = data.currentbook;
 				setBook(bookData);
-				// console.log(data.currentbook.bookApiID);
-				setBookID(data.currentbook.bookApiID || "no ID");
 			}
 		});
 		// Stop listening to changes
 		return unsubscribe;
-	}, []);
+	}, [bookclubid]);
 
 	// DELETE
 	const deleteBookClub = async (id) => {
@@ -86,15 +83,18 @@ function BookClubHome() {
 		});
 	};
 
-	// FEATURE: READ POSTS COLLECTION DB
-	const postsQuery = query(
-		collection(db, "posts"),
-		where("bookclubID", "==", bookclubid),
-		// where("bookID", "==", currentBookID)
-		// where("bookID", "==", currentBook.bookApiID)
-	);
-
 	useEffect(() => {
+		if (!currentBook) {
+			return;
+		}
+
+		// FEATURE: READ POSTS COLLECTION DB
+		const postsQuery = query(
+			collection(db, "posts"),
+			where("bookclubID", "==", bookclubid),
+			where("bookID", "==", currentBook.bookApiID)
+		);
+
 		const unsubscribe = onSnapshot(postsQuery, (querySnapshot) => {
 			setPostsData(
 				querySnapshot.docs.map((doc) => ({
@@ -105,7 +105,7 @@ function BookClubHome() {
 			);
 		});
 		return unsubscribe;
-	}, []);
+	}, [currentBook]);
 
 	// CALLBACK FOR FIND BOOK BUTTON
 	const findBook = () => {
@@ -118,18 +118,18 @@ function BookClubHome() {
 		return (
 			<SearchPage
 				bookclubid={bookclubid}
-				bookclubName={currentBookClub.name}
+				bookclubName={currentBookClub?.name}
 				findBook={findBook}
 			/>
 		);
 	} else {
-		if (currentBookClub.currentbook) {
+		if (currentBookClub?.currentbook) {
 			return (
 				<div style={{ margin: "0 auto", padding: "0 10vw" }}>
 					{/* <h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1> */}
 					<header>
 						<h2>
-							Welcome to your {currentBookClub.name} Book Club!
+							Welcome to your {currentBookClub?.name} Book Club!
 						</h2>
 						{/* <p>Book Club Name: {currentBookClub.name}</p> */}
 						{/* <p>Book Club ID: {bookclubid}</p> */}
@@ -184,8 +184,8 @@ function BookClubHome() {
 		} else {
 			return (
 				<div>
-					<h2>{currentBookClub.name} NEW BOOK CLUB HOME PAGE</h2>
-					<p>Book Club Name: {currentBookClub.name}</p>
+					<h2>{currentBookClub?.name} NEW BOOK CLUB HOME PAGE</h2>
+					<p>Book Club Name: {currentBookClub?.name}</p>
 					<p>Book Club ID: {bookclubid}</p>
 
 					<>
