@@ -32,6 +32,7 @@ function BookClubHome() {
 
 	const [currentBookClub, setBookClub] = useState([]);
 	const [currentBook, setBook] = useState([]);
+	const [currentBookID, setBookID] = useState("");
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
@@ -54,6 +55,8 @@ function BookClubHome() {
 			if (data.currentbook) {
 				const bookData = data.currentbook;
 				setBook(bookData);
+				// console.log(data.currentbook.bookApiID);
+				setBookID(data.currentbook.bookApiID);
 			}
 		});
 		// Stop listening to changes
@@ -79,7 +82,6 @@ function BookClubHome() {
 		await addDoc(postsRef, {
 			text: postText,
 			bookclubID: bookclubid,
-			// bookclubID: currentBookClub.id,
 			bookID: currentBook.bookApiID,
 		});
 	};
@@ -87,7 +89,9 @@ function BookClubHome() {
 	// FEATURE: READ POSTS COLLECTION DB
 	const postsQuery = query(
 		collection(db, "posts"),
-		where("bookclubID", "==", bookclubid)
+		// where("bookclubID", "==", bookclubid),
+		where("bookID", "==", currentBookID)
+		// where("bookID", "==", currentBook.bookApiID)
 	);
 
 	useEffect(() => {
@@ -141,10 +145,7 @@ function BookClubHome() {
 					>
 						<div>
 							<h3>Reading Now</h3>
-							<BookCard
-								currentBook={currentBook}
-
-							/>
+							<BookCard currentBook={currentBook} />
 							<Button
 								onClick={() => deleteCurrentBook()}
 								variant="warning"
