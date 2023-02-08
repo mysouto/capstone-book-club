@@ -121,35 +121,54 @@ function BookClubHome() {
 	} else {
 		if (currentBookClub.currentbook) {
 			return (
-				<div>
+				<div style={{ margin: "0 auto", padding: "0 10vw" }}>
 					{/* <h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1> */}
-					<h2>Welcome to your {currentBookClub.name} Book Club!</h2>
-					<p>Book Club Name: {currentBookClub.name}</p>
-					<p>Book Club ID: {bookclubid}</p>
+					<header>
+						<h2>
+							Welcome to your {currentBookClub.name} Book Club!
+						</h2>
+						<p>Book Club Name: {currentBookClub.name}</p>
+						<p>Book Club ID: {bookclubid}</p>
+					</header>
 
-					<h3>Reading Now</h3>
-					<>
-						<BookCard currentBook={currentBook} />
-					</>
-
-					<Button
-						onClick={() => deleteCurrentBook()}
-						variant="warning"
+					<div
+						style={{
+							display: "flex",
+							flexWrap: "wrap",
+							justifyContent: "space-between",
+							// gap: "10vw",
+						}}
 					>
-						Delete book
-					</Button>
+						<div>
+							<h3>Reading Now</h3>
+							<BookCard
+								currentBook={currentBook}
 
-					<>
-						{/* POSTS FEATURE */}
-						<h2>Comments</h2>
-						<NewPostForm addPost={addPost} />
+							/>
+							<Button
+								onClick={() => deleteCurrentBook()}
+								variant="warning"
+							>
+								Delete book
+							</Button>
+						</div>
 
-						{/* READ POSTS */}
-						<h2>Showing {postsData.length} Comments</h2>
-						<PostsList postsData={postsData} />
-					</>
+						<div style={{ width: "45vw" }}>
+							{/* POSTS FEATURE */}
+							<div>
+								{" "}
+								<h2>Comments</h2>
+								<NewPostForm addPost={addPost} />
+							</div>
 
-					<>
+							{/* READ POSTS */}
+							<div style={{ marginTop: "20px" }}>
+								<h2>Showing {postsData.length} Comments</h2>
+								<PostsList postsData={postsData} />
+							</div>
+						</div>
+					</div>
+					<div style={{ width: "18rem" }}>
 						<DeleteModal
 							bookclubid={bookclubid}
 							currentBookClub={currentBookClub}
@@ -158,7 +177,7 @@ function BookClubHome() {
 							handleClose={handleClose}
 							handleShow={handleShow}
 						/>
-					</>
+					</div>
 				</div>
 			);
 		} else {
