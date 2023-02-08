@@ -21,24 +21,26 @@ const BookRes = ({
 	const handleShow = () => setShow(true);
 
 	return (
-		<div className="col">
-			<Card style={{ width: "18rem" }}>
+		<div className="col mt-5">
+			<Card style={{ width: "18rem", height: "40rem" }}>
 				{/* / height: "100" */}
 				<Card.Img
 					src={cover}
 					alt={title}
 					variant="top"
-					// style={{ height: "70", width: "100" }}
+					style={{ height: "20rem" }}
 				/>
 				<Card.Body>
 					<Card.Title>{title}</Card.Title>
-					<Card.Text>Author(s): {authors}</Card.Text>
+					<Card.Text style={{ fontSize: "1rem" }}>
+						Author(s): {authors}
+					</Card.Text>
 					<Card.Text>
-						Description: {description.slice(0, 100)}{" "}
+						Description: {description.slice(0, 100)}...{" "}
 						{/* <a href="#" data-toggle="modal" data-target={BookDetailsModal}> */}
-						<a href="#" onClick={handleShow}>
-							... see more
-						</a>
+						<Card.Link href="#" onClick={handleShow}>
+							see more
+						</Card.Link>
 					</Card.Text>
 					<Button
 						variant="primary"
