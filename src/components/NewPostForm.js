@@ -27,8 +27,8 @@ const NewPostForm = ({ addPost }) => {
 	};
 
 	// additional feature
-	let isSubmitDisabled = postText === "" || postText.length > 300;
-	let showAlert = postText.length > 300;
+	let isSubmitDisabled = postText === "" || postText.length > 1000;
+	let showAlert = postText.length > 1000;
 
 	return (
 		<div>
@@ -45,10 +45,10 @@ const NewPostForm = ({ addPost }) => {
 				<Button type="submit" disabled={isSubmitDisabled}>
 					Post Comment
 				</Button>{" "}
-				<p> Characters: {charCount}</p>
-				<Alert show={showAlert} key="warning" variant="warning">
-					Too many characters, be more concise lol
-				</Alert>
+				{/* <p> Characters: {charCount}</p> */}
+				{/* <Alert show={showAlert} key="warning" variant="warning">
+					Too many characters
+				</Alert> */}
 			</Form>
 
 			{/* <form onSubmit={onPostSubmit}>

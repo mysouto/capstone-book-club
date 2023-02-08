@@ -15,7 +15,13 @@ function PostsList({ postsData }) {
 			/>
 		);
 	});
-	return <div>{postsComponents}</div>;
+	return (
+		<div
+			style={{ height: "500px", overflow: "hidden", overflowY: "visible" }}
+		>
+			{postsComponents}
+		</div>
+	);
 }
 
 PostsList.propTypes = {
