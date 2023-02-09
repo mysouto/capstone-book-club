@@ -6,9 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 
-// CREATE book club
 function NewBookClubForm({ createBookClub }) {
-	// state to track add bookclub input
 	const [newBookClubName, setNewBookClub] = useState("");
 
 	const handleChange = (event) => {
@@ -23,31 +21,61 @@ function NewBookClubForm({ createBookClub }) {
 
 	let isSubmitDisabled =
 		newBookClubName === "" || newBookClubName.length > 32;
+	let showNoNameAlert = newBookClubName === "";
+	let showLenAlert = newBookClubName.length > 32;
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<input
-					type="text"
-					id="name"
-					name="name"
-					placeholder="Book Club Name..."
-					onChange={handleChange}
-					// onChange={(event) => {
-					// 	console.log(event.target.value);
-					// 	setNewBookClub(event.target.value);
-					// }}
-				></input>
+		<form
+			onSubmit={handleSubmit}
+			class="form-group"
+			style={{
+				height: "50vw",
+				width: "30vw",
+				marginTop: "20px",
+			}}
+		>
+			<label for="name">Book Club Name</label>
+			<input
+				type="name"
+				className="form-control"
+				id="name"
+				name="name"
+				placeholder="Enter book club name..."
+				onChange={handleChange}
+				style={{
+					marginTop: "10px",
+				}}
+			></input>
 
-				<Alert show={isSubmitDisabled} key="warning" variant="warning">
-					Book Club name cannot be empty
-				</Alert>
+			<Alert
+				show={showNoNameAlert}
+				key="warning"
+				variant="warning"
+				style={{
+					marginTop: "10px",
+				}}
+			>
+				Book club name cannot be empty
+			</Alert>
+			<Alert
+				show={showLenAlert}
+				key="warning"
+				variant="warning"
+				style={{
+					marginTop: "10px",
+				}}
+			>
+				Book club name cannot exceed 32 characters
+			</Alert>
 
-				<Button type="submit" disabled={isSubmitDisabled}>
-					Create Book Club
-				</Button>
-			</form>
-		</div>
+			<button
+				type="submit"
+				disabled={isSubmitDisabled}
+				class="btn btn-primary"
+			>
+				Create Book Club
+			</button>
+		</form>
 	);
 }
 

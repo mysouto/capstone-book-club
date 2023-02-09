@@ -28,9 +28,21 @@ function CreateBookClub() {
 	};
 
 	return (
-		<div className="App">
+		<div
+			style={{
+				margin: "0 auto",
+				padding: "0 10vw",
+				display: "flex",
+				flexWrap: "wrap",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center",
+			}}
+		>
 			<h1>Create a Book Club</h1>
-			<NewBookClubForm createBookClub={createBookClub} />
+			<div >
+				<NewBookClubForm createBookClub={createBookClub} />
+			</div>
 		</div>
 	);
 }
