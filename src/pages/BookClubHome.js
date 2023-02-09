@@ -128,9 +128,9 @@ function BookClubHome() {
 				<div style={{ margin: "0 auto", padding: "0 10vw" }}>
 					{/* <h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1> */}
 					<header>
-						<h2>
+						<h1 className="text-capitalize">
 							Welcome to your {currentBookClub?.name} Book Club!
-						</h2>
+						</h1>
 						{/* <p>Book Club Name: {currentBookClub.name}</p> */}
 						{/* <p>Book Club ID: {bookclubid}</p> */}
 					</header>
@@ -144,7 +144,19 @@ function BookClubHome() {
 						}}
 					>
 						<div>
-							<h3>Reading Now</h3>
+							<h2>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									fill="currentColor"
+									class="bi bi-bookmark-fill"
+									viewBox="0 0 20 20"
+								>
+									<path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
+								</svg>
+								Reading Now
+							</h2>
 							<BookCard currentBook={currentBook} />
 							<Button
 								onClick={() => deleteCurrentBook()}
@@ -158,7 +170,19 @@ function BookClubHome() {
 							{/* POSTS FEATURE */}
 							<div>
 								{" "}
-								<h2>Comments</h2>
+								<h2>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										fill="currentColor"
+										class="bi bi-chat-square-text-fill"
+										viewBox="0 0 20 20"
+									>
+										<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
+									</svg>
+									Comments
+								</h2>
 								<NewPostForm addPost={addPost} />
 							</div>
 
@@ -183,25 +207,36 @@ function BookClubHome() {
 			);
 		} else {
 			return (
-				<div>
-					<h2>{currentBookClub?.name} NEW BOOK CLUB HOME PAGE</h2>
-					<p>Book Club Name: {currentBookClub?.name}</p>
-					<p>Book Club ID: {bookclubid}</p>
+				<div
+					style={{
+						margin: "0 auto",
+						padding: "0 10vw",
+					}}
+				>
+					<h1 className="text-capitalize">
+						{currentBookClub?.name} Book Club!
+					</h1>
 
-					<>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "center",
+						}}
+					>
 						<NoBookAlert findBook={findBook} />
-					</>
 
-					<>
-						<DeleteModal
-							bookclubid={bookclubid}
-							currentBookClub={currentBookClub}
-							deleteBookClub={deleteBookClub}
-							showDeleteModal={showDeleteModal}
-							handleClose={handleClose}
-							handleShow={handleShow}
-						/>
-					</>
+						<div style={{ height: "160px", width: "280px" }}>
+							<DeleteModal
+								bookclubid={bookclubid}
+								currentBookClub={currentBookClub}
+								deleteBookClub={deleteBookClub}
+								showDeleteModal={showDeleteModal}
+								handleClose={handleClose}
+								handleShow={handleShow}
+							/>
+						</div>
+					</div>
 				</div>
 			);
 		}
