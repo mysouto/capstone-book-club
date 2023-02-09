@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { app, db } from "../firebase-config";
+import Spinner from "react-bootstrap/Spinner";
+
 import {
 	addDoc,
 	collection,
@@ -35,6 +37,7 @@ function BookClubHome() {
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleClose = () => setDeleteModal(false);
 	const handleShow = () => setDeleteModal(true);
@@ -53,6 +56,9 @@ function BookClubHome() {
 				const bookData = data.currentbook;
 				setBook(bookData);
 			}
+
+			// change loading state once rendered
+			setIsLoading(false);
 		});
 		// Stop listening to changes
 		return unsubscribe;
@@ -101,6 +107,22 @@ function BookClubHome() {
 		await updateDoc(bookclubRef, { currentbook: deleteField() });
 	};
 
+	if (isLoading) {
+		return (
+			<div
+				style={{
+					display: "flex",
+					flex: 1,
+					justifyContent: "center",
+					alignItems: "center",
+					height: "50vh",
+				}}
+			>
+				<Spinner animation="border" />
+			</div>
+		);
+	}
+
 	if (searchState) {
 		return (
 			<SearchPage
@@ -109,121 +131,121 @@ function BookClubHome() {
 				findBook={findBook}
 			/>
 		);
-	} else {
-		if (currentBookClub?.currentbook) {
-			return (
-				<div style={{ margin: "0 auto", padding: "0 10vw" }}>
-					<header>
-						<h1 className="text-capitalize">
-							{currentBookClub?.name} Book Club
-						</h1>
-						<h2>Welcome to your book club!</h2>
-					</header>
+	}
 
-					<div
-						style={{
-							display: "flex",
-							flexWrap: "wrap",
-							justifyContent: "space-between",
-						}}
-					>
+	if (currentBookClub?.currentbook) {
+		return (
+			<div style={{ margin: "0 auto", padding: "0 10vw" }}>
+				<header>
+					<h1 className="text-capitalize">
+						{currentBookClub?.name} Book Club
+					</h1>
+					<h2>Welcome to your book club!</h2>
+				</header>
+
+				<div
+					style={{
+						display: "flex",
+						flexWrap: "wrap",
+						justifyContent: "space-between",
+					}}
+				>
+					<div>
+						<h2>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								fill="currentColor"
+								className="bi bi-bookmark-fill"
+								viewBox="0 0 20 20"
+							>
+								<path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
+							</svg>
+							Reading Now
+						</h2>
+						<BookCard currentBook={currentBook} />
+						<Button
+							onClick={() => deleteCurrentBook()}
+							variant="warning"
+						>
+							Delete book
+						</Button>
+					</div>
+
+					<div style={{ width: "45vw" }}>
 						<div>
+							{" "}
 							<h2>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="20"
 									height="20"
 									fill="currentColor"
-									class="bi bi-bookmark-fill"
+									className="bi bi-chat-square-text-fill"
 									viewBox="0 0 20 20"
 								>
-									<path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
+									<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
 								</svg>
-								Reading Now
+								Comments
 							</h2>
-							<BookCard currentBook={currentBook} />
-							<Button
-								onClick={() => deleteCurrentBook()}
-								variant="warning"
-							>
-								Delete book
-							</Button>
+							<NewPostForm addPost={addPost} />
 						</div>
 
-						<div style={{ width: "45vw" }}>
-							<div>
-								{" "}
-								<h2>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="20"
-										height="20"
-										fill="currentColor"
-										class="bi bi-chat-square-text-fill"
-										viewBox="0 0 20 20"
-									>
-										<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
-									</svg>
-									Comments
-								</h2>
-								<NewPostForm addPost={addPost} />
-							</div>
-
-							{/* READ POSTS */}
-							<div style={{ marginTop: "20px" }}>
-								<h3>Showing {postsData.length} Comments</h3>
-								<PostsList postsData={postsData} />
-							</div>
-						</div>
-					</div>
-					<div style={{ width: "18rem" }}>
-						<DeleteModal
-							bookclubid={bookclubid}
-							currentBookClub={currentBookClub}
-							deleteBookClub={deleteBookClub}
-							showDeleteModal={showDeleteModal}
-							handleClose={handleClose}
-							handleShow={handleShow}
-						/>
-					</div>
-				</div>
-			);
-		} else {
-			return (
-				<div
-					style={{
-						margin: "0 auto",
-						padding: "0 10vw",
-					}}
-				>
-					<h1 className="text-capitalize">
-						{currentBookClub?.name} Book Club
-					</h1>
-
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "center",
-						}}
-					>
-						<NoBookAlert findBook={findBook} />
-
-						<div style={{ height: "160px", width: "280px" }}>
-							<DeleteModal
-								bookclubid={bookclubid}
-								currentBookClub={currentBookClub}
-								deleteBookClub={deleteBookClub}
-								showDeleteModal={showDeleteModal}
-								handleClose={handleClose}
-								handleShow={handleShow}
-							/>
+						{/* READ POSTS */}
+						<div style={{ marginTop: "20px" }}>
+							<h3>Showing {postsData.length} Comments</h3>
+							<PostsList postsData={postsData} />
 						</div>
 					</div>
 				</div>
-			);
-		}
+				<div style={{ width: "18rem" }}>
+					<DeleteModal
+						bookclubid={bookclubid}
+						currentBookClub={currentBookClub}
+						deleteBookClub={deleteBookClub}
+						showDeleteModal={showDeleteModal}
+						handleClose={handleClose}
+						handleShow={handleShow}
+					/>
+				</div>
+			</div>
+		);
 	}
+
+	return (
+		<div
+			style={{
+				margin: "0 auto",
+				padding: "0 10vw",
+			}}
+		>
+			<h1 className="text-capitalize">
+				{currentBookClub?.name} Book Club
+			</h1>
+
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+				}}
+			>
+				<NoBookAlert findBook={findBook} />
+
+				<div style={{ height: "160px", width: "280px" }}>
+					<DeleteModal
+						bookclubid={bookclubid}
+						currentBookClub={currentBookClub}
+						deleteBookClub={deleteBookClub}
+						showDeleteModal={showDeleteModal}
+						handleClose={handleClose}
+						handleShow={handleShow}
+					/>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default BookClubHome;
