@@ -39,8 +39,10 @@ function CreateBookClub() {
 				alignItems: "center",
 			}}
 		>
-			<h1>Create a Book Club</h1>
-			<div >
+			<h1>
+				Create a Book Club
+			</h1>
+			<div>
 				<NewBookClubForm createBookClub={createBookClub} />
 			</div>
 		</div>

@@ -24,12 +24,12 @@ const DeleteModal = ({
 					</Button>
 					<Modal show={showDeleteModal} onHide={handleClose}>
 						<Modal.Header closeButton>
-							<Modal.Title>
+							<Modal.Title className="text-capitalize">
 								Delete {currentBookClub.name} Book Club
 							</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-							Are you sure you wanna delete this Book Club?
+							Are you sure you wanna delete this book club?
 						</Modal.Body>
 						<Modal.Footer>
 							<Button variant="secondary" onClick={handleClose}>
