@@ -44,7 +44,10 @@ const BookCard = ({ currentBook }) => {
 				<Modal.Body>
 					<Card.Img
 						src={currentBook.cover}
-						alt={currentBook.title}
+						alt={
+							currentBook.title ||
+							"Title and book cover information unavaible"
+						}
 						style={{ height: "220px", width: "180px" }}
 					/>
 					<p>
