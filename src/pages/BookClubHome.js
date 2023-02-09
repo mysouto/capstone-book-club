@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { db } from "../firebase-config";
+import { app, db } from "../firebase-config";
 import {
 	addDoc,
 	collection,
@@ -36,7 +36,6 @@ function BookClubHome() {
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
 
-	// delete modal
 	const handleClose = () => setDeleteModal(false);
 	const handleShow = () => setDeleteModal(true);
 
@@ -49,7 +48,6 @@ function BookClubHome() {
 				return;
 			}
 			setBookClub(data);
-			// console.log(typeof currentBookClub);
 
 			if (data.currentbook) {
 				const bookData = data.currentbook;
@@ -60,35 +58,11 @@ function BookClubHome() {
 		return unsubscribe;
 	}, [bookclubid]);
 
-	// DELETE
-	const deleteBookClub = async (id) => {
-		console.log("calling deleteBookClub");
-		const bookClubDoc = doc(db, "bookclubs", id);
-		await deleteDoc(bookClubDoc);
-	};
-
-	const deleteCurrentBook = async (id) => {
-		console.log("calling deleteBook");
-		await updateDoc(bookclubRef, { currentbook: deleteField() });
-	};
-
-	// FEATURE: ADD POST TO DB
-	const addPost = async (postText) => {
-		console.log("calling addPost");
-
-		await addDoc(postsRef, {
-			text: postText,
-			bookclubID: bookclubid,
-			bookID: currentBook.bookApiID,
-		});
-	};
-
 	useEffect(() => {
 		if (!currentBook) {
 			return;
 		}
 
-		// FEATURE: READ POSTS COLLECTION DB
 		const postsQuery = query(
 			collection(db, "posts"),
 			where("bookclubID", "==", bookclubid),
@@ -107,13 +81,26 @@ function BookClubHome() {
 		return unsubscribe;
 	}, [currentBook]);
 
-	// CALLBACK FOR FIND BOOK BUTTON
 	const findBook = () => {
-		console.log("calling findBook");
 		setSearchState(!searchState);
 	};
 
-	// conditionals: Home vs <SearchPage/>
+	const addPost = async (postText) => {
+		await addDoc(postsRef, {
+			text: postText,
+			bookclubID: bookclubid,
+			bookID: currentBook.bookApiID,
+		});
+	};
+	const deleteBookClub = async (id) => {
+		const bookClubDoc = doc(db, "bookclubs", id);
+		await deleteDoc(bookClubDoc);
+	};
+
+	const deleteCurrentBook = async (id) => {
+		await updateDoc(bookclubRef, { currentbook: deleteField() });
+	};
+
 	if (searchState) {
 		return (
 			<SearchPage
@@ -126,13 +113,11 @@ function BookClubHome() {
 		if (currentBookClub?.currentbook) {
 			return (
 				<div style={{ margin: "0 auto", padding: "0 10vw" }}>
-					{/* <h1>{currentBookClub.name} BOOK CLUB HOME PAGE</h1> */}
 					<header>
 						<h1 className="text-capitalize">
-							Welcome to your {currentBookClub?.name} Book Club!
+							{currentBookClub?.name} Book Club
 						</h1>
-						{/* <p>Book Club Name: {currentBookClub.name}</p> */}
-						{/* <p>Book Club ID: {bookclubid}</p> */}
+						<h2>Welcome to your book club!</h2>
 					</header>
 
 					<div
@@ -140,7 +125,6 @@ function BookClubHome() {
 							display: "flex",
 							flexWrap: "wrap",
 							justifyContent: "space-between",
-							// gap: "10vw",
 						}}
 					>
 						<div>
@@ -167,7 +151,6 @@ function BookClubHome() {
 						</div>
 
 						<div style={{ width: "45vw" }}>
-							{/* POSTS FEATURE */}
 							<div>
 								{" "}
 								<h2>
@@ -188,7 +171,7 @@ function BookClubHome() {
 
 							{/* READ POSTS */}
 							<div style={{ marginTop: "20px" }}>
-								<h2>Showing {postsData.length} Comments</h2>
+								<h3>Showing {postsData.length} Comments</h3>
 								<PostsList postsData={postsData} />
 							</div>
 						</div>
@@ -214,7 +197,7 @@ function BookClubHome() {
 					}}
 				>
 					<h1 className="text-capitalize">
-						{currentBookClub?.name} Book Club!
+						{currentBookClub?.name} Book Club
 					</h1>
 
 					<div

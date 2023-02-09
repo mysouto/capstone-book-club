@@ -16,7 +16,9 @@ const DeleteModal = ({
 	return (
 		<>
 			<Alert variant="danger">
-				<p>Danger Zone</p>
+				<p>
+					<strong>Danger Zone</strong>
+				</p>
 				<hr />
 				<div className="d-flex justify-content-end">
 					<Button variant="outline-danger" onClick={handleShow}>
