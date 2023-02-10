@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 
 import Post from "./Post";
 
-function PostsList({ postsData }) {
+function PostsList({ postsData, currentBook }) {
 	// creating book club list components
 	const postsComponents = postsData.map((post) => {
+		// console.log("time", post.createdAt.toDate());
 		return (
 			<Post
 				key={post.id}
@@ -12,6 +13,8 @@ function PostsList({ postsData }) {
 				text={post.text}
 				bookclubID={post.bookclubID}
 				bookID={post.bookID}
+				timestamp={post.createdAt.toDate()}
+				currentBook={currentBook}
 			/>
 		);
 	});

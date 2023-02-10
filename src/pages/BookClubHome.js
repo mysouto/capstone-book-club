@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { app, db } from "../firebase-config";
-import Spinner from "react-bootstrap/Spinner";
 
 import {
 	addDoc,
@@ -10,7 +9,9 @@ import {
 	deleteField,
 	doc,
 	onSnapshot,
+	orderBy,
 	query,
+	serverTimestamp,
 	updateDoc,
 	where,
 } from "firebase/firestore";
@@ -24,6 +25,7 @@ import BookCard from "./css-components/BookCard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 function BookClubHome() {
 	let { bookclubid } = useParams();
@@ -72,7 +74,8 @@ function BookClubHome() {
 		const postsQuery = query(
 			collection(db, "posts"),
 			where("bookclubID", "==", bookclubid),
-			where("bookID", "==", currentBook.bookApiID)
+			where("bookID", "==", currentBook.bookApiID),
+			orderBy("createdAt", "desc")
 		);
 
 		const unsubscribe = onSnapshot(postsQuery, (querySnapshot) => {
@@ -83,6 +86,7 @@ function BookClubHome() {
 					id: doc.id,
 				}))
 			);
+
 		});
 		return unsubscribe;
 	}, [currentBook]);
@@ -96,6 +100,7 @@ function BookClubHome() {
 			text: postText,
 			bookclubID: bookclubid,
 			bookID: currentBook.bookApiID,
+			createdAt: serverTimestamp(),
 		});
 	};
 	const deleteBookClub = async (id) => {
@@ -196,8 +201,11 @@ function BookClubHome() {
 
 						{/* READ POSTS */}
 						<div className="col-lg" style={{ marginTop: "20px" }}>
-							<h3 >Showing {postsData.length} Comments</h3>
-							<PostsList postsData={postsData} />
+							<h3>Showing {postsData.length} Comments</h3>
+							<PostsList
+								postsData={postsData}
+								currentBook={currentBook}
+							/>
 						</div>
 					</div>
 				</div>

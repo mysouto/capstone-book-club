@@ -1,32 +1,50 @@
 import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Image from "react-bootstrap/Image";
-import Placeholder from "react-bootstrap/Placeholder";
 
-function Post({ id, text, bookclubID, bookID }) {
+function Post({ id, text, bookclubID, bookID, timestamp, currentBook }) {
+	const [timeAgoValue, setTimeAgoValue] = useState("");
+	const [postTime, setTimestamp] = useState(timestamp);
+
+	function timeAgo(postTimestamp) {
+		let now = Date.now();
+		const elapsedTime = now - timestamp;
+
+		const second = 1000;
+		const minute = second * 60;
+		const hour = minute * 60;
+		const day = hour * 24;
+
+		if (elapsedTime < minute) {
+			return Math.round(elapsedTime / second) + " seconds ago";
+		} else if (elapsedTime < hour) {
+			return Math.round(elapsedTime / minute) + " minutes ago";
+		} else if (elapsedTime < day) {
+			return Math.round(elapsedTime / hour) + " hours ago";
+		} else {
+			return Math.round(elapsedTime / day) + " days ago";
+		}
+	}
+	// timeAgo(timestamp);
+	// const timeDiff = 1609459200000;
+	// console.log(timeAgo(timeDiff));
+	// console.log(timeDiff);
+
+	useEffect(() => {
+		setInterval(() => {
+			setTimeAgoValue(timeAgo(postTime));
+		}, 1000);
+	}, [postTime]);
+
 	return (
 		<div className="list-group-item py-3">
-			<h5 className="mb-1">USER name </h5>
 			<p className="mb-1">{text}</p>
-			<small className="mb-1">timestamp</small>
-			<button>Delete</button>
+			<small className="mb-1">
+				{" "}
+				{timeAgoValue} &middot; {currentBook.title}{" "}
+			</small>
 		</div>
-		// <div>
-		// 	<p>Post content: {text}</p>
-		// 	<p>Book Club ID: {bookclubID}</p>
-		// 	<p>Book ID: {bookID}</p>
-		// </div>
-
-		// <div className="media">
-		// 	{/* <Image src="..." class="mr-3" alt="..." /> */}
-		// 	<div className="media-body">
-		// 		<h5 className="mt-0">Post Title</h5>
-		// 		<p> Comment Content: {text}</p>
-		// 		<p>Book Club ID: {bookclubID}</p>
-		// 		<p>Book ID: {bookID}</p>
-		// 	</div>
-		// </div>
 	);
 }
 
