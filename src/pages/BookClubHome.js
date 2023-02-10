@@ -14,6 +14,7 @@ import {
 	serverTimestamp,
 	updateDoc,
 	where,
+	Timestamp,
 } from "firebase/firestore";
 
 import SearchPage from "./SearchPage";
@@ -79,14 +80,21 @@ function BookClubHome() {
 		);
 
 		const unsubscribe = onSnapshot(postsQuery, (querySnapshot) => {
-			setPostsData(
-				querySnapshot.docs.map((doc) => ({
+			const resData = querySnapshot.docs.map((doc) => {
+				if (
+					!doc.data().createdAt &&
+					querySnapshot.metadata.hasPendingWrites
+				) {
+					const ts = Timestamp.now();
+					console.log(`timestamp: ${ts} (estimated)`);
+					return { ...doc.data(), id: doc.id, createdAt: ts };
+				} else {
 					// doc.data() is never undefined for query doc snapshots
-					...doc.data(),
-					id: doc.id,
-				}))
-			);
+					return { ...doc.data(), id: doc.id };
+				}
+			});
 
+			setPostsData(resData);
 		});
 		return unsubscribe;
 	}, [currentBook]);

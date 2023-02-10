@@ -26,10 +26,6 @@ function Post({ id, text, bookclubID, bookID, timestamp, currentBook }) {
 			return Math.round(elapsedTime / day) + " days ago";
 		}
 	}
-	// timeAgo(timestamp);
-	// const timeDiff = 1609459200000;
-	// console.log(timeAgo(timeDiff));
-	// console.log(timeDiff);
 
 	useEffect(() => {
 		setInterval(() => {

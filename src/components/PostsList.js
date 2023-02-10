@@ -5,7 +5,8 @@ import Post from "./Post";
 function PostsList({ postsData, currentBook }) {
 	// creating book club list components
 	const postsComponents = postsData.map((post) => {
-		// console.log("time", post.createdAt.toDate());
+		// console.log("post", post);
+		// console.log("date", Date.now());
 		return (
 			<Post
 				key={post.id}
@@ -13,7 +14,7 @@ function PostsList({ postsData, currentBook }) {
 				text={post.text}
 				bookclubID={post.bookclubID}
 				bookID={post.bookID}
-				timestamp={post.createdAt.toDate()}
+				timestamp={post.createdAt.toDate() || Date.now()}
 				currentBook={currentBook}
 			/>
 		);
