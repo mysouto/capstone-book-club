@@ -16,15 +16,17 @@ function PostsList({ postsData }) {
 		);
 	});
 	return (
-		<ul
+		<div
 			style={{
 				height: "500px",
 				overflow: "hidden",
 				overflowY: "visible",
+				marginTop: "20px",
 			}}
+			className="row justify-content-center"
 		>
-			{postsComponents}
-		</ul>
+			<div className="list-group">{postsComponents}</div>
+		</div>
 	);
 }
 

@@ -150,7 +150,7 @@ function BookClubHome() {
 						justifyContent: "space-between",
 					}}
 				>
-					<div>
+					<div style={{ marginTop: "20px" }}>
 						<h2>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -164,16 +164,18 @@ function BookClubHome() {
 							</svg>
 							Reading Now
 						</h2>
-						<BookCard currentBook={currentBook} />
-						<Button
-							onClick={() => deleteCurrentBook()}
-							variant="warning"
-						>
-							Delete book
-						</Button>
+						<div style={{ marginTop: "20px" }}>
+							<BookCard currentBook={currentBook} />
+							<Button
+								onClick={() => deleteCurrentBook()}
+								variant="warning"
+							>
+								Delete book
+							</Button>
+						</div>
 					</div>
 
-					<div style={{ width: "45vw" }}>
+					<div style={{ width: "45vw", marginTop: "20px" }}>
 						<div>
 							{" "}
 							<h2>
@@ -193,8 +195,8 @@ function BookClubHome() {
 						</div>
 
 						{/* READ POSTS */}
-						<div style={{ marginTop: "20px" }}>
-							<h3>Showing {postsData.length} Comments</h3>
+						<div className="col-lg" style={{ marginTop: "20px" }}>
+							<h3 >Showing {postsData.length} Comments</h3>
 							<PostsList postsData={postsData} />
 						</div>
 					</div>

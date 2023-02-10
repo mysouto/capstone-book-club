@@ -6,13 +6,18 @@ import Placeholder from "react-bootstrap/Placeholder";
 
 function Post({ id, text, bookclubID, bookID }) {
 	return (
+		<div className="list-group-item py-3">
+			<h5 className="mb-1">USER name </h5>
+			<p className="mb-1">{text}</p>
+			<small className="mb-1">timestamp</small>
+			<button>Delete</button>
+		</div>
 		// <div>
 		// 	<p>Post content: {text}</p>
 		// 	<p>Book Club ID: {bookclubID}</p>
 		// 	<p>Book ID: {bookID}</p>
 		// </div>
 
-		<li>{text}</li>
 		// <div className="media">
 		// 	{/* <Image src="..." class="mr-3" alt="..." /> */}
 		// 	<div className="media-body">

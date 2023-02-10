@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 // bootstrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
-import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
@@ -31,7 +30,7 @@ const NewPostForm = ({ addPost }) => {
 	let showAlert = postText.length > 1000;
 
 	return (
-		<div>
+		<div style={{ marginTop: "20px" }}>
 			<Form onSubmit={onPostSubmit}>
 				<FloatingLabel controlId="floatingTextarea2" label="Comments">
 					<Form.Control
@@ -42,7 +41,7 @@ const NewPostForm = ({ addPost }) => {
 					></Form.Control>
 				</FloatingLabel>
 				{/* <Button type="submit" disabled={isSubmitDisabled}> */}
-				<Button type="submit" disabled={isSubmitDisabled}>
+				<Button type="submit" disabled={isSubmitDisabled} style={{ marginTop: "10px" }}>
 					Post Comment
 				</Button>{" "}
 				{/* <p> Characters: {charCount}</p> */}
