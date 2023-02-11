@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import CreateBookClub from "./pages/CreateBookClub";
 import BookClubHome from "./pages/BookClubHome";
 import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 							Create a Book Club
 						</Nav.Link>
 						<Nav.Link href="/signup">Sign Up</Nav.Link>
+						<Nav.Link href="/login">Login</Nav.Link>
 					</Nav>
 				</Container>
 			</Navbar>
@@ -41,6 +43,7 @@ function App() {
 					element={<BookClubHome />}
 				></Route>
 				<Route path="/signup" element={<SignUp />}></Route>
+				<Route path="/login" element={<Login />}></Route>
 			</Routes>
 		</Router>
 	);
