@@ -5,7 +5,7 @@ import {
 	onAuthStateChanged, // trigerred every time there's a change in Auth state
 	signOut,
 } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SignUp() {
 	const [registerEmail, setRegisterEmail] = useState("");
@@ -16,9 +16,33 @@ function SignUp() {
 	// state for user, so user stays logged in page refresh
 	const [user, setUser] = useState({});
 
-	onAuthStateChanged(auth, (currentUser) => {
-		setUser(currentUser);
-	});
+	// Toggle between LOGGED IN AND SIGN UP
+	// const monitorAuthState = async () => {
+	// 	onAuthStateChanged(auth, (user) => {
+	// 		if (user) {
+	// 			console.log(user);
+	// 			showApp();
+	// 			showLoginState(user);
+
+	// 			hideLoginError();
+	// 		} else {
+	// 			showLoginForm();
+	// 			lblAuthState.innerHTML = "You're not logged in.";
+	// 		}
+	// 	});
+	// };
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
+				// user is signed in
+				setUser(currentUser);
+				console.log("signed in user ID: ", currentUser.uid);
+			} else {
+				console.log("User signed out");
+			}
+		});
+	}, []);
 
 	const register = async () => {
 		try {
@@ -29,7 +53,7 @@ function SignUp() {
 			);
 			console.log(user);
 		} catch (error) {
-			console.log(error.message);
+			alert(error.message);
 		}
 	};
 
@@ -42,7 +66,7 @@ function SignUp() {
 			);
 			console.log(user);
 		} catch (error) {
-			console.log(error.message);
+			alert(error.message); // TODO: error handling on the frontend
 		}
 	};
 
@@ -59,12 +83,14 @@ function SignUp() {
 					onChange={(event) => {
 						setRegisterEmail(event.target.value);
 					}}
+					value={registerEmail}
 				/>{" "}
 				<input
 					placeholder="Password..."
 					onChange={(event) => {
 						setRegisterPassword(event.target.value);
 					}}
+					value={registerPassword}
 				/>
 				<button onClick={register}>Create User</button>
 			</div>
@@ -72,12 +98,14 @@ function SignUp() {
 			<div>
 				<h3> Login </h3>
 				<input
+					value={loginEmail}
 					placeholder="Email..."
 					onChange={(event) => {
 						setLoginEmail(event.target.value);
 					}}
 				/>{" "}
 				<input
+					value={loginPassword}
 					placeholder="Password..."
 					onChange={(event) => {
 						setLoginPassword(event.target.value);
@@ -86,7 +114,7 @@ function SignUp() {
 				<button onClick={login}>Login</button>
 			</div>
 
-			<h4>User Logged In: {user?.email}</h4>
+			<h4>User Logged In: {user ? user.email : "Not Logged In"}</h4>
 
 			<button onClick={logout}>Sign Out</button>
 		</div>
