@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import { app, db } from "../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 
-// Components
 import NewBookClubForm from "../components/NewBookClubForm";
 import { UserContext } from "../UserContext";
 
@@ -30,6 +28,9 @@ function CreateBookClub() {
 		navigate(`/bookclubhome/${docRef.id}`);
 	};
 
+	// console.log(user.displayName);
+	// console.log(user.email);
+
 	return (
 		<div
 			style={{
@@ -43,12 +44,10 @@ function CreateBookClub() {
 			}}
 		>
 			<h1>Create a Book Club</h1>
-			{/* <h2>{val}</h2> */}
-			<h3>User logged in: {JSON.stringify(user, null, 2)}</h3>
-			{/* <button onClick={() => setValue("hey")}>change value</button> */}
 			<div>
 				<NewBookClubForm createBookClub={createBookClub} />
 			</div>
+			{/* <p>User logged in: {JSON.stringify(user, null, 2)}</p> */}
 		</div>
 	);
 }

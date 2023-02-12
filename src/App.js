@@ -8,7 +8,6 @@ import Navbar from "react-bootstrap/Navbar";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // Router encompasses all other  components
 import Home from "./pages/Home";
-// import BookClubsPage from "./pages/BookClubsPage";
 import CreateBookClub from "./pages/CreateBookClub";
 import BookClubHome from "./pages/BookClubHome";
 import SignUp from "./pages/SignUp";

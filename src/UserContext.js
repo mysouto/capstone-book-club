@@ -2,14 +2,12 @@ import { createContext, useState, useEffect } from "react";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
-export const UserContext = createContext(null); // null = initial values
-
-// export default UserContext;
+export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 
-    const logout = async () => {
+	const logout = async () => {
 		await signOut(auth);
 	};
 
