@@ -16,13 +16,9 @@ import Login from "./pages/Login";
 
 import React, { useState, useMemo } from "react";
 // import UserContext
-import { UserContext } from "./UserContext";
+import { UserContextProvider } from "./UserContext";
 
 function App() {
-	const [user, setUser] = useState(null);
-
-	const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
-
 	return (
 		<Router>
 			<Navbar bg="dark" variant="dark">
@@ -41,7 +37,7 @@ function App() {
 			</Navbar>
 
 			{/* wrap components with Provider */}
-			<UserContext.Provider value={providerValue}>
+			<UserContextProvider>
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					<Route
@@ -56,7 +52,7 @@ function App() {
 					<Route path="/signup" element={<SignUp />}></Route>
 					<Route path="/login" element={<Login />}></Route>
 				</Routes>
-			</UserContext.Provider>
+			</UserContextProvider>
 		</Router>
 	);
 }

@@ -1,15 +1,13 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { auth } from "../firebase-config";
 import {
-	signInWithEmailAndPassword,
-	onAuthStateChanged, // trigerred every time there's a change in Auth state
-	signOut,
+	signInWithEmailAndPassword, 
 } from "firebase/auth";
 
 import { UserContext } from "../UserContext";
 
 function Login() {
-	const { user, setUser } = useContext(UserContext);
+	const { user, logout } = useContext(UserContext);
 
 	const [loginEmail, setLoginEmail] = useState("");
 	const [loginPassword, setLoginPassword] = useState("");
@@ -37,17 +35,10 @@ function Login() {
 				loginPassword
 			);
 			console.log("logged in user: ", user);
-			setUser(userData);
+			// setUser(userData);
 		} catch (error) {
 			alert(error.message); // TODO: error handling on the frontend
 		}
-	};
-
-	const logout = async () => {
-		// call server
-		await signOut(auth);
-		// change user state in provider
-		setUser(null);
 	};
 
 	return (
