@@ -1,6 +1,8 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { app, db } from "../firebase-config";
+
+import { UserContext } from "../UserContext";
 
 import {
 	addDoc,
@@ -29,6 +31,8 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 function BookClubHome() {
+	const { user } = useContext(UserContext);
+
 	let { bookclubid } = useParams();
 	let navigate = useNavigate();
 
@@ -204,7 +208,22 @@ function BookClubHome() {
 								</svg>
 								Comments
 							</h2>
-							<NewPostForm addPost={addPost} />
+							{/* Check if logged in to display post form */}
+							{user ? (
+								<NewPostForm addPost={addPost} />
+							) : (
+								<>
+									<h3>Login to create comment</h3>
+									<Button
+										onClick={() => {
+											navigate("/login");
+										}}
+									>
+										Login
+									</Button>
+								</>
+							)}
+							{/* <NewPostForm addPost={addPost} /> */}
 						</div>
 
 						{/* READ POSTS */}
