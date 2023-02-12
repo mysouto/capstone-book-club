@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -7,8 +7,11 @@ import { addDoc, collection } from "firebase/firestore";
 
 // Components
 import NewBookClubForm from "../components/NewBookClubForm";
+import { UserContext } from "../UserContext";
 
 function CreateBookClub() {
+	const { user } = useContext(UserContext);
+
 	const bookclubsCollectionRef = collection(db, "bookclubs");
 
 	let navigate = useNavigate();
@@ -39,9 +42,10 @@ function CreateBookClub() {
 				alignItems: "center",
 			}}
 		>
-			<h1>
-				Create a Book Club
-			</h1>
+			<h1>Create a Book Club</h1>
+			{/* <h2>{val}</h2> */}
+			<h3>User logged in: {JSON.stringify(user, null, 2)}</h3>
+			{/* <button onClick={() => setValue("hey")}>change value</button> */}
 			<div>
 				<NewBookClubForm createBookClub={createBookClub} />
 			</div>

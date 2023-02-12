@@ -4,9 +4,13 @@ import {
 	onAuthStateChanged, // trigerred every time there's a change in Auth state
 	signOut,
 } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import { UserContext } from "../UserContext";
 
 function SignUp() {
+	// const { val, setValue } = useContext(UserContext);
+
 	const [registerEmail, setRegisterEmail] = useState("");
 	const [registerPassword, setRegisterPassword] = useState("");
 
@@ -40,6 +44,8 @@ function SignUp() {
 
 	return (
 		<div>
+			{/* <h2>{val}</h2> */}
+
 			<h3>Register User / Sign Up</h3>
 			<input
 				placeholder="Email..."
