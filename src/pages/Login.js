@@ -1,13 +1,12 @@
 import { useState, useContext } from "react";
+import { UserContext } from "../UserContext";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
-import { UserContext } from "../UserContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
 	let navigate = useNavigate();
@@ -39,7 +38,7 @@ function Login() {
 		>
 			<h2> Login </h2>
 			<Form
-				className="p-3 bg-light"
+				className="p-3"
 				style={{ height: "300px", width: "500px" }}
 			>
 				<Form.Group className="mb-3" controlId="formBasicEmail">

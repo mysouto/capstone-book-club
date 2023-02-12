@@ -23,7 +23,11 @@ const Main = () => {
 
 	return (
 		<>
-			<Navbar bg="dark" variant="dark">
+			<Navbar
+				bg="light"
+				variant="light"
+				// bg-color="#2e9f9e" 
+			>
 				<Container>
 					<Navbar.Brand href="#home">Navbar</Navbar.Brand>
 					<Nav>

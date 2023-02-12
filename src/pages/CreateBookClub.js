@@ -91,7 +91,8 @@ function CreateBookClub() {
 				}}
 			>
 				<h1>Create a Book Club</h1>
-				<h3>Login to create a book club</h3>
+
+				<h4>Login to create a book club</h4>
 				<Button
 					onClick={() => {
 						navigate("/login");
@@ -99,6 +100,10 @@ function CreateBookClub() {
 				>
 					Login
 				</Button>
+
+				<h2> Register </h2>
+				<h4>Not registered yet?</h4>
+				<Button onClick={() => navigate("/signup")}>Sign Up</Button>
 			</div>
 		);
 	}
