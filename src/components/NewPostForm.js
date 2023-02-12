@@ -36,12 +36,17 @@ const NewPostForm = ({ addPost }) => {
 					<Form.Control
 						onChange={onTextChange}
 						as="textarea"
+						value={postText}
 						placeholder="Leave a comment here"
 						style={{ height: "100px" }}
 					></Form.Control>
 				</FloatingLabel>
 				{/* <Button type="submit" disabled={isSubmitDisabled}> */}
-				<Button type="submit" disabled={isSubmitDisabled} style={{ marginTop: "10px" }}>
+				<Button
+					type="submit"
+					disabled={isSubmitDisabled}
+					style={{ marginTop: "10px" }}
+				>
 					Post Comment
 				</Button>{" "}
 				{/* <p> Characters: {charCount}</p> */}
