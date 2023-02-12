@@ -38,9 +38,9 @@ function Login() {
 			/>
 			<pre>{JSON.stringify(user, null, 2)}</pre>
 			{user ? (
-				<button onClick={logout}>logout</button>
+				<button onClick={logout}>Log out</button>
 			) : (
-				<button onClick={login}>context Login</button>
+				<button onClick={login}>Log in</button>
 			)}
 		</div>
 	);
