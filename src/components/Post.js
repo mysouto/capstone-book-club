@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { UserContext } from "../UserContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -12,6 +14,7 @@ function Post({
 	currentBook,
 	deletePost,
 }) {
+	const { user } = useContext(UserContext);
 	const [timeAgoValue, setTimeAgoValue] = useState("");
 	const [postTime, setTimestamp] = useState(timestamp);
 
@@ -48,7 +51,8 @@ function Post({
 				{" "}
 				{timeAgoValue} &middot; {currentBook.title}{" "}
 			</small>
-			<button onClick={() => deletePost(id)}>Delete</button>
+
+			{user && <button onClick={() => deletePost(id)}>Delete</button>}
 		</div>
 	);
 }

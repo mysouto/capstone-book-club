@@ -31,7 +31,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
 function BookClubHome() {
-	const { user } = useContext(UserContext);
+	const { user, login } = useContext(UserContext);
 
 	let { bookclubid } = useParams();
 	let navigate = useNavigate();
@@ -246,14 +246,18 @@ function BookClubHome() {
 					</div>
 				</div>
 				<div style={{ width: "18rem" }}>
-					<DeleteModal
-						bookclubid={bookclubid}
-						currentBookClub={currentBookClub}
-						deleteBookClub={deleteBookClub}
-						showDeleteModal={showDeleteModal}
-						handleClose={handleClose}
-						handleShow={handleShow}
-					/>
+					{/* if user is null or falsy, show what's after after && */}
+					{/* if truthy, show && */}
+					{user && (
+						<DeleteModal
+							bookclubid={bookclubid}
+							currentBookClub={currentBookClub}
+							deleteBookClub={deleteBookClub}
+							showDeleteModal={showDeleteModal}
+							handleClose={handleClose}
+							handleShow={handleShow}
+						/>
+					)}
 				</div>
 			</div>
 		);
@@ -280,14 +284,18 @@ function BookClubHome() {
 				<NoBookAlert findBook={findBook} />
 
 				<div style={{ height: "160px", width: "280px" }}>
-					<DeleteModal
-						bookclubid={bookclubid}
-						currentBookClub={currentBookClub}
-						deleteBookClub={deleteBookClub}
-						showDeleteModal={showDeleteModal}
-						handleClose={handleClose}
-						handleShow={handleShow}
-					/>
+					{user ? (
+						<DeleteModal
+							bookclubid={bookclubid}
+							currentBookClub={currentBookClub}
+							deleteBookClub={deleteBookClub}
+							showDeleteModal={showDeleteModal}
+							handleClose={handleClose}
+							handleShow={handleShow}
+						/>
+					) : (
+						<Button>Log In</Button>
+					)}
 				</div>
 			</div>
 		</div>
