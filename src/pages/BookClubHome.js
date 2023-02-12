@@ -113,8 +113,16 @@ function BookClubHome() {
 			bookclubID: bookclubid,
 			bookID: currentBook.bookApiID,
 			createdAt: serverTimestamp(),
+			uid: user.uid,
 		});
 	};
+
+	const deletePost = async (postId) => {
+		console.log("calling deletePost");
+		const postDoc = doc(db, "posts", postId);
+		await deleteDoc(postDoc);
+	};
+
 	const deleteBookClub = async (id) => {
 		const bookClubDoc = doc(db, "bookclubs", id);
 		await deleteDoc(bookClubDoc);
@@ -232,6 +240,7 @@ function BookClubHome() {
 							<PostsList
 								postsData={postsData}
 								currentBook={currentBook}
+								deletePost={deletePost}
 							/>
 						</div>
 					</div>

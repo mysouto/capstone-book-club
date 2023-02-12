@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import Post from "./Post";
 
-function PostsList({ postsData, currentBook }) {
+function PostsList({ postsData, currentBook, deletePost }) {
 	// creating book club list components
 	const postsComponents = postsData.map((post) => {
 		// console.log("post", post);
@@ -16,6 +16,7 @@ function PostsList({ postsData, currentBook }) {
 				bookID={post.bookID}
 				timestamp={post.createdAt.toDate() || Date.now()}
 				currentBook={currentBook}
+				deletePost={deletePost}
 			/>
 		);
 	});

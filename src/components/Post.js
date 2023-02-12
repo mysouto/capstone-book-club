@@ -3,7 +3,15 @@ import React, { useState, useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function Post({ id, text, bookclubID, bookID, timestamp, currentBook }) {
+function Post({
+	id,
+	text,
+	bookclubID,
+	bookID,
+	timestamp,
+	currentBook,
+	deletePost,
+}) {
 	const [timeAgoValue, setTimeAgoValue] = useState("");
 	const [postTime, setTimestamp] = useState(timestamp);
 
@@ -40,6 +48,7 @@ function Post({ id, text, bookclubID, bookID, timestamp, currentBook }) {
 				{" "}
 				{timeAgoValue} &middot; {currentBook.title}{" "}
 			</small>
+			<button onClick={() => deletePost(id)}>Delete</button>
 		</div>
 	);
 }

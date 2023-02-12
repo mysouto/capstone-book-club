@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 import { app, db } from "../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 
 import NewBookClubForm from "../components/NewBookClubForm";
-import { UserContext } from "../UserContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -29,7 +29,7 @@ function CreateBookClub() {
 		const docRef = await addDoc(
 			bookclubsCollectionRef,
 			// obj to add
-			{ name: bookClubName }
+			{ name: bookClubName, uid: user.uid }
 		);
 		// TODO - get book club id from firebase db response
 		// Open Book Club home page
