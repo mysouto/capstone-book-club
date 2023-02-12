@@ -14,7 +14,15 @@ import BookClubHome from "./pages/BookClubHome";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 
+import React, { useState, useMemo } from "react";
+// import UserContext
+import { UserContext } from "./UserContext";
+
 function App() {
+	const [user, setUser] = useState(null);
+
+	const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+
 	return (
 		<Router>
 			<Navbar bg="dark" variant="dark">
@@ -31,20 +39,24 @@ function App() {
 					</Nav>
 				</Container>
 			</Navbar>
-			<Routes>
-				<Route path="/" element={<Home />}></Route>
-				<Route
-					path="/createbookclub"
-					element={<CreateBookClub />}
-				></Route>
-				{/* dynamic variable */}
-				<Route
-					path="/bookclubhome/:bookclubid"
-					element={<BookClubHome />}
-				></Route>
-				<Route path="/signup" element={<SignUp />}></Route>
-				<Route path="/login" element={<Login />}></Route>
-			</Routes>
+
+			{/* wrap components with Provider */}
+			<UserContext.Provider value={providerValue}>
+				<Routes>
+					<Route path="/" element={<Home />}></Route>
+					<Route
+						path="/createbookclub"
+						element={<CreateBookClub />}
+					></Route>
+					{/* dynamic variable */}
+					<Route
+						path="/bookclubhome/:bookclubid"
+						element={<BookClubHome />}
+					></Route>
+					<Route path="/signup" element={<SignUp />}></Route>
+					<Route path="/login" element={<Login />}></Route>
+				</Routes>
+			</UserContext.Provider>
 		</Router>
 	);
 }
