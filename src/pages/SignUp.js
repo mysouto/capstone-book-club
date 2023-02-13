@@ -19,16 +19,6 @@ function SignUp() {
 	const [registerPassword, setRegisterPassword] = useState("");
 	const [registerName, setRegisterName] = useState("");
 
-	useEffect(() => {
-		onAuthStateChanged(auth, (currentUser) => {
-			if (currentUser) {
-				console.log("signed in user ID: ", currentUser.uid);
-			} else {
-				console.log("User signed out");
-			}
-		});
-	}, []);
-
 	const register = async () => {
 		try {
 			const userCreated = await createUserWithEmailAndPassword(
@@ -43,14 +33,10 @@ function SignUp() {
 			});
 			console.log("displayName: ", userDisplayName);
 		} catch (error) {
-			//alert(error.message);
 			console.log(error);
+			alert(error.message);
 		}
 	};
-
-	// const logout = async () => {
-	// 	await signOut(auth);
-	// };
 
 	return (
 		<div
@@ -123,29 +109,6 @@ function SignUp() {
 					</Button>
 				)}
 			</Form>
-			{/* <input
-				placeholder="Name..."
-				onChange={(event) => {
-					setRegisterName(event.target.value);
-				}}
-				value={registerName}
-			/> */}
-			{/* <input
-				placeholder="Email..."
-				onChange={(event) => {
-					setRegisterEmail(event.target.value);
-				}}
-				value={registerEmail}
-			/> */}
-			{/* <input
-				placeholder="Password..."
-				onChange={(event) => {
-					setRegisterPassword(event.target.value);
-				}}
-				value={registerPassword}
-			/> */}
-			{/* <button onClick={register}>Create User</button> */}
-			{/* <button onClick={logout}>Sign Out</button> */}
 		</div>
 	);
 }
