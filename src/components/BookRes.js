@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../UserContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -14,7 +15,9 @@ const BookRes = ({
 	description,
 	publishedDate,
 	addBook,
+	currentBookClubUid,
 }) => {
+	const { user } = useContext(UserContext);
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -42,12 +45,14 @@ const BookRes = ({
 							see more
 						</Card.Link>
 					</Card.Text>
-					<Button
-						variant="primary"
-						onClick={() => addBook(bookApiID)}
-					>
-						Add Book
-					</Button>
+					{user && currentBookClubUid === user.uid && (
+						<Button
+							variant="primary"
+							onClick={() => addBook(bookApiID)}
+						>
+							Add Book
+						</Button>
+					)}
 
 					{/* <Button onClick={handleShow}>See Book Details</Button> */}
 					<Modal show={show} onHide={handleClose}>

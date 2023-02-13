@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
-const NoBookAlert = ({ findBook }) => {
+const NoPermissionAlert = ({ findBook }) => {
 	return (
 		<Alert variant="info">
 			<div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -12,7 +12,13 @@ const NoBookAlert = ({ findBook }) => {
 					<Alert.Heading className="display-5">
 						No books here yet
 					</Alert.Heading>
-					<p className="lead">Get started by adding a book!</p>
+					<p className="lead">
+						To get started login and ask book club creator to add
+						book.
+					</p>
+					<p className="lead">
+						For now you can search some awesome books here!
+					</p>
 					<Button onClick={findBook} variant="info">
 						Find Book
 					</Button>
@@ -32,8 +38,8 @@ const NoBookAlert = ({ findBook }) => {
 	);
 };
 
-NoBookAlert.propTypes = {
+NoPermissionAlert.propTypes = {
 	findBook: PropTypes.func.isRequired,
 };
 
-export default NoBookAlert;
+export default NoPermissionAlert;

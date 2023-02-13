@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -14,7 +15,8 @@ import { doc, setDoc } from "firebase/firestore";
 import BookResList from "../components/BookResList";
 
 // SEARCH BOOK feature
-function SearchPage({ bookclubid, bookclubName, uid, findBook }) {
+function SearchPage({ bookclubid, bookclubName, uid, findBook, currentBookClubUid }) {
+
 	let navigate = useNavigate();
 
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
@@ -121,6 +123,7 @@ function SearchPage({ bookclubid, bookclubName, uid, findBook }) {
 				<BookResList
 					searchResults={searchResults}
 					addBook={addBook}
+					currentBookClubUid={currentBookClubUid}
 				></BookResList>
 			</div>
 		</div>

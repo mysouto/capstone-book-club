@@ -24,6 +24,7 @@ import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
 import DeleteModal from "./css-components/DeleteBookCubModal";
 import NoBookAlert from "./css-components/NoBookAlert";
+import NoPermissionAlert from "./css-components/NoPermissionAlert";
 import BookCard from "./css-components/BookCard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -163,6 +164,7 @@ function BookClubHome() {
 				uid={currentBookClub?.uid}
 				bookclubName={currentBookClub?.name}
 				findBook={findBook}
+				currentBookClubUid={currentBookClubUid}
 			/>
 		);
 	}
@@ -308,7 +310,11 @@ function BookClubHome() {
 					justifyContent: "center",
 				}}
 			>
-				<NoBookAlert findBook={findBook} />
+				{user && currentBookClubUid === user.uid ? (
+					<NoBookAlert findBook={findBook} />
+				) : (
+					<NoPermissionAlert findBook={findBook} />
+				)}
 
 				<div style={{ height: "160px", width: "280px" }}>
 					{/* {user && ( */}

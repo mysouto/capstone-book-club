@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import BookRes from "./BookRes";
 
 // params: title, author, img
-const BookResList = ({ searchResults, addBook }) => {
+const BookResList = ({ searchResults, addBook, currentBookClubUid }) => {
 	const resultsComponents = searchResults.map((result) => {
 		return (
 			<BookRes
@@ -14,6 +14,7 @@ const BookResList = ({ searchResults, addBook }) => {
 				description={result.description}
 				publishedDate={result.publishedDate}
 				addBook={addBook}
+				currentBookClubUid={currentBookClubUid}
 			/>
 		);
 	});
