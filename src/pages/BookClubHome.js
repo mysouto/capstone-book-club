@@ -42,6 +42,7 @@ function BookClubHome() {
 	const [currentBookClub, setBookClub] = useState({});
 	const [currentBook, setBook] = useState();
 	const [currentBookClubUid, setUid] = useState("");
+	const [currentBookClubAuthor, setAuthor] = useState("");
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
@@ -60,6 +61,7 @@ function BookClubHome() {
 			}
 			setBookClub(data);
 			setUid(data.uid);
+			setAuthor(data.bookClubAuthor);
 
 			if (data.currentbook) {
 				const bookData = data.currentbook;
@@ -173,6 +175,10 @@ function BookClubHome() {
 						{currentBookClub?.name} Book Club
 					</h1>
 					<h2>Welcome to your book club!</h2>
+					<h4>
+						Created by:{" "}
+						{currentBookClubAuthor || "No author info available"}{" "}
+					</h4>
 				</header>
 
 				<div
@@ -197,8 +203,12 @@ function BookClubHome() {
 							Reading Now
 						</h2>
 						{/* <div style={{ marginTop: "20px" }}> */}
-							<BookCard currentBook={currentBook} deleteCurrentBook={deleteCurrentBook} currentBookClubUid={currentBookClubUid}/>
-							{/* <Button
+						<BookCard
+							currentBook={currentBook}
+							deleteCurrentBook={deleteCurrentBook}
+							currentBookClubUid={currentBookClubUid}
+						/>
+						{/* <Button
 								onClick={() => deleteCurrentBook()}
 								variant="warning"
 							>
@@ -280,9 +290,16 @@ function BookClubHome() {
 				padding: "0 10vw",
 			}}
 		>
-			<h1 className="text-capitalize">
-				{currentBookClub?.name} Book Club
-			</h1>
+			<header>
+				<h1 className="text-capitalize">
+					{currentBookClub?.name} Book Club
+				</h1>
+				<h2>Welcome to your book club!</h2>
+				<h4>
+					Created by:{" "}
+					{currentBookClubAuthor || "No author info available"}{" "}
+				</h4>
+			</header>
 
 			<div
 				style={{

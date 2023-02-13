@@ -29,7 +29,11 @@ function CreateBookClub() {
 		const docRef = await addDoc(
 			bookclubsCollectionRef,
 			// obj to add
-			{ name: bookClubName, uid: user.uid }
+			{
+				name: bookClubName,
+				uid: user.uid,
+				bookClubAuthor: user.displayName,
+			}
 		);
 		// TODO - get book club id from firebase db response
 		// Open Book Club home page
