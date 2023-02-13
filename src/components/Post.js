@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../UserContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
 function Post({
 	id,
@@ -11,8 +12,11 @@ function Post({
 	bookclubID,
 	bookID,
 	timestamp,
+	authorUid,
+	authorName,
 	currentBook,
 	deletePost,
+	currentBookClubUid,
 }) {
 	const { user } = useContext(UserContext);
 	const [timeAgoValue, setTimeAgoValue] = useState("");
@@ -46,13 +50,16 @@ function Post({
 
 	return (
 		<div className="list-group-item py-3">
+			<h5 className="mb-1">{authorName || "User name unavailable"}</h5>
 			<p className="mb-1">{text}</p>
 			<small className="mb-1">
 				{" "}
 				{timeAgoValue} &middot; {currentBook.title}{" "}
 			</small>
 
-			{user && <button onClick={() => deletePost(id)}>Delete</button>}
+			{user && currentBookClubUid === user.uid && (
+				<Button onClick={() => deletePost(id)}>Delete</Button>
+			)}
 		</div>
 	);
 }

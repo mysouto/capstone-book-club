@@ -41,7 +41,7 @@ function SignUp() {
 			const userDisplayName = await updateProfile(auth.currentUser, {
 				displayName: registerName,
 			});
-			console.log(userDisplayName);
+			console.log("displayName: ", userDisplayName);
 		} catch (error) {
 			//alert(error.message);
 			console.log(error);

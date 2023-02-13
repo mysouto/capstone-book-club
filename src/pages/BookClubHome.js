@@ -41,7 +41,7 @@ function BookClubHome() {
 
 	const [currentBookClub, setBookClub] = useState({});
 	const [currentBook, setBook] = useState();
-	// const [currentBookClubUid, setUid] = useState("");
+	const [currentBookClubUid, setUid] = useState("");
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
@@ -59,7 +59,7 @@ function BookClubHome() {
 				return;
 			}
 			setBookClub(data);
-			// setUid(data.uid);
+			setUid(data.uid);
 
 			if (data.currentbook) {
 				const bookData = data.currentbook;
@@ -116,6 +116,7 @@ function BookClubHome() {
 			bookID: currentBook.bookApiID,
 			createdAt: serverTimestamp(),
 			uid: user.uid,
+			authorName: user.displayName,
 		});
 	};
 
@@ -133,6 +134,9 @@ function BookClubHome() {
 	const deleteCurrentBook = async (id) => {
 		await updateDoc(bookclubRef, { currentbook: deleteField() });
 	};
+
+	// const isBookClubCreatedLoggedIn = currentBookClubUid === user.uid;
+	// console.log(isBookClubCreatedLoggedIn);
 
 	if (isLoading) {
 		return (
@@ -192,15 +196,15 @@ function BookClubHome() {
 							</svg>
 							Reading Now
 						</h2>
-						<div style={{ marginTop: "20px" }}>
-							<BookCard currentBook={currentBook} />
-							<Button
+						{/* <div style={{ marginTop: "20px" }}> */}
+							<BookCard currentBook={currentBook} deleteCurrentBook={deleteCurrentBook} currentBookClubUid={currentBookClubUid}/>
+							{/* <Button
 								onClick={() => deleteCurrentBook()}
 								variant="warning"
 							>
 								Delete book
-							</Button>
-						</div>
+							</Button> */}
+						{/* </div> */}
 					</div>
 
 					<div style={{ width: "45vw", marginTop: "20px" }}>
@@ -244,14 +248,17 @@ function BookClubHome() {
 								postsData={postsData}
 								currentBook={currentBook}
 								deletePost={deletePost}
+								currentBookClubUid={currentBookClubUid}
 							/>
 						</div>
 					</div>
 				</div>
 				<div style={{ width: "18rem" }}>
-					{/* if user is null or falsy, show what's after after && */}
+					{/* if user is null or falsy, don't show what's after after && */}
 					{/* if truthy, show && */}
-					{user && (
+					{/* CHECK IF CURRENT USER IS BOOK CLUB AUTHOR */}
+					{/* {user && ( */}
+					{user && currentBookClubUid === user.uid && (
 						<DeleteModal
 							bookclubid={bookclubid}
 							currentBookClub={currentBookClub}
@@ -287,7 +294,8 @@ function BookClubHome() {
 				<NoBookAlert findBook={findBook} />
 
 				<div style={{ height: "160px", width: "280px" }}>
-					{user ? (
+					{/* {user && ( */}
+					{user && currentBookClubUid === user.uid && (
 						<DeleteModal
 							bookclubid={bookclubid}
 							currentBookClub={currentBookClub}
@@ -296,8 +304,6 @@ function BookClubHome() {
 							handleClose={handleClose}
 							handleShow={handleShow}
 						/>
-					) : (
-						<Button>Log In</Button>
 					)}
 				</div>
 			</div>

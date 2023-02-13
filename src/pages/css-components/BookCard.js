@@ -1,18 +1,19 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../UserContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Card, Modal } from "react-bootstrap";
 
-const BookCard = ({ currentBook }) => {
+const BookCard = ({ currentBook, deleteCurrentBook, currentBookClubUid }) => {
+	const { user } = useContext(UserContext);
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
 	return (
-		<div>
-			<Card style={{ width: "16rem", height: "40rem" }}>
+		<div style={{ marginTop: "20px" }}>
+			<Card style={{ width: "18rem", height: "42rem" }}>
 				<Card.Img
 					src={currentBook.cover}
 					alt={currentBook.title}
@@ -35,6 +36,15 @@ const BookCard = ({ currentBook }) => {
 							</Card.Link>
 						</p>
 					</Card.Text>
+
+					{user && currentBookClubUid === user.uid && (
+						<Button
+							onClick={() => deleteCurrentBook()}
+							variant="warning"
+						>
+							Delete book
+						</Button>
+					)}
 				</Card.Body>
 			</Card>
 			<Modal show={show} onHide={handleClose}>

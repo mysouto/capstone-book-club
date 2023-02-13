@@ -17,6 +17,7 @@ export const UserContextProvider = ({ children }) => {
 				// user is signed in
 				setUser(currentUser);
 				console.log("signed in user ID: ", currentUser.uid);
+				console.log("user display name", currentUser.displayName);
 			} else {
 				console.log("User logged out");
 				setUser(null);
