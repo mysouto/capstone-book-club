@@ -10,6 +10,7 @@ function BookClubList({ bookClubsData }) {
 				key={bookclub.bookClubID}
 				bookClubID={bookclub.bookClubID}
 				name={bookclub.name}
+				uid={bookclub.uid}
 			/>
 		);
 	});

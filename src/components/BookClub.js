@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 
-function BookClub({ bookClubID, name }) {
+function BookClub({ bookClubID, name, uid }) {
 	let navigate = useNavigate();
 
 	return (

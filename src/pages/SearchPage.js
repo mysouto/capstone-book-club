@@ -14,7 +14,7 @@ import { doc, setDoc } from "firebase/firestore";
 import BookResList from "../components/BookResList";
 
 // SEARCH BOOK feature
-function SearchPage({ bookclubid, bookclubName, findBook }) {
+function SearchPage({ bookclubid, bookclubName, uid, findBook }) {
 	let navigate = useNavigate();
 
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
@@ -90,6 +90,7 @@ function SearchPage({ bookclubid, bookclubName, findBook }) {
 		console.log("bookToAdd", bookToAdd);
 		await setDoc(bookclubRef, {
 			name: bookclubName,
+			uid: uid,
 			currentbook: bookToAdd,
 		});
 		// navigate back to book club home page

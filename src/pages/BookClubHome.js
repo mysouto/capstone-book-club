@@ -41,6 +41,7 @@ function BookClubHome() {
 
 	const [currentBookClub, setBookClub] = useState({});
 	const [currentBook, setBook] = useState();
+	// const [currentBookClubUid, setUid] = useState("");
 	const [postsData, setPostsData] = useState([]);
 	const [searchState, setSearchState] = useState(false);
 	const [showDeleteModal, setDeleteModal] = useState(false);
@@ -58,6 +59,7 @@ function BookClubHome() {
 				return;
 			}
 			setBookClub(data);
+			// setUid(data.uid);
 
 			if (data.currentbook) {
 				const bookData = data.currentbook;
@@ -152,6 +154,7 @@ function BookClubHome() {
 		return (
 			<SearchPage
 				bookclubid={bookclubid}
+				uid={currentBookClub?.uid}
 				bookclubName={currentBookClub?.name}
 				findBook={findBook}
 			/>
