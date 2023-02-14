@@ -40,6 +40,8 @@ Readdit is a web app allows people to participate in book clubs virtually. Users
 5. External APIs: Google Books API
 6. Additional: Google Firebase Authentication, Bootstrap
 
+<img width="1100" alt="Screenshot 2023-02-14 at 3 51 13 PM" src="https://user-images.githubusercontent.com/65979426/218889066-ab174681-7273-42d2-9164-26434c4a24ab.png">
+
 <img width="935" alt="Screenshot 2023-02-14 at 3 30 54 PM" src="https://user-images.githubusercontent.com/65979426/218887812-a38d1070-7af3-4839-ba1c-647b89c51300.png">
 
 <img width="1209" alt="Screenshot 2023-02-14 at 3 30 23 PM" src="https://user-images.githubusercontent.com/65979426/218887802-3a8fb304-2f5b-48b6-bf0e-d97c4643fe4c.png">
