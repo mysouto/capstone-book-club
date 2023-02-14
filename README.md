@@ -44,7 +44,9 @@ Readdit is a web app allows people to participate in book clubs virtually. Users
 
 <img width="1209" alt="Screenshot 2023-02-14 at 3 30 23 PM" src="https://user-images.githubusercontent.com/65979426/218887802-3a8fb304-2f5b-48b6-bf0e-d97c4643fe4c.png">
 
-<img width="1345" alt="Screenshot 2023-02-14 at 3 34 39 PM" src="https://user-images.githubusercontent.com/65979426/218887839-ebe357e4-9d94-4176-9018-e75624f29529.png">
+<img width="660" alt="Screenshot 2023-02-14 at 3 48 40 PM" src="https://user-images.githubusercontent.com/65979426/218888722-ae700433-0c97-4118-80b5-1674ece7c79a.png">
+
+<img width="653" alt="Screenshot 2023-02-14 at 3 48 30 PM" src="https://user-images.githubusercontent.com/65979426/218888719-be3ef693-c059-4ad3-8bea-57e5433947c4.png">
 
 <img width="1209" alt="Screenshot 2023-02-14 at 3 34 54 PM" src="https://user-images.githubusercontent.com/65979426/218887863-82080d85-8dc9-496f-a3a6-f0d2967fec8f.png">
 
