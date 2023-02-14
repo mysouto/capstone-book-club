@@ -21,35 +21,19 @@ function Login() {
 	const login = async () => {
 		try {
 			await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-			console.log("logged in user: ", user);
 			navigate("/");
 		} catch (error) {
-			alert(error.message); // TODO: error handling on the frontend
+			alert(error.message);
 		}
 	};
 
 	const signInWithGoogle = async () => {
 		try {
 			await signInWithPopup(auth, gmailProvider);
-			// console.log("gmail signed in:", user);
-			// console.log("email:", user.email);
-			// console.log("displayName:", user.displayName);
 			navigate("/");
 		} catch (error) {
-			console.log(error);
 			alert(error);
 		}
-
-		// signInWithPopup(auth, gmailProvider)
-		// 	.then((result) => {
-		// 		console.log("gmail signed in:", result);
-		// 		console.log("email:", result.user.email);
-		// 		console.log("email:", result.user.displayName);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 		alert(error);
-		// 	});
 	};
 
 	return (
@@ -89,7 +73,6 @@ function Login() {
 					/>
 				</Form.Group>
 
-				{/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
 				{user ? (
 					<Button onClick={logout} variant="primary" type="submit">
 						Log Out
@@ -124,27 +107,6 @@ function Login() {
 			</div>
 
 			<Footer />
-			{/* input version */}
-			{/* <input
-				value={loginEmail}
-				placeholder="Email..."
-				onChange={(event) => {
-					setLoginEmail(event.target.value);
-				}}
-			/>{" "}
-			<input
-				value={loginPassword}
-				placeholder="Password..."
-				onChange={(event) => {
-					setLoginPassword(event.target.value);
-				}}
-			/>
-			<pre>{JSON.stringify(user, null, 2)}</pre>
-			{user ? (
-				<button onClick={logout}>Log out</button>
-			) : (
-				<button onClick={login}>Log in</button>
-			)} */}
 		</div>
 	);
 }

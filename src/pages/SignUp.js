@@ -1,12 +1,8 @@
 import { auth } from "../firebase-config";
-import {
-	createUserWithEmailAndPassword,
-	onAuthStateChanged, // trigerred every time there's a change in Auth state
-	signOut,
-	updateProfile,
-} from "firebase/auth";
-import { useEffect, useState, useContext } from "react";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useState, useContext } from "react";
 import { UserContext } from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -16,6 +12,7 @@ import { Footer } from "./css-components/Footer";
 
 function SignUp() {
 	const { user, logout } = useContext(UserContext);
+	let navigate = useNavigate();
 
 	const [registerEmail, setRegisterEmail] = useState("");
 	const [registerPassword, setRegisterPassword] = useState("");
@@ -23,19 +20,21 @@ function SignUp() {
 
 	const register = async () => {
 		try {
-			const userCreated = await createUserWithEmailAndPassword(
+			// const userCreated = await createUserWithEmailAndPassword(
+			await createUserWithEmailAndPassword(
 				auth,
 				registerEmail,
 				registerPassword
 			);
-			console.log(userCreated);
+			// console.log(userCreated);
 
-			const userDisplayName = await updateProfile(auth.currentUser, {
+			// const userDisplayName = await updateProfile(auth.currentUser, {
+			await updateProfile(auth.currentUser, {
 				displayName: registerName,
 			});
-			console.log("displayName: ", userDisplayName);
+			// console.log("displayName: ", userDisplayName);
+			navigate("/createbookclub");
 		} catch (error) {
-			console.log(error);
 			alert(error.message);
 		}
 	};
@@ -51,11 +50,11 @@ function SignUp() {
 				alignItems: "center",
 			}}
 		>
-			<h2>Create Account</h2>{" "}
+			<h2 className="display-6">Create Account</h2>{" "}
 			<Form
 				className="p-3 rounded"
 				style={{
-					height: "400px",
+					height: "360px",
 					width: "500px",
 					backgroundColor: "#e9f4f4",
 				}}
@@ -96,13 +95,8 @@ function SignUp() {
 					/>
 				</Form.Group>
 
-				<pre>{JSON.stringify(user, null, 2)}</pre>
 				{user ? (
-					<Button
-						onClick={logout}
-						// style={{ backgroundColor: "#2e9f9e !important" }}
-						variant="primary"
-					>
+					<Button onClick={logout} variant="primary">
 						Log out
 					</Button>
 				) : (
