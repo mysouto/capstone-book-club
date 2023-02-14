@@ -230,6 +230,10 @@ function BookClubHome() {
 										onClick={() => {
 											navigate("/login");
 										}}
+										style={{
+											backgroundColor: "#AAA1C8", // #80475E
+											border: "none",
+										}}
 									>
 										Login
 									</Button>

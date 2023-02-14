@@ -62,8 +62,7 @@ function Home() {
 						Readdit makes it easy to explore your love for books and
 						share your passion with others. Join and create book
 						clubs, share your thoughts, discover new books, and
-						participate in discussions. Come build your reading
-						communities!
+						build your reading communities!
 					</p>
 					{!user && (
 						<Button

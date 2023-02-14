@@ -76,13 +76,20 @@ function CreateBookClub() {
 						margin: "50px",
 					}}
 				>
-					<h1 style={{ fontWeight: "bolder" }}>Create a Book Club</h1>
+					<h1
+						style={{
+							fontWeight: "bolder",
+						}}
+					>
+						Create a Book Club
+					</h1>
 
 					<h4>Login to create a book club</h4>
 					<Button
 						onClick={() => {
 							navigate("/login");
 						}}
+						style={{ backgroundColor: "#7A82AB", border: "none" }}
 					>
 						Login
 					</Button>
@@ -106,7 +113,12 @@ function CreateBookClub() {
 					>
 						Not registered yet?
 					</h4>
-					<Button onClick={() => navigate("/signup")}>Sign Up</Button>
+					<Button
+						onClick={() => navigate("/signup")}
+						style={{ backgroundColor: "#7A82AB", border: "none" }}
+					>
+						Sign Up
+					</Button>
 				</div>
 
 				<Footer />

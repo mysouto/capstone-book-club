@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
 
 function NewBookClubForm({ createBookClub }) {
 	const [newBookClubName, setNewBookClub] = useState("");
@@ -67,15 +68,18 @@ function NewBookClubForm({ createBookClub }) {
 				Book club name cannot exceed 32 characters
 			</Alert>
 
-			<button
+			<Button
 				type="submit"
 				disabled={isSubmitDisabled}
-				class="btn btn-primary"
-				styles={{ display: "inline" }}
+				style={{
+					display: "inline",
+					backgroundColor: "#967AA1",
+					border: "none",
+				}}
 			>
 				<i class="bi bi-book m-2"></i>
 				Create Book Club
-			</button>
+			</Button>
 		</form>
 	);
 }

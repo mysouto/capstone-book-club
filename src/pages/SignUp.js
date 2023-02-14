@@ -96,11 +96,19 @@ function SignUp() {
 				</Form.Group>
 
 				{user ? (
-					<Button onClick={logout} variant="primary">
+					<Button
+						onClick={logout}
+						variant="primary"
+						style={{ backgroundColor: "#1E7B75", border: "none" }}
+					>
 						Log out
 					</Button>
 				) : (
-					<Button onClick={register} variant="primary">
+					<Button
+						onClick={register}
+						variant="primary"
+						style={{ backgroundColor: "#1E7B75", border: "none" }}
+					>
 						Sign Up
 					</Button>
 				)}
