@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import BookClub from "./BookClub";
 
 function BookClubList({ bookClubsData }) {
-	// creating book club list components
 	const bookClubComponents = bookClubsData.map((bookclub) => {
 		return (
 			<BookClub
@@ -15,17 +14,7 @@ function BookClubList({ bookClubsData }) {
 		);
 	});
 	return (
-		<div
-			// style={{
-			// 	display: "flex",
-			// 	justifyContent: "space-evenly",
-			// 	// alignItems: "center",
-			// 	flexWrap: "wrap",
-			// }}
-			className= "row justify-content-center"
-		>
-			{bookClubComponents}
-		</div>
+		<div className="row justify-content-center">{bookClubComponents}</div>
 	);
 }
 

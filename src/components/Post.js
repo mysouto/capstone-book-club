@@ -16,7 +16,6 @@ function Post({
 	authorName,
 	currentBook,
 	deletePost,
-	// currentBookClubUid,
 }) {
 	const { user } = useContext(UserContext);
 	const [timeAgoValue, setTimeAgoValue] = useState("");

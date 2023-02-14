@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import BookRes from "./BookRes";
 
-// params: title, author, img
 const BookResList = ({ searchResults, addBook, currentBookClubUid }) => {
 	const resultsComponents = searchResults.map((result) => {
 		return (

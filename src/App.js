@@ -1,4 +1,7 @@
-// Bootstrap
+import React, { useContext } from "react";
+import { UserContext, UserContextProvider } from "./UserContext";
+
+// CSS
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
@@ -9,17 +12,12 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 // React Router
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// Router encompasses all other  components
 import Home from "./pages/Home";
 import CreateBookClub from "./pages/CreateBookClub";
 import BookClubHome from "./pages/BookClubHome";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import { Footer } from "./pages/css-components/Footer";
-
-import React, { useContext } from "react";
-// import UserContext
-import { UserContext, UserContextProvider } from "./UserContext";
+// import { Footer } from "./pages/css-components/Footer";
 
 const Main = () => {
 	const { user, logout } = useContext(UserContext);
@@ -61,14 +59,12 @@ const Main = () => {
 								<Nav.Link href="/" className="text-dark">
 									Home
 								</Nav.Link>
-								{/* <Nav.Link href="/bookclubs">Book Clubs</Nav.Link> */}
 								<Nav.Link
 									href="/createbookclub"
 									className="text-dark"
 								>
 									Create a Book Club
 								</Nav.Link>
-								{/* <Nav.Link href="/signup">Sign Up</Nav.Link> */}
 								{!user ? (
 									<Nav.Link
 										href="/login"
@@ -78,29 +74,15 @@ const Main = () => {
 										Login
 									</Nav.Link>
 								) : (
-									<Button
-										onClick={logout}
-										variant="light"
-										// className="rounded-pill"
-									>
+									<Button onClick={logout} variant="light">
 										Logout
 									</Button>
 								)}
-								{/* <button
-									aria-controls="offcanvasNavbar-expand-false"
-									type="button"
-									aria-label="Toggle navigation"
-									class="navbar-toggler collapsed"
-								>
-									<span class="navbar-toggler-icon"></span>
-								</button> */}
 							</Nav>
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>
 				</Container>
 			</Navbar>
-
-			{/* <Footer  style={{ position: "relative", height: "100vh" }}/> */}
 
 			<Routes>
 				<Route path="/" element={<Home />}></Route>

@@ -26,7 +26,6 @@ const BookRes = ({
 	return (
 		<div className="col mt-5">
 			<Card style={{ width: "18rem", height: "40rem" }}>
-				{/* / height: "100" */}
 				<Card.Img
 					src={cover}
 					alt={title}
@@ -40,7 +39,6 @@ const BookRes = ({
 					</Card.Text>
 					<Card.Text>
 						Description: {description.slice(0, 100)}...{" "}
-						{/* <a href="#" data-toggle="modal" data-target={BookDetailsModal}> */}
 						<Card.Link href="#" onClick={handleShow}>
 							see more
 						</Card.Link>
@@ -54,7 +52,6 @@ const BookRes = ({
 						</Button>
 					)}
 
-					{/* <Button onClick={handleShow}>See Book Details</Button> */}
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Header closeButton>
 							<Modal.Title>{title}</Modal.Title>

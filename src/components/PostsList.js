@@ -1,12 +1,8 @@
 import PropTypes from "prop-types";
-
 import Post from "./Post";
 
 function PostsList({ postsData, currentBook, deletePost }) {
-	// creating book club list components
 	const postsComponents = postsData.map((post) => {
-		// console.log("post", post);
-		// console.log("date", Date.now());
 		return (
 			<Post
 				key={post.id}

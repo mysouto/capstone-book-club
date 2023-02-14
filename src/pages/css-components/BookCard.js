@@ -30,7 +30,6 @@ const BookCard = ({ currentBook, deleteCurrentBook, currentBookClubUid }) => {
 						<strong>Description </strong>
 						<p className="text-muted">
 							{currentBook.description.slice(0, 100)} ...{" "}
-							{/* <a href="#" data-toggle="modal" data-target={BookDetailsModal}> */}
 							<Card.Link href="#" onClick={handleShow}>
 								see more
 							</Card.Link>
