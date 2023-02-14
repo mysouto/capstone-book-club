@@ -1,4 +1,5 @@
 // Bootstrap
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -14,6 +15,7 @@ import CreateBookClub from "./pages/CreateBookClub";
 import BookClubHome from "./pages/BookClubHome";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import { Footer } from "./pages/css-components/Footer";
 
 import React, { useContext } from "react";
 // import UserContext
@@ -98,6 +100,8 @@ const Main = () => {
 				</Container>
 			</Navbar>
 
+			<Footer />
+
 			<Routes>
 				<Route path="/" element={<Home />}></Route>
 				<Route
@@ -118,7 +122,7 @@ const Main = () => {
 
 function App() {
 	return (
-		<Router>
+		<Router className="App">
 			{/* wrap components with Provider */}
 			<UserContextProvider>
 				<Main />
