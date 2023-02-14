@@ -28,7 +28,6 @@ const NewPostForm = ({ addPost }) => {
 				<FloatingLabel controlId="floatingTextarea2" label="Comments">
 					<Form.Control
 						onChange={onTextChange}
-						value={postText}
 						as="textarea"
 						value={postText}
 						placeholder="Leave a comment here"
