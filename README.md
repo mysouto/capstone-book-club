@@ -40,3 +40,16 @@ Readdit is a web app allows people to participate in book clubs virtually. Users
 5. External APIs: Google Books API
 6. Additional: Google Firebase Authentication, Bootstrap
 
+<img width="935" alt="Screenshot 2023-02-14 at 3 30 54 PM" src="https://user-images.githubusercontent.com/65979426/218887812-a38d1070-7af3-4839-ba1c-647b89c51300.png">
+
+<img width="1209" alt="Screenshot 2023-02-14 at 3 30 23 PM" src="https://user-images.githubusercontent.com/65979426/218887802-3a8fb304-2f5b-48b6-bf0e-d97c4643fe4c.png">
+
+<img width="1345" alt="Screenshot 2023-02-14 at 3 34 39 PM" src="https://user-images.githubusercontent.com/65979426/218887839-ebe357e4-9d94-4176-9018-e75624f29529.png">
+
+<img width="1209" alt="Screenshot 2023-02-14 at 3 34 54 PM" src="https://user-images.githubusercontent.com/65979426/218887863-82080d85-8dc9-496f-a3a6-f0d2967fec8f.png">
+
+<img width="1077" alt="Screenshot 2023-02-14 at 3 36 00 PM" src="https://user-images.githubusercontent.com/65979426/218888045-3fdb8df5-7304-4927-aaa0-cfe0b568f055.png">
+
+<img width="741" alt="Screenshot 2023-02-14 at 3 36 34 PM" src="https://user-images.githubusercontent.com/65979426/218888081-54dfab7f-b123-46b1-bdbd-48b838cd1953.png">
+
+<img width="1016" alt="Screenshot 2023-02-14 at 3 39 19 PM" src="https://user-images.githubusercontent.com/65979426/218888085-fe5ea473-11d0-4551-87dd-6a6664728660.png">
