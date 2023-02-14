@@ -77,23 +77,28 @@ function Home() {
 						literature lover, our web app offers something for
 						everyone. So come join the Book Club Hero community,
 						where the joy of reading never ends! */}
-						Join and create book clubs, share your thoughts,
-						discover new books, and participate in discussions. Come
-						build your reading communities!
+						Readdit makes it easy to explore your love for books and
+						share your passion with others. Join and create book
+						clubs, share your thoughts, discover new books, and
+						participate in discussions. Come build your reading
+						communities!
 					</p>
 				</div>
 			</header>
 
 			<div
 				style={{
+					display: "flex",
 					backgroundColor: "#e9f4f4",
+					flexDirection: "column",
+					padding: "20px",
 					textAlign: "center",
-					width: "100%",
+					// width: "100%",
 				}}
 			>
 				<BookClubList bookClubsData={bookClubs} />
 			</div>
-			<Footer></Footer>
+			{/* <Footer></Footer> */}
 		</div>
 	);
 }

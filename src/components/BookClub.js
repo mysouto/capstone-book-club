@@ -32,7 +32,7 @@ function BookClub({ bookClubID, name, uid }) {
 
 				<div>
 					<Button
-						// style={{ backgroundColor: "#008093" }}
+						// style={{ backgroundColor: "#008093", border: "none" }}
 						onClick={() => {
 							navigate(`/bookclubhome/${bookClubID}`);
 						}}

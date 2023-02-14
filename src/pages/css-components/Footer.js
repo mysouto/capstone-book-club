@@ -53,7 +53,7 @@ export const Footer = () => {
 					href="https://github.com/mysouto"
 					target="_blank"
 					rel="noopener noreferrer"
-					style={{ textDecoration: "none" }}
+					style={{ textDecoration: "none"}}
 				>
 					Built by Milena Yamada Souto
 				</a>
