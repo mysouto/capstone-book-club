@@ -55,7 +55,6 @@ function BookClubHome() {
 	useEffect(() => {
 		const unsubscribe = onSnapshot(bookclubRef, (response) => {
 			const data = response.data();
-			// if no bookclub doc data found in db, navigate home and return to stop onSnapshot listener
 			if (!data) {
 				navigate("/");
 				return;
@@ -95,10 +94,8 @@ function BookClubHome() {
 					querySnapshot.metadata.hasPendingWrites
 				) {
 					const ts = Timestamp.now();
-					console.log(`timestamp: ${ts} (estimated)`);
 					return { ...doc.data(), id: doc.id, createdAt: ts };
 				} else {
-					// doc.data() is never undefined for query doc snapshots
 					return { ...doc.data(), id: doc.id };
 				}
 			});
@@ -124,7 +121,6 @@ function BookClubHome() {
 	};
 
 	const deletePost = async (postId) => {
-		console.log("calling deletePost");
 		const postDoc = doc(db, "posts", postId);
 		await deleteDoc(postDoc);
 	};
@@ -137,9 +133,6 @@ function BookClubHome() {
 	const deleteCurrentBook = async (id) => {
 		await updateDoc(bookclubRef, { currentbook: deleteField() });
 	};
-
-	// const isBookClubCreatedLoggedIn = currentBookClubUid === user.uid;
-	// console.log(isBookClubCreatedLoggedIn);
 
 	if (isLoading) {
 		return (
@@ -172,15 +165,18 @@ function BookClubHome() {
 	if (currentBookClub?.currentbook) {
 		return (
 			<div style={{ margin: "0 auto", padding: "0 10vw" }}>
-				<header>
-					<h1 className="text-capitalize">
+				<header style={{ fontFamily: "Abril Fatface, Cursive" }}>
+					<h1 className="text-capitalize display-4">
 						{currentBookClub?.name} Book Club
 					</h1>
-					<h2>Welcome to your book club!</h2>
-					<h4>
-						Created by:{" "}
-						{currentBookClubAuthor || "No author info available"}{" "}
-					</h4>
+					<div style={{ fontFamily: "Poppins, Sans-Serif" }}>
+						<h3>Welcome to your book club!</h3>
+						<p>
+							Created by:{" "}
+							{currentBookClubAuthor ||
+								"No author info available"}{" "}
+						</p>
+					</div>
 				</header>
 
 				<div
@@ -191,41 +187,45 @@ function BookClubHome() {
 					}}
 				>
 					<div style={{ marginTop: "20px" }}>
-						<h2>
+						<h2
+							style={{
+								fontFamily: "Poppins, Sans-Serif",
+								fontWeight: "bold",
+							}}
+						>
 							<i class="bi bi-bookmark m-1"></i>
 							Reading Now
 						</h2>
-						{/* <div style={{ marginTop: "20px" }}> */}
 						<BookCard
 							currentBook={currentBook}
 							deleteCurrentBook={deleteCurrentBook}
 							currentBookClubUid={currentBookClubUid}
 						/>
-						{/* <Button
-								onClick={() => deleteCurrentBook()}
-								variant="warning"
-							>
-								Delete book
-							</Button> */}
-						{/* </div> */}
 					</div>
 
 					<div style={{ width: "45vw", marginTop: "20px" }}>
 						<div>
 							{" "}
-							<h2>
-								<i
-									className="bi bi-chat-left-dots m-1"
-									// style={{ width: "10px", height: "10px" }}
-								></i>
+							<h2
+								style={{
+									fontFamily: "Poppins, Sans-Serif",
+									fontWeight: "bold",
+								}}
+							>
+								<i className="bi bi-chat-left-dots m-1"></i>
 								Comments
 							</h2>
-							{/* Check if logged in to display post form */}
 							{user ? (
 								<NewPostForm addPost={addPost} />
 							) : (
 								<>
-									<h3>Login to create comment</h3>
+									<h5
+										style={{
+											fontFamily: "Poppins, Sans-Serif",
+										}}
+									>
+										Login to create comment
+									</h5>
 									<Button
 										onClick={() => {
 											navigate("/login");
@@ -235,27 +235,26 @@ function BookClubHome() {
 									</Button>
 								</>
 							)}
-							{/* <NewPostForm addPost={addPost} /> */}
 						</div>
 
-						{/* READ POSTS */}
 						<div className="col-lg" style={{ marginTop: "20px" }}>
-							<h3>Showing {postsData.length} Comments</h3>
+							<h4
+								style={{
+									fontFamily: "Poppins, Sans-Serif",
+									fontWeight: "bold",
+								}}
+							>
+								Showing {postsData.length} Comments
+							</h4>
 							<PostsList
 								postsData={postsData}
 								currentBook={currentBook}
 								deletePost={deletePost}
-								// authorUid={user.uid}
-								// currentBookClubUid={currentBookClubUid}
 							/>
 						</div>
 					</div>
 				</div>
 				<div style={{ width: "18rem" }}>
-					{/* if user is null or falsy, don't show what's after after && */}
-					{/* if truthy, show && */}
-					{/* CHECK IF CURRENT USER IS BOOK CLUB AUTHOR */}
-					{/* {user && ( */}
 					{user && currentBookClubUid === user.uid && (
 						<DeleteModal
 							bookclubid={bookclubid}
@@ -278,15 +277,17 @@ function BookClubHome() {
 				padding: "0 10vw",
 			}}
 		>
-			<header>
-				<h1 className="text-capitalize">
+			<header style={{ fontFamily: "Abril Fatface, Cursive" }}>
+				<h1 className="text-capitalize display-4">
 					{currentBookClub?.name} Book Club
 				</h1>
-				<h2>Welcome to your book club!</h2>
-				<h4>
-					Created by:{" "}
-					{currentBookClubAuthor || "No author info available"}{" "}
-				</h4>
+				<div style={{ fontFamily: "Poppins, Sans-Serif" }}>
+					<h3>Welcome to your book club!</h3>
+					<p>
+						Created by:{" "}
+						{currentBookClubAuthor || "No author info available"}{" "}
+					</p>
+				</div>
 			</header>
 
 			<div
@@ -303,7 +304,6 @@ function BookClubHome() {
 				)}
 
 				<div style={{ height: "160px", width: "280px" }}>
-					{/* {user && ( */}
 					{user && currentBookClubUid === user.uid && (
 						<DeleteModal
 							bookclubid={bookclubid}

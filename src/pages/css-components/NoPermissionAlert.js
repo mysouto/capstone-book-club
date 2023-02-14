@@ -9,7 +9,7 @@ const NoPermissionAlert = ({ findBook }) => {
 		<Alert variant="info">
 			<div style={{ display: "flex", justifyContent: "space-around" }}>
 				<div>
-					<Alert.Heading className="display-5">
+					<Alert.Heading className="display-6">
 						No books here yet
 					</Alert.Heading>
 					<p className="lead">
