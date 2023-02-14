@@ -43,7 +43,6 @@ function Home() {
 			<header
 				style={{
 					// backgroundColor: "#e9f4f4",
-					// backgroundColor: "#e9f4f4",
 					width: "100%",
 					minHeight: "300px",
 					textAlign: "center",
@@ -88,8 +87,8 @@ function Home() {
 			<div
 				style={{
 					backgroundColor: "#e9f4f4",
-					height: "100",
 					textAlign: "center",
+					width: "100%",
 				}}
 			>
 				<BookClubList bookClubsData={bookClubs} />

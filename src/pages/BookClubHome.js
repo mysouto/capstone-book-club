@@ -245,7 +245,8 @@ function BookClubHome() {
 								postsData={postsData}
 								currentBook={currentBook}
 								deletePost={deletePost}
-								currentBookClubUid={currentBookClubUid}
+								// authorUid={user.uid}
+								// currentBookClubUid={currentBookClubUid}
 							/>
 						</div>
 					</div>

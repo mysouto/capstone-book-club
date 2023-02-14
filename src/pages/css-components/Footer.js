@@ -10,6 +10,8 @@ export const Footer = () => {
 				position: "absolute",
 				bottom: "0",
 				width: "100%",
+                left: "0",
+                right: "0"
 			}}
 		>
 			<div className="container p-4 pb-0">

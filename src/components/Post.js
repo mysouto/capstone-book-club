@@ -16,7 +16,7 @@ function Post({
 	authorName,
 	currentBook,
 	deletePost,
-	currentBookClubUid,
+	// currentBookClubUid,
 }) {
 	const { user } = useContext(UserContext);
 	const [timeAgoValue, setTimeAgoValue] = useState("");
@@ -31,9 +31,10 @@ function Post({
 		const hour = minute * 60;
 		const day = hour * 24;
 
-		if (elapsedTime < minute) {
-			return Math.round(elapsedTime / second) + " seconds ago";
-		} else if (elapsedTime < hour) {
+		// if (elapsedTime < minute) {
+		// 	return Math.round(elapsedTime / second) + " seconds ago";
+		// } else if (elapsedTime < hour) {
+		if (elapsedTime < hour) {
 			return Math.round(elapsedTime / minute) + " minutes ago";
 		} else if (elapsedTime < day) {
 			return Math.round(elapsedTime / hour) + " hours ago";
@@ -57,9 +58,11 @@ function Post({
 				{timeAgoValue} &middot; {currentBook.title}{" "}
 			</small>
 
-			{user && currentBookClubUid === user.uid && (
-				<Button onClick={() => deletePost(id)}>Delete</Button>
-			)}
+			<div className="m-1">
+				{user && authorUid === user.uid && (
+					<Button onClick={() => deletePost(id)}>Delete</Button>
+				)}
+			</div>
 		</div>
 	);
 }
