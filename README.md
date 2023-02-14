@@ -4,6 +4,13 @@
 - https://capstone-bookclub.web.app/
 - https://capstone-bookclub.firebaseapp.com/
 
+## Capstone Learning Goals
+
+- Complete product life cycle from conception to delivery and deployment while demonstrating self-direction and independent learning of new technology
+- Practice React.js and learn new React tools (Router library, Context)
+- Learn how to develop backend with an app development platform (Google Firebase)
+- Learn other new technologies: noSQL database (Google Firestore), deployment though Google Cloud, user authenticatin  (Firebase), Bootstrap
+
 ## Problem Statement 
 
 Readdit is a web app allows people to participate in book clubs virtually. Users can join to create and manage book clubs, discover new books, and participate in discussions.
@@ -32,3 +39,4 @@ Readdit is a web app allows people to participate in book clubs virtually. Users
 4. Deployment: Google Firebase Hosting
 5. External APIs: Google Books API
 6. Additional: Google Firebase Authentication, Bootstrap
+
