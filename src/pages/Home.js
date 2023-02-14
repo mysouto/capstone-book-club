@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { app, db } from "../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
-// Components
 import BookClubList from "../components/BookClubList";
+import { Footer } from "./css-components/Footer";
 
 function Home() {
 	// create reference to bookclubs collections
@@ -94,6 +94,7 @@ function Home() {
 			>
 				<BookClubList bookClubsData={bookClubs} />
 			</div>
+			<Footer></Footer>
 		</div>
 	);
 }

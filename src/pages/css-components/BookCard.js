@@ -13,7 +13,7 @@ const BookCard = ({ currentBook, deleteCurrentBook, currentBookClubUid }) => {
 	const handleShow = () => setShow(true);
 	return (
 		<div style={{ marginTop: "20px" }}>
-			<Card style={{ width: "18rem", height: "42rem" }}>
+			<Card style={{ width: "18rem", height: "40rem" }}>
 				<Card.Img
 					src={currentBook.cover}
 					alt={currentBook.title}

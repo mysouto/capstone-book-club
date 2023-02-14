@@ -12,6 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import { Footer } from "./css-components/Footer";
+
 function SignUp() {
 	const { user, logout } = useContext(UserContext);
 
@@ -109,6 +111,7 @@ function SignUp() {
 					</Button>
 				)}
 			</Form>
+			<Footer />
 		</div>
 	);
 }

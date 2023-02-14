@@ -13,10 +13,16 @@ import { doc, setDoc } from "firebase/firestore";
 
 // Components
 import BookResList from "../components/BookResList";
+import { Footer } from "./css-components/Footer";
 
 // SEARCH BOOK feature
-function SearchPage({ bookclubid, bookclubName, uid, findBook, currentBookClubUid }) {
-
+function SearchPage({
+	bookclubid,
+	bookclubName,
+	uid,
+	findBook,
+	currentBookClubUid,
+}) {
 	let navigate = useNavigate();
 
 	const bookclubRef = doc(db, "bookclubs", bookclubid);
@@ -126,6 +132,7 @@ function SearchPage({ bookclubid, bookclubName, uid, findBook, currentBookClubUi
 					currentBookClubUid={currentBookClubUid}
 				></BookResList>
 			</div>
+			{/* <Footer></Footer> */}
 		</div>
 	);
 }

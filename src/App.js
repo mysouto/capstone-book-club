@@ -100,7 +100,7 @@ const Main = () => {
 				</Container>
 			</Navbar>
 
-			<Footer />
+			{/* <Footer  style={{ position: "relative", height: "100vh" }}/> */}
 
 			<Routes>
 				<Route path="/" element={<Home />}></Route>

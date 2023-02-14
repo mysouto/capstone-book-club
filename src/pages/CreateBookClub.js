@@ -6,6 +6,7 @@ import { app, db } from "../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 
 import NewBookClubForm from "../components/NewBookClubForm";
+import { Footer } from "./css-components/Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -73,12 +74,13 @@ function CreateBookClub() {
 					justifyContent: "center",
 					alignItems: "center",
 				}}
+				className="container min-vw-100"
 			>
 				<h1>Create a Book Club</h1>
 				<div>
 					<NewBookClubForm createBookClub={createBookClub} />
 				</div>
-				{/* <p>User logged in: {JSON.stringify(user, null, 2)}</p> */}
+				<Footer />
 			</div>
 		);
 	} else {
@@ -93,6 +95,7 @@ function CreateBookClub() {
 					justifyContent: "center",
 					alignItems: "center",
 				}}
+				className="container min-vw-100"
 			>
 				<h1>Create a Book Club</h1>
 
@@ -108,6 +111,8 @@ function CreateBookClub() {
 				<h2> Register </h2>
 				<h4>Not registered yet?</h4>
 				<Button onClick={() => navigate("/signup")}>Sign Up</Button>
+				
+				<Footer />
 			</div>
 		);
 	}

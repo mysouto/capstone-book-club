@@ -8,7 +8,8 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { async } from "@firebase/util";
+
+import { Footer } from "./css-components/Footer";
 
 function Login() {
 	let navigate = useNavigate();
@@ -121,6 +122,8 @@ function Login() {
 				<p>Not registered yet?</p>
 				<Button onClick={() => navigate("/signup")}>Sign Up</Button>
 			</div>
+
+			<Footer />
 			{/* input version */}
 			{/* <input
 				value={loginEmail}
