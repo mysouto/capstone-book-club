@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -13,7 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 // Components
 import BookResList from "../components/BookResList";
-import { Footer } from "./css-components/Footer";
+// import { Footer } from "./css-components/Footer";
 
 // SEARCH BOOK feature
 function SearchPage({
@@ -45,9 +44,6 @@ function SearchPage({
 		axios
 			.get(URL)
 			.then((response) => {
-				// console.log("API response:", response.data.items);
-
-				// unpack API response and check of undefined data
 				const booksAPIResCopy = response.data.items.map((book) => {
 					return {
 						bookApiID:
@@ -74,12 +70,11 @@ function SearchPage({
 					};
 				});
 
-				// console.log("booksAPIResCopy", booksAPIResCopy);
 				setResults(booksAPIResCopy);
-				// setResults(response.data.items);
 			})
 			.catch((error) => {
 				console.log(error);
+				alert(error.message);
 			});
 	};
 
@@ -95,13 +90,11 @@ function SearchPage({
 
 	const addBook = async (bookApiID) => {
 		const bookToAdd = getSelectedBook(bookApiID);
-		console.log("bookToAdd", bookToAdd);
 		await setDoc(bookclubRef, {
 			name: bookclubName,
 			uid: uid,
 			currentbook: bookToAdd,
 		});
-		// navigate back to book club home page
 		findBook();
 		navigate(`/bookclubhome/${bookclubid}`);
 	};

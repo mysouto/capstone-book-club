@@ -42,7 +42,9 @@ function CreateBookClub() {
 				}}
 				className="container min-vw-100"
 			>
-				<h1>Create a Book Club</h1>
+				<h1 style={{ fontFamily: "Poppins, Sans-Serif" }}>
+					Create a Book Club
+				</h1>
 				<div>
 					<NewBookClubForm createBookClub={createBookClub} />
 				</div>
