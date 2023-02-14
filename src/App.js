@@ -35,7 +35,10 @@ const Main = () => {
 				// className="bg-light expand navbar-expand-lg"
 			>
 				<Container>
-					<Navbar.Brand href="#home">Navbar</Navbar.Brand>
+					<Navbar.Brand href="/" className="flex">
+						{" "}
+						<i class="bi bi-book-half m-2"></i>readdit
+					</Navbar.Brand>
 					<Navbar.Toggle
 						aria-controls={"offcanvasNavbar-expand-lg"}
 					/>
@@ -53,18 +56,30 @@ const Main = () => {
 						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className="justify-content-end flex-grow-1 pe-3">
-								<Nav.Link href="/">Home</Nav.Link>
+								<Nav.Link href="/" className="text-dark">
+									Home
+								</Nav.Link>
 								{/* <Nav.Link href="/bookclubs">Book Clubs</Nav.Link> */}
-								<Nav.Link href="/createbookclub">
+								<Nav.Link
+									href="/createbookclub"
+									className="text-dark"
+								>
 									Create a Book Club
 								</Nav.Link>
 								{/* <Nav.Link href="/signup">Sign Up</Nav.Link> */}
 								{!user ? (
-									<Nav.Link href="/login">Login</Nav.Link>
+									<Nav.Link
+										href="/login"
+										className="text-dark"
+									>
+										{" "}
+										Login
+									</Nav.Link>
 								) : (
 									<Button
 										onClick={logout}
-										variant="outline-success"
+										variant="light"
+										// className="rounded-pill"
 									>
 										Logout
 									</Button>

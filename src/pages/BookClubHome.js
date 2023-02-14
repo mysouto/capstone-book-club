@@ -192,16 +192,7 @@ function BookClubHome() {
 				>
 					<div style={{ marginTop: "20px" }}>
 						<h2>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="20"
-								height="20"
-								fill="currentColor"
-								className="bi bi-bookmark-fill"
-								viewBox="0 0 20 20"
-							>
-								<path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
-							</svg>
+							<i class="bi bi-bookmark m-1"></i>
 							Reading Now
 						</h2>
 						{/* <div style={{ marginTop: "20px" }}> */}
@@ -223,16 +214,10 @@ function BookClubHome() {
 						<div>
 							{" "}
 							<h2>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="20"
-									height="20"
-									fill="currentColor"
-									className="bi bi-chat-square-text-fill"
-									viewBox="0 0 20 20"
-								>
-									<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
-								</svg>
+								<i
+									className="bi bi-chat-left-dots m-1"
+									// style={{ width: "10px", height: "10px" }}
+								></i>
 								Comments
 							</h2>
 							{/* Check if logged in to display post form */}
