@@ -30,6 +30,7 @@ const NewPostForm = ({ addPost }) => {
 						onChange={onTextChange}
 						value={postText}
 						as="textarea"
+						value={postText}
 						placeholder="Leave a comment here"
 						style={{ height: "100px" }}
 					></Form.Control>
